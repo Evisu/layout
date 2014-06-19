@@ -9,10 +9,9 @@ var problems = new Array();
 function questionnaire($scope){
 	$scope.problems = problems;
 	
-	$scope.problems.push({name:'标题',sort:0,type:'title',options:[{name:'',sort:0}]});
 	$scope.problems.push({name:'题目1',sort:0,type:'radio',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
 	$scope.problems.push({name:'题目2',sort:1,type:'checkbox',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
-	$scope.problems.push({name:'题目2',sort:1,type:'completion',options:[{name:'',sort:0,isInput:true}]});
+	$scope.problems.push({name:'题目2',sort:2,type:'completion',options:[{name:'',sort:0,isInput:true}]});
 	
 	$scope.addOption = function(sort1){
 	$scope.problems[sort1].options.push({name:'选项'+($scope.problems[sort1].options.length+1),sort:($scope.problems[sort1].options.length)}); 
@@ -42,11 +41,6 @@ function addProblem(index,problem){
 	for(var i = 0;i<problems.length;i++){
 		problems[i].sort = i;
 	}
-}
-
-function modProblem(index,value){
-	problems[index].name = value;
-
 }
 
 

@@ -22,16 +22,6 @@
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/angularComponent.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
-	<style>
-	.T_edit {
-		height:20;
-		width:150;	
-	}
-	
-	.T_edit:hover{
-		background:#FDF9CD;
-	}
-	</style>
 
   </head>
   
@@ -427,7 +417,7 @@
         </div>
         
         <div id="editDiv" style="min-height: 590px;" class="demo ui-sortable" ng-app ng-controller="questionnaire">
-        	
+     
         	<div class="lyrow ui-draggable"> <a href="#close" class="remove label label-default label-danger"><i class="glyphicon glyphicon-remove"></i>删除</a> <span class="drag label label-default label-default"><i class="glyphicon glyphicon-move"></i>拖动</span>
               <div class="preview">
                 <input value="12" type="text">
@@ -441,36 +431,6 @@
              </span>
               <div class="preview"></div>
               
-              <div class="view" ng-if="problem.type == 'title'"> 
-              	<span class="T_edit"  contenteditable="true" onmouseout="focus();" onclick="edit();" onblur="editout();">
-              	aasd
-              	</span>
-              	<input type="hidden" id="aa" value="{{problem.sort}}">
-              	<script type="text/javascript">
-              	function edit(){
-              		$('.T_edit').each(function(){
-              		
-              			$(this).attr('contenteditable','true');
-              			$(this).css('border-style','solid');
-              			$(this).css('border-color','black');
-              		})
-              	}
-              	
-              	function editout(){
-              		$('.T_edit').each(function(){
-              			$(this).attr('contenteditable','false');
-              			$(this).css('border-style','');
-              			$(this).css('border-color','');
-              			console.log($(this).html());
-              			modProblem($('#aa').val(),$(this).html());
-              			
-              		})
-              	}
-              	
-              	</script>
-              </div>
-              
-              
               <!-- 单选题-->
               <div class="view" ng-if="problem.type == 'radio'"> 
               		<textarea class="form-control" rows="1" ng-model="problem.name">{{problem.name}}</textarea>
@@ -481,9 +441,9 @@
         	  </div>
         	   <a href="#close" class="label label-default label-danger" ng-click="addOption(problem.sort)"><i class="glyphicon glyphicon-add"></i>添加</a>
               		
-              </div>
+            </div>
             
-             <!-- 复选题-->
+            <!-- 复选题-->
              <div class="view" ng-if="problem.type == 'checkbox'"> 
               		<textarea class="form-control" rows="1" ng-model="problem.name">{{problem.name}}</textarea>
 			  <div ng-repeat="option in problem.options">
@@ -526,22 +486,7 @@
         
       </div>
   </div>
-  
-  <div style="display:none;">
-  
-  	 <div id="radioProblemTemplate"> 
-              		
-              		<textarea class="form-control" rows="1" ng-model="problem.name">{{problem.name}}</textarea>
-			  <div ng-repeat="option in problem.options">
-              <div class="radio">
-            		<input type="radio"> <textarea class="form-control" rows="1">{{option.name}}</textarea><a href="#close" class="removeOption label label-default label-danger"><i class="glyphicon glyphicon-remove"></i>删除</a>
-        	  </div>
-        	  </div>
-        	   <a href="#close" class="label label-default label-danger" ng-click="add()"><i class="glyphicon glyphicon-add"></i>添加</a>
-              		
-            </div>
-  
-  </div>
+ 
   
   <!-- 编辑 -->
   

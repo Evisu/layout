@@ -1,0 +1,652 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>问卷设计-11</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Cache-Control" CONTENT="no-cache">
+<meta http-equiv="Cache-Control" CONTENT="no-store">
+<meta http-equiv="Expires" content="0" />
+
+<link href="http://www.wenjuan.com/static/css/public.css?v=ae9fe7f48c611f5e332cb886ba249eea" rel="stylesheet">
+<link href="http://www.wenjuan.com/static/css/style.css?v=970cebb17a04efd05c780ba66f5dfe77" rel="stylesheet">
+
+
+
+
+<script src="http://www.wenjuan.com/static/js/jquery.js?v=7aa8158252cf79c03f55d0ca27f7842f"></script>
+<script src="http://www.wenjuan.com/static/js/jquery.cookie.js?v=1a2ba987a52985c8f69aeb6d3f19b5c4"></script>
+<script src="http://www.wenjuan.com/static/js/jQuery_ui.js?v=05a5faabd379a01af9234ca2f5157cd2"></script>
+<script src="http://www.wenjuan.com/static/js/json.js?v=2ba3e68501985816b26089f135e5b718"></script>
+<script src="http://www.wenjuan.com/static/js/base_utils.js?v=76462afbb1215a0e124d680d7a4cbd13"></script>
+
+<script type="text/javascript" src="http://www.wenjuan.com/static/js/base_utils.js?v=76462afbb1215a0e124d680d7a4cbd13"></script>
+</head>
+<body>
+<div class="header">
+<div class="wrapper">
+<a href="/" class="logo"></a>
+
+<ul class="main-nav">
+<li>
+<a href="/mysurvey">问卷</a>
+</li>
+<li>
+<a href="/myform">表单</a>
+</li>
+<li>
+<a href="/lib">模板库</a>
+</li>
+<li>
+<a href="/helpcenter">帮助</a>
+</li>
+<li>
+<a href="http://bbs.wenjuan.com" target="_blank">论坛</a>
+</li>
+</ul>
+
+
+<div class="entry">
+
+<!-- <ul class="util-nav">
+<li><a class="getevent" href="/stu_event/" target="_blank">同学，快来毕业论文大作战</a></li>
+<li>
+<a href="/member/" title="hxkinggil">
+hxkinggil
+</a>
+</li>
+<li>
+<a href="/member/">我的账号</a>
+</li>
+<span id="show_msg_id" >
+<li>|</li>
+<li class="NewMessage">
+<a class="xsa" href="/message/list">消息</a>
+</li>
+<li>|</li>
+</span>
+<li>
+<a href="/logout/">退出</a>
+</li>
+</ul> -->
+<ul class="util-nav">
+<li>
+<a class="wjNews" href="/message/list"></a>
+</li>
+<li class="username">
+<a href="javascript:;" title="hxkinggil">
+hxkinggil
+</a>
+<div class="arrowup">
+<div class="arrowupt"></div>
+</div>
+<div class="loginMeun">
+<div class="opacityDIV"></div>
+<div class="loginMenu_n">
+<ul class="UserMenu">
+<li><a href="/member">我的账户</a></li>
+<li><a href="/member/myscore">调查券</a></li>
+<li><a href="/contact/list/all?zoom_model=normal">联系人</a></li>
+<li class="bbnot"><a href="/logout">退出</a></li>
+</ul>
+</div>
+</div>
+</li>
+</ul>
+
+</div>
+
+</div>
+</div>
+<!--top end-->
+
+<div class="wjContent">
+<div class="container-fluid clear">
+<div class="row-fluid">
+<!--wentop-->
+<div class="wentop">
+<ul id="myTab" class="nav1 nav2-tabs">
+<li class="active">
+<a href="#design" data-toggle="tab">问卷设计</a>
+</li>
+<li>
+<a href="/collect/urllink/538fc99af7405b73dd9d784e" data-toggle="tab">答卷收集</a>
+</li>
+<li>
+<a href="/report/basic_chart/538fc99af7405b73dd9d784e" data-toggle="tab">结果分析</a>
+</li>
+</ul>
+<h4 class="h4st1">
+<div class="h4Title">
+
+11
+
+</div>
+<select name="proj_func_select" id="proj_func_select">
+
+<option value="51dd234e9b9fbe6646bf4dcc" >品牌营销</option>
+
+<option value="51dd234e9b9fbe6646bf4dcd" >产品测试</option>
+
+<option value="51dd234e9b9fbe6646bf4dce" >消费者分析</option>
+
+<option value="51dd234e9b9fbe6646bf4dcf" >满意度调查</option>
+
+<option value="51dd234e9b9fbe6646bf4dd0" selected="selected">人力资源</option>
+
+<option value="51dd234e9b9fbe6646bf4dd1" >学术教育</option>
+
+<option value="51dd234e9b9fbe6646bf4dd2" >社会民意</option>
+
+<option value="51dd234e9b9fbe6646bf4dd3" >其他</option>
+
+</select>
+</h4>
+<div id="myTabContent" class="tab2-content">
+<div class="tab-pane fade in active" id="design">
+<ul class="fr">
+<li>
+<a id="appearset" href="javascript:;"> <i class="design-set1-icon active"></i>
+外观设置
+</a>
+</li>
+<li>
+<a class="logicset" href="javascript:;"> <i class="design-set2-icon"></i>
+逻辑设置
+</a>
+</li>
+<li>
+<a id="ansrest" href="javascript:;"> <i class="design-set0-icon"></i>
+收集设置
+</a>
+</li>
+<li>
+<a href="/s/mMZfAb?test=1&v=0.326994584354" target="_blank">
+<i class="design-set4-icon"></i>
+预览问卷
+</a>
+</li>
+<li>
+<a target="_blank" onclick="publish_proj_confirm();return false;" href="#" >
+<i class="design-set5-icon" ></i>
+发布问卷
+</a>
+</li>
+</ul>
+</div>
+<div class="tab-pane fade" id="collect">
+<ul class="fr">
+<li>
+<a href="javascript:;">
+<i class="collect-set1-icon active"></i>
+问卷链接
+</a>
+</li>
+<li>
+<a href="javascript:;">
+<i class="collect-set2-icon"></i>
+社交分享
+</a>
+</li>
+<li>
+<a href="javascript:;">
+<i class="collect-set3-icon"></i>
+邮件邀请
+</a>
+</li>
+<li>
+<a href="javascript:;">
+<i class="collect-set4-icon"></i>
+网站收集
+</a>
+</li>
+</ul>
+</div>
+<div class="tab-pane fade" id="analyse">
+<ul class="fr">
+<li>
+<a href="javascript:;">
+<i class="analyse-set1-icon active"></i>
+基本图表
+</a>
+</li>
+<li>
+<a href="javascript:;">
+<i class="analyse-set2-icon"></i>
+交叉图表
+</a>
+</li>
+<li>
+<a href="javascript:;">
+<i class="analyse-set3-icon"></i>
+答卷详情
+</a>
+</li>
+</ul>
+</div>
+</div>
+<!--/.tab2-content--> </div>
+<!--/.wentop-->
+<div class="rows1">
+<div class="well sidebar-nav affix-top" id="accordion1">
+<div class="accordion-group">
+<h4 class="tc">
+<a href="javascript:;">
+基本题型
+<i class="icon_on"></i>
+</a>
+</h4>
+<ul class="ul-tool collapse">
+<li class="moduleL" name="2">
+<a href="javascript:;">
+<i class="basic-too11-icon-active"></i>
+单选题
+</a>
+</li>
+<li class="moduleL" name="3">
+<a href="javascript:;">
+<i class="basic-too12-icon-active"></i>
+多选题
+</a>
+</li>
+<li class="moduleL" name="6">
+<a href="javascript:;">
+<i class="basic-too13-icon-active"></i>
+填空题
+</a>
+</li>
+<li class="moduleL" name="50">
+<a href="javascript:;">
+<i class="basic-too14-icon-active"></i>
+打分题
+</a>
+</li>
+<li class="moduleL" name="60">
+<a href="javascript:;">
+<i class="basic-too15-icon-active"></i>
+排序题
+</a>
+</li>
+<li class="moduleL" name="95">
+<a href="javascript:;">
+<i class="basic-too16-icon-active"></i>
+多项填空题
+</a>
+</li>
+<li class="moduleL" name="4">
+<a href="javascript:;">
+<i class="basic-too17-icon-active"></i>
+矩阵单选题
+</a>
+</li>
+<li class="moduleL" name="5">
+<a href="javascript:;">
+<i class="basic-too18-icon-active"></i>
+矩阵多选题
+</a>
+</li>
+<li class="moduleL" name="100">
+<a href="javascript:;">
+<i class="basic-too19-icon-active"></i>
+矩阵填空题
+</a>
+</li>
+<li class="moduleL" name="7">
+<a href="javascript:;">
+<i class="basic-too110-icon-active"></i>
+矩阵打分题
+</a>
+</li>
+<li class="moduleL" name="70">
+<a href="javascript:;">
+<i class="basic-too111-icon-active"></i>
+段落说明
+</a>
+</li>
+<li class="moduleL" name="page">
+<a href="javascript:;">
+<i class="basic-too112-icon-active"></i>
+分页
+</a>
+</li>
+</ul>
+<h4 class="tc">
+<a href="javascript:;">
+常用题目
+<i class=""></i>
+</a>
+</h4>
+<ul id="common" class="ul-tool collapse" style="display:none;">
+<li class="moduleL" name="sex">
+<a href="javascript:;">性别</a>
+</li>
+<li class="moduleL" name="city">
+<a href="javascript:;">城市</a>
+</li>
+<li class="moduleL" name="name">
+<a href="javascript:;">姓名</a>
+</li>
+<li class="moduleL" name="mobile">
+<a href="javascript:;">手机</a>
+</li>
+<li class="moduleL" name="age">
+<a href="javascript:;">生日</a>
+</li>
+<li class="moduleL" name="email">
+<a href="javascript:;">Email</a>
+</li>
+<li class="moduleL" name="work_ex">
+<a href="javascript:;">工作年限</a>
+</li>
+<li class="moduleL" name="education">
+<a href="javascript:;">教育程度</a>
+</li>
+<li class="moduleL" name="income">
+<a href="javascript:;">个人收入</a>
+</li>
+<li class="moduleL" name="company">
+<a href="javascript:;">工作单位</a>
+</li>
+<li class="moduleL" name="marriage">
+<a href="javascript:;">婚姻状况</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!--/.rows1-->
+<div class="rows2 well2 Tj">
+<h4 name="project" class="h4-bg T_edit p_title">11</h4>
+<table class="table1 bg-m">
+<tr>
+<td class="rb">&nbsp;</td>
+<td>
+<div class="th4 T_edit p_begin_desc" name="begin_desc"><p style="text-align: center;"><span style="color: rgb(102, 102, 102);"><span style="font-size: 16px;"><strong><span style="color: rgb(102, 102, 102);"><span style="font-size: 16px;"><span style="color: rgb(102, 102, 102);"><span style="font-size: 16px;"><span style="color: rgb(102, 102, 102);"><span style="font-size: 16px;"><span style="font-family: 微软雅黑;">2014年满意度调查</span></span></span></span></span></span></span></strong></span></span></p></div>
+</td>
+</tr>
+</table>
+<ul class="dragwen" id="question_box">
+<!-- 题目的html放这里 --> </ul>
+<ul class="ul_tail">
+<li class="module paging" oid="|" >
+<div class="topic_type">
+<div class="topic_type_menu">
+<div class="setup-group">
+<a class="DelPaging" title="删除分页" href="javascript:;">
+<i class="del2-icon-active"></i>
+</a>
+</div>
+</div>
+<div class="topic_type_con">
+<div class="icon_paging"></div>
+<div class="fr con_paging">
+页码：
+<span>1/1</span>
+</div>
+</div>
+</div>
+<div class="updown">
+<a href="javascript:;">
+<i title="上移本题" class="up-icon-active"></i>
+</a>
+<a href="javascript:;">
+<i title="下移本题" class="down-icon-active"></i>
+</a>
+</div>
+</li>
+</ul>
+<table class="table1 bg-m">
+<tr>
+<td class="rb"></td>
+<td>
+<div class="selectEnd">
+<select id="end_desc_type">
+<option value="complete">正常完成</option>
+<option value="screenout">提前结束（不计入结果）</option>
+<!--option value="自动结束（指定份数）">自动结束（指定份数）</option-->
+<!--option value="自动结束（指定时间）">自动结束（指定时间）</option-->
+</select>
+<span> 时显示</span>
+</div>
+<h4 name='end_desc' class="th4 T_edit p_end_desc" id="end_desc">
+
+您已完成本次问卷，感谢您的帮助与支持。
+
+</h4>
+</td>
+</tr>
+</table>
+</div>
+<!--/.rows2--> </div>
+<!--/.row-fluid--> </div>
+<!--/container-fluid-->
+</div>
+<form id="change_project_status_form" action="/report/ajax/update_project_status/" method="POST" callback="change_project_status_callback">
+<input type="hidden" name="proj_id">
+<input type="hidden" name="status">
+<input type="hidden" name="is_shared"><input type="hidden" name="_xsrf" value="d6b4fc30e7cf4ce5957980a01a2bc5ec"/>
+</form>
+<!--日期组件-->
+<link type="text/css" rel="stylesheet" href="/static/js/plug-in/date/css/zebra_datepicker_metallic.css?v=bdc00515926951c91cb1d2494354e09a" />
+<script type="text/javascript" src="/static/js/plug-in/date/javascript/zebra_datepicker.js?v=7774bd0c8db8c364764d10de89666558"></script>
+<script type="text/javascript">
+var project = {"status": 0, "updated": {"$date": 1403103760099}, "official_status": 0, "is_shared": false, "short_id": "mMZfAb", "is_struct_change": 1, "_id": {"$oid": "538fc99af7405b73dd9d784e"}, "questionpage_id_list": ["538fc99af7405b73dd9d784f", "539931a1f7405b1f7cee5f87"], "page_count": 2, "questionpage_list": [{"updated": {"$date": 1401960986170}, "_id": {"$oid": "538fc99af7405b73dd9d784f"}, "question_id_list": ["53a1398af7405b68cdab18ee", "539ac587f7405b1f593bfa61", "538fd1bdf7405b73f1629b85", "53993adcf7405b1f6f3d6a2d", "538fd17ef7405b73e62dad80", "538fca3df7405b73c0d0e9a0", "538fca17f7405b73dd9d7864"], "question_list": [{"has_open_option": false, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 50, "cid": "Q1", "questionpage_id": "538fc99af7405b73dd9d784f", "title": "\u6253\u5206\u9898", "updated": {"$date": 1403103754111}, "matrixrow_id_list": [], "option_list": [{"updated": {"$date": 1403103754148}, "title": "\u9009\u98791", "cid": "A1", "is_open": false, "_id": {"$oid": "53a1398af7405b68cdab18ef"}, "custom_attr": {}, "question_id": "53a1398af7405b68cdab18ee"}, {"updated": {"$date": 1403103754172}, "title": "\u9009\u98792", "cid": "A2", "is_open": false, "_id": {"$oid": "53a1398af7405b68cdab18f0"}, "custom_attr": {}, "question_id": "53a1398af7405b68cdab18ee"}], "option_id_list": ["53a1398af7405b68cdab18ef", "53a1398af7405b68cdab18f0"], "_id": {"$oid": "53a1398af7405b68cdab18ee"}, "custom_attr": {"min_answer_num": 1, "max_answer_num": 5}}, {"has_open_option": false, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 6, "cid": "Q2", "questionpage_id": "538fc99af7405b73dd9d784f", "title": "\u5355\u884c\u586b\u7a7a", "updated": {"$date": 1402680839281}, "matrixrow_id_list": [], "option_list": [{"updated": {"$date": 1402680839314}, "title": "\u9009\u98791", "cid": "A1", "is_open": false, "_id": {"$oid": "539ac587f7405b1f593bfa62"}, "custom_attr": {"checkmethod": "chinese", "text_row": "1", "text_col": "20"}, "question_id": "539ac587f7405b1f593bfa61"}], "option_id_list": ["539ac587f7405b1f593bfa62"], "_id": {"$oid": "539ac587f7405b1f593bfa61"}, "custom_attr": {}}, {"has_open_option": false, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 2, "cid": "Q3", "questionpage_id": "538fc99af7405b73dd9d784f", "title": "\u6027\u522b", "updated": {"$date": 1401963069684}, "matrixrow_id_list": [], "option_list": [{"updated": {"$date": 1401963069720}, "title": "\u7537", "cid": "A1", "is_open": false, "_id": {"$oid": "538fd1bdf7405b73f1629b86"}, "custom_attr": {}, "question_id": "538fd1bdf7405b73f1629b85"}, {"updated": {"$date": 1401963069744}, "title": "\u5973", "cid": "A2", "is_open": false, "_id": {"$oid": "538fd1bdf7405b73f1629b87"}, "custom_attr": {}, "question_id": "538fd1bdf7405b73f1629b85"}], "option_id_list": ["538fd1bdf7405b73f1629b86", "538fd1bdf7405b73f1629b87"], "_id": {"$oid": "538fd1bdf7405b73f1629b85"}, "custom_attr": {}}, {"has_open_option": false, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 4, "cid": "Q4", "questionpage_id": "538fc99af7405b73dd9d784f", "title": "\u77e9\u9635\u5355\u9009\u9898", "updated": {"$date": 1402579804111}, "matrixrow_list": [{"updated": {"$date": 1402579804187}, "title": "\u77e9\u9635\u884c1", "cid": "R1", "is_open": false, "_id": {"$oid": "53993adcf7405b1f6f3d6a30"}, "custom_attr": {}, "question_id": "53993adcf7405b1f6f3d6a2d"}, {"updated": {"$date": 1402579804216}, "title": "\u77e9\u9635\u884c2", "cid": "R2", "is_open": false, "_id": {"$oid": "53993adcf7405b1f6f3d6a31"}, "custom_attr": {}, "question_id": "53993adcf7405b1f6f3d6a2d"}], "matrixrow_id_list": ["53993adcf7405b1f6f3d6a30", "53993adcf7405b1f6f3d6a31"], "option_list": [{"updated": {"$date": 1402579804141}, "title": "\u9009\u98791", "cid": "A1", "is_open": false, "_id": {"$oid": "53993adcf7405b1f6f3d6a2e"}, "custom_attr": {}, "question_id": "53993adcf7405b1f6f3d6a2d"}, {"updated": {"$date": 1402579804164}, "title": "\u9009\u98792", "cid": "A2", "is_open": false, "_id": {"$oid": "53993adcf7405b1f6f3d6a2f"}, "custom_attr": {}, "question_id": "53993adcf7405b1f6f3d6a2d"}], "option_id_list": ["53993adcf7405b1f6f3d6a2e", "53993adcf7405b1f6f3d6a2f"], "_id": {"$oid": "53993adcf7405b1f6f3d6a2d"}, "custom_attr": {}}, {"has_open_option": false, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 3, "cid": "Q5", "questionpage_id": "538fc99af7405b73dd9d784f", "title": "\u591a\u9009\u9898", "updated": {"$date": 1401963006580}, "matrixrow_id_list": [], "option_list": [{"updated": {"$date": 1401963006626}, "title": "dfk\u9876\u9876\u9876\u9876\u9876\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u9876\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u7684\u591a\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u963f\u4e09\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u5927\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f\u662f", "cid": "A1", "is_open": false, "_id": {"$oid": "538fd17ef7405b73e62dad81"}, "custom_attr": {}, "question_id": "538fd17ef7405b73e62dad80"}, {"updated": {"$date": 1401963006658}, "title": "\u963f\u65af\u987f\u53d1\u751f\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5e08\u5927\u5b9e\u6253\u5b9e\u5927\u5e08\u5927\u5e08\u7684\u58eb\u5927\u592b\u58eb\u5927\u592b\u58eb\u5927\u592b\u58eb\u5927\u592b\u65f6\u53d1\u751f\u7684\u65b9\u5f0f\u58eb\u5927\u592b\u58eb\u5927\u592b\u662f\u7684\u5927\u6cd5\u5e08\u6cd5\u58eb\u5927\u592b\u58eb\u5927\u592b\u58eb\u5927\u592b\u58eb\u5927\u592b \u58eb\u5927\u592b\u4f3c\u7684\u53d1\u58eb\u5927\u592b&nbsp;", "cid": "A2", "is_open": false, "_id": {"$oid": "538fd17ef7405b73e62dad82"}, "custom_attr": {}, "question_id": "538fd17ef7405b73e62dad80"}, {"updated": {"$date": 1402573681689}, "title": "\u9009\u98793", "cid": "A3", "is_open": false, "_id": {"$oid": "539922f1f7405b1f6f3d6760"}, "custom_attr": {}, "question_id": "538fd17ef7405b73e62dad80"}], "option_id_list": ["538fd17ef7405b73e62dad81", "538fd17ef7405b73e62dad82", "539922f1f7405b1f6f3d6760"], "_id": {"$oid": "538fd17ef7405b73e62dad80"}, "custom_attr": {}}, {"has_open_option": false, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 60, "cid": "Q6", "questionpage_id": "538fc99af7405b73dd9d784f", "title": "\u6392\u5e8f\u9898", "updated": {"$date": 1401961149071}, "matrixrow_id_list": [], "option_list": [{"updated": {"$date": 1401961149102}, "title": "\u9009\u98791", "cid": "A1", "is_open": false, "_id": {"$oid": "538fca3df7405b73c0d0e9a1"}, "custom_attr": {}, "question_id": "538fca3df7405b73c0d0e9a0"}, {"updated": {"$date": 1401961149123}, "title": "\u9009\u98792", "cid": "A2", "is_open": false, "_id": {"$oid": "538fca3df7405b73c0d0e9a2"}, "custom_attr": {}, "question_id": "538fca3df7405b73c0d0e9a0"}, {"updated": {"$date": 1401961162024}, "title": "\u9009\u98793", "cid": "A3", "is_open": false, "_id": {"$oid": "538fca4af7405b73fd1059d1"}, "custom_attr": {}, "question_id": "538fca3df7405b73c0d0e9a0"}], "option_id_list": ["538fca3df7405b73c0d0e9a1", "538fca3df7405b73c0d0e9a2", "538fca4af7405b73fd1059d1"], "_id": {"$oid": "538fca3df7405b73c0d0e9a0"}, "custom_attr": {}}, {"has_open_option": false, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 50, "cid": "Q7", "questionpage_id": "538fc99af7405b73dd9d784f", "title": "\u6253\u5206\u9898", "updated": {"$date": 1401961111514}, "matrixrow_id_list": [], "option_list": [{"updated": {"$date": 1401961111545}, "title": "\u9009\u98791", "cid": "A1", "is_open": false, "_id": {"$oid": "538fca17f7405b73dd9d7865"}, "custom_attr": {}, "question_id": "538fca17f7405b73dd9d7864"}, {"updated": {"$date": 1401961111565}, "title": "\u9009\u98792", "cid": "A2", "is_open": false, "_id": {"$oid": "538fca17f7405b73dd9d7866"}, "custom_attr": {}, "question_id": "538fca17f7405b73dd9d7864"}], "option_id_list": ["538fca17f7405b73dd9d7865", "538fca17f7405b73dd9d7866"], "_id": {"$oid": "538fca17f7405b73dd9d7864"}, "custom_attr": {"min_answer_num": 1, "max_answer_num": 5}}], "project_id": "538fc99af7405b73dd9d784e", "custom_attr": {}}, {"updated": {"$date": 1402577441319}, "_id": {"$oid": "539931a1f7405b1f7cee5f87"}, "question_id_list": ["539931b5f7405b1fa95235b0", "53993f54f7405b1f8c515aca", "53993b2cf7405b1f8c515a08", "53993b4ef7405b1fb43ac462"], "question_list": [{"has_open_option": false, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 7, "cid": "Q8", "questionpage_id": "539931a1f7405b1f7cee5f87", "title": "\u77e9\u9635\u6253\u5206\u9898", "updated": {"$date": 1402577461059}, "matrixrow_list": [{"updated": {"$date": 1402577461146}, "title": "\u77e9\u9635\u884c1", "cid": "R1", "is_open": false, "_id": {"$oid": "539931b5f7405b1fa95235b3"}, "custom_attr": {}, "question_id": "539931b5f7405b1fa95235b0"}, {"updated": {"$date": 1402577461169}, "title": "\u77e9\u9635\u884c2", "cid": "R2", "is_open": false, "_id": {"$oid": "539931b5f7405b1fa95235b4"}, "custom_attr": {}, "question_id": "539931b5f7405b1fa95235b0"}, {"updated": {"$date": 1402577512167}, "title": "\u77e9\u9635\u884c3", "cid": "R3", "is_open": false, "_id": {"$oid": "539931e8f7405b1fa95235b6"}, "custom_attr": {}, "question_id": "539931b5f7405b1fa95235b0"}], "matrixrow_id_list": ["539931b5f7405b1fa95235b3", "539931b5f7405b1fa95235b4", "539931e8f7405b1fa95235b6"], "option_list": [{"updated": {"$date": 1402577461103}, "title": "\u8bf7\u6253\u52061", "cid": "A1", "is_open": false, "_id": {"$oid": "539931b5f7405b1fa95235b1"}, "custom_attr": {}, "question_id": "539931b5f7405b1fa95235b0"}, {"updated": {"$date": 1402577461124}, "title": "\u8bf7\u6253\u52062", "cid": "A2", "is_open": false, "_id": {"$oid": "539931b5f7405b1fa95235b2"}, "custom_attr": {}, "question_id": "539931b5f7405b1fa95235b0"}], "option_id_list": ["539931b5f7405b1fa95235b1", "539931b5f7405b1fa95235b2"], "_id": {"$oid": "539931b5f7405b1fa95235b0"}, "custom_attr": {"min_answer_num": 1, "max_answer_num": 5}}, {"has_open_option": true, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 2, "cid": "Q9", "questionpage_id": "539931a1f7405b1f7cee5f87", "title": "\u5355\u9009\u9898", "updated": {"$date": 1402580948374}, "matrixrow_id_list": [], "option_list": [{"updated": {"$date": 1402580948406}, "title": "\u9009\u98791", "cid": "A1", "is_open": false, "_id": {"$oid": "53993f54f7405b1f8c515acb"}, "custom_attr": {}, "question_id": "53993f54f7405b1f8c515aca"}, {"updated": {"$date": 1402580948431}, "title": "\u9009\u98792", "cid": "A2", "is_open": false, "_id": {"$oid": "53993f54f7405b1f8c515acc"}, "custom_attr": {}, "question_id": "53993f54f7405b1f8c515aca"}, {"updated": {"$date": 1402580951751}, "title": "<p>1\u5b9e\u5728\u6492\u6253\u7b97</p>", "cid": "A3", "is_open": true, "_id": {"$oid": "53993f57f7405b1fa95237a4"}, "custom_attr": {"checkmethod": ""}, "question_id": "53993f54f7405b1f8c515aca"}], "option_id_list": ["53993f54f7405b1f8c515acb", "53993f54f7405b1f8c515acc", "53993f57f7405b1fa95237a4"], "_id": {"$oid": "53993f54f7405b1f8c515aca"}, "custom_attr": {}}, {"has_open_option": false, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 5, "cid": "Q10", "questionpage_id": "539931a1f7405b1f7cee5f87", "title": "\u77e9\u9635\u591a\u9009\u9898", "updated": {"$date": 1402579884781}, "matrixrow_list": [{"updated": {"$date": 1402579884867}, "title": "\u77e9\u9635\u884c1", "cid": "R1", "is_open": false, "_id": {"$oid": "53993b2cf7405b1f8c515a0b"}, "custom_attr": {}, "question_id": "53993b2cf7405b1f8c515a08"}, {"updated": {"$date": 1402579884893}, "title": "\u77e9\u9635\u884c2", "cid": "R2", "is_open": false, "_id": {"$oid": "53993b2cf7405b1f8c515a0c"}, "custom_attr": {}, "question_id": "53993b2cf7405b1f8c515a08"}], "matrixrow_id_list": ["53993b2cf7405b1f8c515a0b", "53993b2cf7405b1f8c515a0c"], "option_list": [{"updated": {"$date": 1402579884819}, "title": "\u9009\u98791", "cid": "A1", "is_open": false, "_id": {"$oid": "53993b2cf7405b1f8c515a09"}, "custom_attr": {}, "question_id": "53993b2cf7405b1f8c515a08"}, {"updated": {"$date": 1402579884841}, "title": "\u9009\u98792", "cid": "A2", "is_open": false, "_id": {"$oid": "53993b2cf7405b1f8c515a0a"}, "custom_attr": {}, "question_id": "53993b2cf7405b1f8c515a08"}], "option_id_list": ["53993b2cf7405b1f8c515a09", "53993b2cf7405b1f8c515a0a"], "_id": {"$oid": "53993b2cf7405b1f8c515a08"}, "custom_attr": {}}, {"has_open_option": false, "project_id": "538fc99af7405b73dd9d784e", "jumpconstraint_id_list": [], "question_type": 100, "cid": "Q11", "questionpage_id": "539931a1f7405b1f7cee5f87", "title": "\u77e9\u9635\u586b\u7a7a\u9898", "updated": {"$date": 1402579918170}, "matrixrow_list": [{"updated": {"$date": 1402579918261}, "title": "\u77e9\u9635\u884c1", "cid": "R1", "is_open": false, "_id": {"$oid": "53993b4ef7405b1fb43ac465"}, "custom_attr": {}, "question_id": "53993b4ef7405b1fb43ac462"}, {"updated": {"$date": 1402579918285}, "title": "\u77e9\u9635\u884c2", "cid": "R2", "is_open": false, "_id": {"$oid": "53993b4ef7405b1fb43ac466"}, "custom_attr": {}, "question_id": "53993b4ef7405b1fb43ac462"}], "matrixrow_id_list": ["53993b4ef7405b1fb43ac465", "53993b4ef7405b1fb43ac466"], "option_list": [{"updated": {"$date": 1402579918203}, "title": "\u8bf7\u586b\u7a7a1", "cid": "A1", "is_open": false, "_id": {"$oid": "53993b4ef7405b1fb43ac463"}, "custom_attr": {"text_row": "1", "text_col": "10"}, "question_id": "53993b4ef7405b1fb43ac462"}, {"updated": {"$date": 1402579918224}, "title": "\u8bf7\u586b\u7a7a2", "cid": "A2", "is_open": false, "_id": {"$oid": "53993b4ef7405b1fb43ac464"}, "custom_attr": {"text_row": "1", "text_col": "10"}, "question_id": "53993b4ef7405b1fb43ac462"}], "option_id_list": ["53993b4ef7405b1fb43ac463", "53993b4ef7405b1fb43ac464"], "_id": {"$oid": "53993b4ef7405b1fb43ac462"}, "custom_attr": {}}], "project_id": "538fc99af7405b73dd9d784e", "custom_attr": {}}], "share_status": 0, "created": {"$date": 1401960986158}, "end_desc": "\u60a8\u5df2\u5b8c\u6210\u672c\u6b21\u95ee\u5377\uff0c\u611f\u8c22\u60a8\u7684\u5e2e\u52a9\u4e0e\u652f\u6301\u3002", "creator_id": "538fc987f7405b73f1629a28", "version": 1, "question_count": 11, "title": "11", "project_func_id": "51dd234e9b9fbe6646bf4dd0", "first_create_for_member": true, "custom_attr": {"theme": "darkblue", "scrollbar": "on", "screenout_desc": "\u4e0d\u597d\u610f\u601d\uff0c\u60a8\u4e0d\u592a\u9002\u5408\u672c\u6b21\u8c03\u67e5\uff0c\u8c22\u8c22\u60a8\u7684\u65f6\u95f4\u3002", "panelsite": ""}, "begin_desc": "<p style=\"text-align: center;\"><span style=\"color: rgb(102, 102, 102);\"><span style=\"font-size: 16px;\"><strong><span style=\"color: rgb(102, 102, 102);\"><span style=\"font-size: 16px;\"><span style=\"color: rgb(102, 102, 102);\"><span style=\"font-size: 16px;\"><span style=\"color: rgb(102, 102, 102);\"><span style=\"font-size: 16px;\"><span style=\"font-family: \u5fae\u8f6f\u96c5\u9ed1;\">2014\u5e74\u6ee1\u610f\u5ea6\u8c03\u67e5</span></span></span></span></span></span></span></strong></span></span></p>"};
+$(function(){
+// loadMack({off:'on',Limg:0,text:'加载中...',set:0});
+$('.logicset').click(function(){
+ajax_loads(920,256,'逻辑设置','/edit/ajax/logic_set/538fc99af7405b73dd9d784e/?v=' + new Date().getTime());
+});
+$('#appearset').click(function(){
+mapsets(918,600,'外观设置','/edit/appearset/538fc99af7405b73dd9d784e/?v=' + new Date().getTime());
+});
+$('#ansrest').click(function(){
+ajax_loads(500,380,'收集设置','/edit/ansrest/538fc99af7405b73dd9d784e/?pre_page=design&v=' + new Date().getTime());
+});
+});
+function ajax_loads(w,h,title,url){
+var wbs = new jsbox({
+onlyid:"maptss",
+title:title,
+conw:w,
+//conh:h,
+FixedTop:170,
+loads:true,
+url:url,
+range:false,
+mack:true
+}).show();
+}
+//弹出框打包配置
+function mapsets(w,h,title,url){
+var wbs = new jsbox({
+onlyid:"maptss",
+title:title,
+conw:w,
+conh:h,
+FixedTop:170,
+iframe:true,
+url:url,
+range:false,
+mack:true
+}).show();
+}
+function ajax_loads(w,h,title,url){
+var wbs = new jsbox({
+onlyid:"maptss",
+title:title,
+conw:w,
+//conh:h,
+FixedTop:170,
+loads:true,
+url:url,
+range:false,
+mack:true
+}).show();
+}
+function close_pop_window(){
+$("#maptss").remove();
+$('#lightBox').remove();
+}
+function flush_after_close_window(){
+$("#maptss").remove();
+$('#lightBox').remove();
+window.location.href = "/edit/survey/538fc99af7405b73dd9d784e/";
+}
+function publish_proj_confirm(){
+var confirm_popup_win = Object();
+confirm_popup_win.title = "确认发布";
+var content = "是否发布问卷?";
+if(project.share_status == 0 && (project.copy_from_pid==undefined||project.copy_from_pid==null||project.copy_from_pid=='')){
+content += "<br/><label><input style='margin:3px; margin:3px 3px 0 3px;' type='checkbox' checked='checked' id='checkbox_selector'/>共享到模板库</label><i class='tips' title='选中该选项，本问卷经审核合格后会添加到模板库中，供其他会员制作问卷时参考。'></i>";
+}
+confirm_popup_win.content = content;
+confirm_popup_win.obj = publish_proj;
+confirm_popup_win.close_obj = cancle_publish_proj;
+jsConfirm(confirm_popup_win);
+}
+function publish_proj(){
+var proj_id = project._id.$oid;
+$("#change_project_status_form input[name='proj_id']").val(proj_id);
+$("#change_project_status_form input[name='status']").val(1);
+$("#change_project_status_form input[name='is_shared']").val($("#checkbox_selector").attr("checked"));
+ajaxSubmit($("#change_project_status_form"));
+}
+function change_project_status_callback(info){
+var panelsite = 'None';
+if(panelsite==3){
+var alert_obj = Object();
+alert_obj.title = "成功信息";
+alert_obj.content = "你的问卷已经成功发布到研修网";
+alert_obj.obj_text = '确定';
+alert_obj.obj = function(){
+var url = "/collect/urllink/538fc99af7405b73dd9d784e/";
+location.href = url;
+}
+jsAlert(alert_obj);
+}else{
+var url = "/collect/urllink/538fc99af7405b73dd9d784e/?fp="+info.first_publish;
+location.href = url;
+}
+}
+function cancle_publish_proj(){
+}
+var client_uuid = "07abbf98-f6b9-11e3-9923-90b11c535da3";
+</script>
+<script type="text/javascript" src="http://www.wenjuan.com/static/js/init.js?v=78315b796a7db5785593efad33936483"></script>
+<script src="http://www.wenjuan.com/static/js/enums.js?v=5b056688b54a5f11dd0a585a91370f11"></script>
+<script src="http://www.wenjuan.com/static/js/models.js?v=a8f3b5fea6fb326bb4bc4c2d92b8ace8"></script>
+<script src="http://www.wenjuan.com/static/js/juicer.js?v=eddf2482fed75dc11f602a5f519435cb"></script>
+<script src="http://www.wenjuan.com/static/js/survey_utils.js?v=963ed8e22416410f5e3afea8b7a01e3c"></script>
+<!--加载提示-->
+<link type="text/css" rel="stylesheet" href="http://www.wenjuan.com/static/js/plug-in/load/load.css?v=77d9e9d879bf940884faa6409deccf1f" />
+<script type="text/javascript" src="http://www.wenjuan.com/static/js/plug-in/load/load.js?v=a07f90c641a72936491a95f8fe4968bd"></script>
+<!--气泡弹框-->
+<link type="text/css" rel="stylesheet" href="http://www.wenjuan.com/static/js/plug-in/JsBubble/JsBubble.css?v=af6c2a651e002361df53bc9b490733ce" />
+<script type="text/javascript" src="http://www.wenjuan.com/static/js/plug-in/JsBubble/JsBubble.js?v=adebd6742bc00b737558bcef21a423f8"></script>
+<!--弹出框-->
+<link type="text/css" rel="stylesheet" href="http://www.wenjuan.com/static/js/plug-in/jsbox/jsbox.css?v=4c521321f44331efafc1ee9bb30699ee" />
+<script type="text/javascript" src="http://www.wenjuan.com/static/js/plug-in/jsbox/jsbox.js?v=e6153a8ca6300cc2fabc3572bf13dc1e"></script>
+<!--FCK编辑器-->
+<script type="text/javascript" src="http://www.wenjuan.com/static/js/plug-in/ckeditor/ckeditor.js?v=d92ce8a4c44188b7494639c228f3804a"></script>
+<script src="http://www.wenjuan.com/static/js/edit/edit.js?v=999698f9e7b6357d6bd0a03ba52980c4"></script>
+<script src="http://www.wenjuan.com/static/js/edit/edit_utils.js?v=b4ea8f7f839270a695246f21551dc7c5"></script>
+<script src="http://www.wenjuan.com/static/js/edit/edit_init.js?v=849a0f5af775bb8ca39fe028fb65211f"></script>
+<script src="http://www.wenjuan.com/static/js/edit/q_template.js?v=81879bda23ec6890a48bf5f1087a6565"></script>
+<script src="http://www.wenjuan.com/static/js/ssq.js?v=8aedc4acd7e910819dec3cb8bc152e43"></script>
+<script type="text/javascript">
+var active_index = 0;
+var found = 0;
+$(".main-nav li a").each(function(){
+if($(this).text() == '问卷')
+found = 1;
+if(found == 0)
+active_index += 1;
+});
+set_active_head1(active_index);
+var first_edit = false;
+if (first_edit){
+//新手帮助
+Help_up();
+}
+// window.onbeforeunload = function(){
+// syncPost('/edit/ajax/exit_edit/'+get_oid(project)+"/", {});
+// }
+</script>
+
+
+
+<div class="footer_w">
+<div class="footer">
+<div class="instructions">
+<div class="ma_auto">
+<div> ©2013 爱调研旗下网站 </div><a href="http://business.idiaoyan.com/" target="_blank"><div class="slogan_min"></div></a><span>用你的观点影响世界</span>
+</div>
+</div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-9592313-3']);
+_gaq.push(['_setDomainName', 'wenjuan.com']);
+_gaq.push(['_setAllowLinker', true]);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+<script type="text/javascript">
+$(function(){
+$().top_hj();
+$('.username').click(function(){
+if($(".loginMeun:visible").length>0){
+$(this).find('.loginMeun').hide();
+$(this).find('.arrowupt').removeClass('atop');
+}else{
+$(this).find('.loginMeun').show();
+$(this).find('.arrowupt').addClass('atop');
+}
+});
+$(".login_but").click(function(){
+if($(".loginBox:visible").length>0){
+$(".loginBox").fadeOut("slow");
+}else{
+$(".loginBox").fadeIn("slow");
+}
+return false;
+});
+$(".loginBox").mouseup(function(){return false;});
+$('body').mouseup(function(){
+$(".loginBox").fadeOut("slow");
+$('.username').find('.loginMeun').hide();
+$('.username').find('.arrowupt').removeClass('atop');
+});
+$("a img[src='http://eiv.baidu.com/hmt/icon/21.gif']").hide();
+});
+
+$.ajax({
+type: "get",
+url: "/message/check",
+data: "",
+success: function (result) {
+if(result=='True'){
+$('.wjNews').html("<span class='PointRed'></span>");
+}
+}
+});
+
+//快速置顶
+;(function($){$.fn.extend({"top_hj":function(Obj){if(!Obj){Obj={}}var Tinfo={parent:Obj.parent||".Tj",url:Obj.url||"/about/zxzx/"};var Zonw=$(Tinfo.parent).width()+30;$(Tinfo.parent).prepend('<a title="关注问卷网微信" class="top_weixin ie6fixedBR" style="margin-left:'+Zonw+'px" href="javascript:;"></a><a class="top_feedback ie6fixedBR" style="margin-left:'+Zonw+'px" target="_blank" href="'+Tinfo.url+'"></a>');fu_scroll($(window));$(window).scroll(function(){$('.gzweixin').hide();fu_scroll($(this))});$('.top_hj').live('click',function(){$('html,body').animate({scrollTop:0},'slow')});$('.top_weixin').die().live('click',function(){var gzweixin=$('.gzweixin:visible');if(gzweixin.length>0){gzweixin.hide()}else{addGzTip($(this))}return});function fu_scroll(_this){var Zonw=$(Tinfo.parent).width()+30;var scrollT=_this.scrollTop();var bodyH=$('body').height();var winH=_this.height();var scrollB=bodyH-scrollT-winH;if(scrollT>300){var ml=$('.top_hj').length;if(ml==0){$(Tinfo.parent).append('<a title="置顶" class="top_hj ie6fixedBR" style="margin-left:'+Zonw+'px" href="javascript:;"></a>')}}else{$('.top_hj').remove()}if(scrollB<160){$('.top_hj').css({bottom:(281-scrollB)+'px'});$('.top_weixin').css({bottom:(230-scrollB)+'px'});$('.top_feedback').css({bottom:(176-scrollB)+'px'})}else{$('.top_hj').css({bottom:'112px'});$('.top_weixin').css({bottom:'60px'});$('.top_feedback').css({bottom:'5px'})}}function addGzTip(obj){var x=obj.offset().left-160;var y=obj.offset().top-100;var gzweixin=$('gzweixin');if(gzweixin.length>0){gzweixin.css({'top':y+'px','left':x+'px'})}else{var con='<div style="top:'+y+'px;left:'+x+'px;" class="gzweixin"></div>';$('body').append(con)}}}})})(jQuery);
+</script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F805c9a16950cbbec8732e90433c5a9e2' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+<!--- CheckPoint:e5434731e0d5daab65472cce13db9b24 --->
+</html>
