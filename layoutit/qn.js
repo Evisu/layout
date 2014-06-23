@@ -24,7 +24,7 @@ $(document).ready(function() {
 	CKEDITOR.disableAutoInline = true;
 	var contenthandle = CKEDITOR.replace( 'contenteditor' ,{
 		language: 'zh-cn',
-		contentsCss: ['css/bootstrap.min.css'],
+	
 		allowedContent: true
 	});
 	$(".ul-tool .ui-draggable").draggable({
@@ -59,4 +59,103 @@ $(document).ready(function() {
 		}
 	});
 	initContainer();
+	
+	
+	$(".SeniorEdit[href='#editorModal']").click(function() {
+		var sort1 = $('#sort1').val();
+		if(sort1 != -1){
+		contenthandle.setData(problems[sort1].name);
+	 }else{
+	 	contenthandle.setData(qnObj.title);
+	 	}
+		
+	});
+	
+	
+		$("#savecontent").click(function() {
+		var sort1 = $('#sort1').val();
+		
+		if(sort1 != -1){
+			problems[sort1].name = contenthandle.getData();
+	 }else{
+	 	alert(contenthandle.getData());
+	 	qnObj.title = contenthandle.getData();
+	
+	 	}
+		
+		
+		
+	});
+	
+	
+	
+ 
+            
+           
+	
+	
+	
+	
+	/*
+	$(".Drag_area,.max_an,#titleEdit").click(function(){
+				
+                $("#problemNameEdit").show();
+                 $("#optionNameEdit").hide();
+                return false;//关键是这里，阻止冒泡
+            });
+            
+            $(document).click(function(){
+                $("#problemNameEdit").hide();
+				$('.menu_edit').hide();
+            });
+            
+            
+            
+    $("#optionNameEdit , .T_edit_min").click(function(){
+				
+                $("#optionNameEdit").show();
+                 $("#problemNameEdit").hide();
+                return false;//关键是这里，阻止冒泡
+            });
+            $("#optionNameEdit").click(function(){
+                return false;
+            });
+            $(document).click(function(){
+                $("#optionNameEdit").hide();
+				$('.fast_machine').hide();
+            });   
+            
+      */      
+                 
+	
+	
 })
+
+
+function editDiv(show){
+	if(show){
+		$('.menu_edit').show();
+	}else{
+		$('.menu_edit').hide();
+	}
+}
+
+function fast_machine(show){
+	if(show){
+		$('.fast_machine').show();
+	}else{
+		$('.fast_machine').hide();
+	}
+	
+	}
+	
+	
+	
+	function stopPropagation(e) {
+					
+                if (e.stopPropagation) 
+                    e.stopPropagation();
+                else 
+                    e.cancelBubble = true;
+            }
+           ;

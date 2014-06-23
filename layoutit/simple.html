@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="simple">
+  <head>
+    <title>Simple</title>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+	
+	<script type="text/javascript" src="js/angular-contenteditable.js"></script>
+   <script>
+angular.module('simple', ['contenteditable'])
+.controller('Ctrl', function($scope) {
+//  $scope.model2 = 'hello'
+  $scope.model = "Initial stuff <b>with bold</b> <em>and italic</em> yay"
+  
+  $scope.ss = function(target){
+  		$scope.model = $(target).html();
+  	}
+})
+.controller('Ctrl2', function($scope) {})
+
+
+    </script>
+  </head>
+  <body>
+    <div ng-controller="Ctrl">
+      <label>Contenteditable (View):</label>
+      <div  contenteditable="true" ng-model="model" strip-br="true" ng-blur="ss($event.target)">
+        something
+      </div>
+      <hr>
+      <div>
+        <label>Model:</label>
+        <pre id="output" onclick="console.log('clicked the output')">{{ model }}</pre>
+      </div>
+     </div>
+  </body>
+</html>

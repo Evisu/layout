@@ -179,7 +179,7 @@
 
 	
 
-<!--单选题-->
+		<!--单选题-->
 <div class="topic_type">
 <div class="topic_type_menu">
 <div class="setup-group">
@@ -253,7 +253,7 @@
  
   <div id="problemNameEdit" class="zon_edit" style="left: 518px; top: 283.19px; width: 600px; position: absolute; min-height: 30px;display:none;">
   	<ul class="menu_edit" style="right: -32px; margin-top: 37px; display: none;">
-  	<li><a class="SeniorEdit" href="#editorModal"   data-toggle="modal"><i class="menu_edit2_icon"></i>高级编辑</a></li>
+  	<li><a class="SeniorEdit" href="#editorModal"  role="button" data-toggle="modal"><i class="menu_edit2_icon"></i>高级编辑</a></li>
   	</ul>
   	<div class="max_an" onclick="editDiv(true);"></div>
   	<div id="problemNameEditDiv" class="add_edit th4 q_title" style="min-height: 30px;" contenteditable="true" onblur="setProblemName(this);">

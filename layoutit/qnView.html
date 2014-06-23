@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>预览问卷</title>
+    
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/public.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+	<script type="text/javascript" src="js/jquery.htmlClean.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	
+	
+	<script type="text/javascript" src="js/angular-contenteditable.js"></script>
+	<script type="text/javascript" src="js/angularComponentView.js"></script>
+
+
+  </head>
+  
+  <body ng-app="qn" ng-controller="questionnaire">
+  	
+    <div class="wjContent">
+<div class="container-fluid clear">
+
+<div class="rows2 well2 Tj">
+	
+<h4 class="h4-bg T_edit p_title">11</h4>
+
+
+
+
+<ul class="dragwen ui-sortable" >
+	
+<!-- 题目的html放这里 --> 
+<li class="module" ng-repeat="problem in problems">
+
+
+	
+
+		<!--单选题-->
+<div class="topic_type">
+<div class="topic_type_menu">
+<div class="setup-group">
+<h4>Q{{problem.sort+1}}</h4>
+</div></div>
+<div class="topic_type_con">
+<div class="Drag_area" contenteditable="true" ng-model="problem.name" strip-br="true" ng-blur="synProblemName($event.target,problem.sort)">
+</div>
+
+<ul class="unstyled " ng-if="problem.type == 'radio'">
+<li ng-repeat="option in problem.options"><input  type="radio" ><label class="T_edit_min" contenteditable="true" ng-model="option.name" strip-br="true"></label></li>
+</ul>
+
+
+<ul class="unstyled " ng-if="problem.type == 'checkbox'">
+<li ng-repeat="option in problem.options"><input  type="checkbox" ><label class="T_edit_min">{{option.name}}</label></li>
+</ul>
+
+<ul class="unstyled" ng-if="problem.type == 'completion'">
+<li>
+<div class="option_Fill">
+<textarea rows="1" cols="40" type="text"></textarea>
+</div>
+</li>
+</ul>
+
+
+
+</div>
+</div>
+
+
+
+</li>
+
+</ul>
+
+<!--/.rows2--> </div>
+<!--/.row-fluid--> </div>
+<!--/container-fluid-->
+</div>
+  
+  
+  
+  
+  
+  </body>
+</html>

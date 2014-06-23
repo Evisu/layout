@@ -1,4 +1,6 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,10 +8,7 @@
     <title>问卷设计</title>
     
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="this is my page">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/public.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
@@ -21,7 +20,6 @@
 	<script type="text/javascript" src="ckeditor/config.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	
-	
 	<script type="text/javascript" src="js/angular-contenteditable.js"></script>
 	<script type="text/javascript" src="js/angularComponent.js"></script>
 	<script type="text/javascript" src="qn.js"></script>
@@ -29,6 +27,7 @@
   </head>
   
   <body ng-app="qn" ng-controller="questionnaire">
+  	
     <div class="wjContent">
 <div class="container-fluid clear">
 <div class="row-fluid">
@@ -46,7 +45,7 @@
 <div class="tab-pane fade in active" id="design">
 <ul class="fr">
 <li>
-<a id="appearset" href="javascript:getData();"> <i class="design-set1-icon active"></i>
+<a id="appearset" href="javascript:getDataProblems();"> <i class="design-set1-icon active"></i>
 保存问卷
 </a>
 </li>
@@ -161,14 +160,7 @@
 	
 <h4 class="h4-bg T_edit p_title">11</h4>
 
-<table class="table1 bg-m">
-<tbody><tr>
-<td class="rb">&nbsp;</td>
-<td>
-<div id="titleEdit" class="th4 T_edit p_begin_desc" name="begin_desc" contenteditable="true" ng-model="qnObj.title" strip-br="true"  ng-click="titleEditShow();"></div>
-</td>
-</tr>
-</tbody></table>
+
 
 
 <ul class="dragwen ui-sortable" >
@@ -179,7 +171,7 @@
 
 	
 
-<!--单选题-->
+		<!--单选题-->
 <div class="topic_type">
 <div class="topic_type_menu">
 <div class="setup-group">
@@ -187,16 +179,16 @@
 <a title="题目删除"  href="javascript:;" ng-click="removeProblem(problem.sort)"><i class="del2-icon-active"></i></a>
 </div></div>
 <div class="topic_type_con">
-<div id="{{'problemName'+problem.sort}}" class="Drag_area" contenteditable="true" ng-model="problem.name" strip-br="true"  ng-click="problemNameEditShow(problem.sort);">
+<div class="Drag_area" contenteditable="true" ng-model="problem.name" strip-br="true" ng-blur="synProblemName($event.target,problem.sort)">
 </div>
 
 <ul class="unstyled " ng-if="problem.type == 'radio'">
-<li ng-repeat="option in problem.options"><input  type="radio" ><label id="{{'optionName_'+problem.sort+'_'+option.sort}}" class="T_edit_min" contenteditable="true" ng-model="option.name" strip-br="true" ng-click="optionNameEditShow(problem.sort,option.sort);"></label></li>
+<li ng-repeat="option in problem.options"><input  type="radio" ><label class="T_edit_min" contenteditable="true" ng-model="option.name" strip-br="true"></label></li>
 </ul>
 
 
 <ul class="unstyled " ng-if="problem.type == 'checkbox'">
-<li ng-repeat="option in problem.options"><input  type="checkbox" ><label id="{{'optionName_'+problem.sort+'_'+option.sort}}" class="T_edit_min"  contenteditable="true" ng-model="option.name" strip-br="true" ng-click="optionNameEditShow(problem.sort,option.sort);">{{option.name}}</label></li>
+<li ng-repeat="option in problem.options"><input  type="checkbox" ><label class="T_edit_min">{{option.name}}</label></li>
 </ul>
 
 <ul class="unstyled" ng-if="problem.type == 'completion'">
@@ -239,8 +231,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">编辑</h4>
       </div>
-      <div>
-        <textarea id="contenteditor"></textarea>
+      <div class="modal-body">
+        <p>  <textarea id="contenteditor"></textarea></p>
       </div>
       <div class="modal-footer">
         <button id="savecontent" type="button" class="btn btn-default btn-primary" data-dismiss="modal">保存</button>
@@ -250,38 +242,10 @@
   </div><!-- /.modal-dialog -->
 </div>
   
- 
-  <div id="problemNameEdit" class="zon_edit" style="left: 518px; top: 283.19px; width: 600px; position: absolute; min-height: 30px;display:none;">
-  	<ul class="menu_edit" style="right: -32px; margin-top: 37px; display: none;">
-  	<li><a class="SeniorEdit" href="#editorModal"   data-toggle="modal"><i class="menu_edit2_icon"></i>高级编辑</a></li>
-  	</ul>
-  	<div class="max_an" onclick="editDiv(true);"></div>
-  	<div id="problemNameEditDiv" class="add_edit th4 q_title" style="min-height: 30px;" contenteditable="true" onblur="setProblemName(this);">
-  	</div>
-  </div>
-  
-  <div id="optionNameEdit"  style="left: 536px; top: 200px; width: 202px; position: absolute; min-height: 21px;display:none;">
-	  <ul class="menu_edit" style="right: -20px; margin-top: 26px; display: none;">
-	  <li><a class="option_Set" href="javascript:;"><i class="menu_edit1_icon"></i>选项设置</a></li>
-	  <li><a class="SeniorEdit" href="javascript:;"><i class="menu_edit2_icon"></i>高级编辑</a></li>
-	  <li><a class="logic_Set" href="javascript:;"><i class="menu_edit3_icon"></i>逻辑设置</a></li>
-	  <li><a class="reference_Set" href="javascript:;"><i class="menu_edit4_icon"></i>引用设置</a></li>
-	  </ul>
-	  <div class="min_an" onclick="fast_machine(true);"></div>
-	  <div id="optionNameEditDiv" class="add_edit T_edit_min" style="padding: 4px 0px 0px; width: 200px; min-height: 21px;" contenteditable="true"  onblur="setOptionName(this);"></div>
-	  <ul class="fast_machine">
-	  <li><a title="上移选项" class="EdUp nob" href="javascript:;" onclick="upOption();"><i class="menu_edit6_icon"></i></a></li>
-	  <li><a title="下移选项" class="EdDn" href="javascript:;" onclick="downOption();"><i class="menu_edit7_icon"></i></a></li>
-	  <li><a title="删除选项" class="DelEdit" href="javascript:;" onclick="deleteOption();"><i class="menu_edit5_icon"></i></a></li>
-	  </ul>
-  </div>
   
   
   
   
   
- 
-  <input id="sort1" type="hidden" vaule="0"/>
-  <input id="sort2" type="hidden"/>
   </body>
 </html>

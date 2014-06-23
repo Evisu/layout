@@ -51,7 +51,7 @@ angular.module('qn', ['contenteditable'])
  		var problemNameEdit = $('#problemNameEdit');
  		problemNameEdit.find('div[contenteditable="true"]').html($scope.problems[sort1].name);
  		problemNameEdit.css("left",$('#problemName'+sort1).offset().left);
-		problemNameEdit.css("top",$('#problemName'+sort1).offset().top);
+		problemNameEdit.css("top",$('#problemName'+sort1).scrollTop());
  		problemNameEdit.show();
  		problemNameEdit.find('.add_edit')[0].focus();
  		var optionNameEdit = $('#optionNameEdit');
