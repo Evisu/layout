@@ -15,18 +15,18 @@ angular.module('qn', ['contenteditable'])
 	$scope.qnObj = qnObj;
 	
 	for(var i = 0;i<50;i++){
-	$scope.problems.push({name:'题目1',sort:0,type:'radio',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
-	$scope.problems.push({name:'题目2',sort:1,type:'checkbox',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
-	$scope.problems.push({name:'题目2',sort:2,type:'completion',options:[{name:'',sort:0,isInput:true}]});
-}
+    }
+        $scope.problems.push({name:'题目1',sort:0,type:'radio',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
+        $scope.problems.push({name:'题目2',sort:1,type:'checkbox',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
+        $scope.problems.push({name:'题目2',sort:2,type:'completion',options:[{name:'',sort:0,isInput:true}]});
+
 	
 	
 	
-	
-	$scope.addOption = function(sort1){
+ $scope.addOption = function(sort1){
 	$scope.problems[sort1].options.push({name:'选项'+($scope.problems[sort1].options.length+1),sort:($scope.problems[sort1].options.length)}); 
  }
-  $scope.removeOption = function(sort1,sort2){
+ $scope.removeOption = function(sort1,sort2){
 	$scope.problems[sort1].options.splice(sort2,1); 
  }
  
@@ -59,23 +59,23 @@ angular.module('qn', ['contenteditable'])
  	}
  	
  	
- 	$scope.optionNameEditShow = function(sort1,sort2){
- 		$('#sort1').val(sort1);
- 		$('#sort2').val(sort2);
- 		var optionNameEdit = $('#optionNameEdit');
+  $scope.optionNameEditShow = function(sort1,sort2){
+    $('#sort1').val(sort1);
+    $('#sort2').val(sort2);
+    var optionNameEdit = $('#optionNameEdit');
 
- 		optionNameEdit.find('div[contenteditable="true"]').html($scope.problems[sort1].options[sort2].name);
- 		optionNameEdit.css("left",$('#optionName_'+sort1+'_'+sort2).offset().left);
-		optionNameEdit.css("top",$('#optionName_'+sort1+'_'+sort2).offset().top);
- 		optionNameEdit.show();
- 		optionNameEdit.find('.add_edit')[0].focus();
- 		
- 		var problemNameEdit = $('#problemNameEdit');
- 		problemNameEdit.hide();
- 		
- 		$('.fast_machine').show();
- 		
- 	}
+    optionNameEdit.find('div[contenteditable="true"]').html($scope.problems[sort1].options[sort2].name);
+    optionNameEdit.css("left",$('#optionName_'+sort1+'_'+sort2).offset().left);
+    optionNameEdit.css("top",$('#optionName_'+sort1+'_'+sort2).offset().top);
+    optionNameEdit.show();
+    optionNameEdit.find('.add_edit')[0].focus();
+
+    var problemNameEdit = $('#problemNameEdit');
+    problemNameEdit.hide();
+
+    $('.fast_machine').show();
+
+ }
  		
  
  
@@ -87,6 +87,8 @@ angular.module('qn', ['contenteditable'])
 		problemNameEdit.css("top",$('#titleEdit').offset().top);
  		problemNameEdit.show();
  		problemNameEdit.find('.add_edit')[0].focus();
+        var optionNameEdit = $('#optionNameEdit');
+        optionNameEdit.hide();
  	}
  
  setInterval(function() {

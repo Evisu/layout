@@ -88,11 +88,35 @@ $(document).ready(function() {
 	});
 	
 	
-	
+	$(document).bind("click",function(e){
+     var target = $(e.target);
+    if($(target).attr('class').indexOf('Drag_area') != -1 || $(target).attr('class').indexOf('max_an') != -1 || $(target).attr('id') == 'problemNameEditDiv' || $(target).attr('id') == 'titleEdit'){
+    	
+    }else if($(target).attr('class').indexOf('T_edit_min') != -1 || $(target).attr('class').indexOf('min_an') != -1 || $(target).attr('id') == 'optionNameEditDiv'){
+    
+    
+    }else{
+    
+    	$('#problemNameEdit').hide();
+    	$('#optionNameEdit').hide();
+    }
+   
+   });  
  
-            
-           
-	
+    
+  /*
+		$('.T_edit,.T_edit_min,.min_an').bind('click',function(e){ 
+			alert();
+			stopPropagation(e); 
+		});      
+		
+		
+		$('.Drag_area,.max_an,#problemNameEditDiv').bind('click',function(e){ 
+			alert();
+			stopPropagation(e); 
+		}); 
+		
+	*/	
 	
 	
 	
