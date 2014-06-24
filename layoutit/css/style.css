@@ -769,10 +769,13 @@ margin-bottom:0;
 .w28{
 width:28px;
 }
-.unstyled{font-size:14px; display: inline-block; width: 100%;}
+.unstyled{
+    font-size:14px;
+    border: 1px solid #DBDBDB;
+    /*display: inline-block; width: 100%;*/
+}
 .unstyled li{
 	margin-top:5px;
-	overflow: hidden;
 /*    line-height: 28px;*/
 }
 .unstyled input[type="radio"],.unstyled input[type="checkbox"]{
@@ -1012,7 +1015,7 @@ left:5px;
 	_height:150px;
 	border-left: 1px solid #DBDBDB;
 	}
-.topic_type_con a{ display:inline-block; padding:0 2px;}	
+.topic_type_con a{ display:inline-block; padding:0 2px;}
 .topic_type_con select{
 	width:200px;
 	}	
@@ -1037,7 +1040,15 @@ left:5px;
 	height:8px !important;
 	width:500px; 
 	}
-.module{background:#fff;}
+.module
+    {background:#fff
+;}
+.moduleOption{
+    background:#fff;
+    margin: 3px 3px 3px 0; padding: 1px; display:inline-block; width: 50px; height: 40px; font-size: 1em; text-align: center;
+    border: 1px solid #DBDBDB;
+}
+
 .module textarea{
 	resize:none;
 	min-height:21px;

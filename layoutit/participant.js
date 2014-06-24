@@ -1,7 +1,7 @@
 
 var qnObj = {};
 var problems = new Array();
-qnObj = {id:'1',title:'2014山东检验检疫局调查问卷',problems:problems};
+qnObj = {id:'1',title:'调查对象与参与人关系维护',problems:problems};
 
 
 
@@ -27,33 +27,38 @@ function initContainer(){
 
     $(".unstyled").sortable({
         connectWith: ".unstyled",
+        dropOnEmpty:false,
         opacity: .35,
         start: function(e,t) {
             t.item.oldIndex = t.item.index();
         },
         stop: function(e,t) {
             var flag = true;
-            $('.topic_type[name="curProblem"]').each(function(){
+            $('.topic_type[name="curParticipant"]').each(function(){
                 flag = false;
                 $(this).attr("dragIndex",t.item.index());
             });
             if(flag){
-                sortTable(t.item.oldIndex,t.item.index());
+                sortOption(t.item.index(),t.item.oldIndex);
             }
         }
     });
 }
 
-
-angular.module('qn', ['contenteditable'])
+//定义qn模块，并把控制器函数questionnaire传递给controller控制器
+angular.module('qn', [])
     .controller('questionnaire',function($scope){
         $scope.problems = problems;
         $scope.qnObj = qnObj;
 
-
-        $scope.problems.push({name:'青岛局',sort:0,type:'radio',options:[{name:'11',sort:1}]});
-        $scope.problems.push({name:'烟台局',sort:1,type:'checkbox',options:[]});
-        $scope.problems.push({name:'荣成局',sort:2,type:'completion',options:[]});
+        //默认加载三条数据
+        var options = new Array();
+        for(var i = 0;i < 20;i++){
+            options.push({name:'张三'+i,sort:i});
+        }
+        $scope.problems.push({name:'青岛局',sort:0,type:'respondent',options:options});
+        $scope.problems.push({name:'烟台局',sort:1,type:'respondent'});
+        $scope.problems.push({name:'荣成局',sort:2,type:'respondent'});
 
 
 
@@ -61,69 +66,33 @@ angular.module('qn', ['contenteditable'])
         $scope.addOption = function(sort1){
             $scope.problems[sort1].options.push({name:'选项'+($scope.problems[sort1].options.length+1),sort:($scope.problems[sort1].options.length)});
         }
+        //删除参与人
         $scope.removeOption = function(sort1,sort2){
             $scope.problems[sort1].options.splice(sort2,1);
         }
-
+        //删除调查对象
         $scope.removeProblem = function(sort1){
             $scope.problems.splice(sort1,1);
+            for(var i = 0;i< $scope.problems.length;i++){
+                problems[i].sort = i;
+            }
         }
-
+        //向上移动调查对象
         $scope.upProblem = function(sort1){
             if(sort1 != 0){
                 sortTable(sort1-1,sort1);
             }
         }
-
+        //向下移动调查对象
         $scope.downProblem = function(sort1){
             if(sort1 != $scope.problems.length-1){
                 sortTable(sort1+1,sort1);
             }
         }
-
-        $scope.problemNameEditShow = function(sort1){
+        //向下移动调查对象
+        $scope.updateSort1 = function(sort1){
+            alert(sort1);
             $('#sort1').val(sort1);
-            var problemNameEdit = $('#problemNameEdit');
-            problemNameEdit.find('div[contenteditable="true"]').html($scope.problems[sort1].name);
-            problemNameEdit.css("left",$('#problemName'+sort1).offset().left);
-            problemNameEdit.css("top",$('#problemName'+sort1).offset().top);
-            problemNameEdit.show();
-            problemNameEdit.find('.add_edit')[0].focus();
-            var optionNameEdit = $('#optionNameEdit');
-            optionNameEdit.hide();
-        }
-
-
-        $scope.optionNameEditShow = function(sort1,sort2){
-            $('#sort1').val(sort1);
-            $('#sort2').val(sort2);
-            var optionNameEdit = $('#optionNameEdit');
-
-            optionNameEdit.find('div[contenteditable="true"]').html($scope.problems[sort1].options[sort2].name);
-            optionNameEdit.css("left",$('#optionName_'+sort1+'_'+sort2).offset().left);
-            optionNameEdit.css("top",$('#optionName_'+sort1+'_'+sort2).offset().top);
-            optionNameEdit.show();
-            optionNameEdit.find('.add_edit')[0].focus();
-
-            var problemNameEdit = $('#problemNameEdit');
-            problemNameEdit.hide();
-
-            $('.fast_machine').show();
-
-        }
-
-
-
-        $scope.titleEditShow = function(){
-            $('#sort1').val(-1);
-            var problemNameEdit = $('#problemNameEdit');
-            problemNameEdit.find('div[contenteditable="true"]').html($scope.qnObj.title);
-            problemNameEdit.css("left",$('#titleEdit').offset().left);
-            problemNameEdit.css("top",$('#titleEdit').offset().top);
-            problemNameEdit.show();
-            problemNameEdit.find('.add_edit')[0].focus();
-            var optionNameEdit = $('#optionNameEdit');
-            optionNameEdit.hide();
         }
 
         setInterval(function() {
@@ -132,7 +101,7 @@ angular.module('qn', ['contenteditable'])
 
     })
 
-
+//调查对象排序
 function sortTable(oldIndex,newIndex){
     problems.splice(newIndex, 0,problems.splice(oldIndex, 1)[0]);
     for(var i = 0;i<problems.length;i++){
@@ -140,6 +109,7 @@ function sortTable(oldIndex,newIndex){
     }
 }
 
+//添加调查对象
 function addProblem(index,problem){
     problems.splice(index, 0,problem);
     for(var i = 0;i<problems.length;i++){
@@ -147,11 +117,19 @@ function addProblem(index,problem){
     }
 }
 
-function addOption(sort1){
-
-    problems[sort1].options.push({name:'张三'+(problems[sort1].options.length+1),sort:(problems[sort1].options.length)});
-
-
+/**
+ * 添加参与人
+ * sort1 调查对象的索引
+ * sort2 参与人的索引
+ * id 参与人的id
+ * name 参与人的名称
+ */
+function addOption(sort1,sort2,id,name){
+    alert(sort1);
+    if(!problems[sort1].options){
+        problems[sort1].options = new Array();
+    }
+    problems[sort1].options.push({name:name,sort:sort2});
 }
 
 
@@ -165,18 +143,6 @@ function getProblems(){
 
     return JSON.stringify(problems);
 
-}
-
-function setProblemName(target){
-    if($('#sort1').val() != -1){
-        problems[$('#sort1').val()].name = $(target).html();
-    }else{
-        qnObj.title = $(target).html();
-    }
-}
-
-function setOptionName(target){
-    problems[$('#sort1').val()].options[$('#sort2').val()].name = $(target).html();
 }
 
 
@@ -224,7 +190,9 @@ function deleteOption(){
 
 function sortOption(newIndex,oldIndex){
     var sort1 = $('#sort1').val();
+//    var sort1 = 0;
     var sort2 = $('#sort2').val();
+    alert(sort1);
 
     problems[sort1].options.splice(newIndex, 0,problems[sort1].options.splice(oldIndex, 1)[0]);
     for(var i = 0;i<problems[sort1].options.length;i++){
@@ -234,7 +202,7 @@ function sortOption(newIndex,oldIndex){
 
 /*******************************************************************************************/
 $(document).ready(function() {
-    $(".ul-tool .ui-draggable").draggable({
+    $("#respondentUL li").draggable({
         connectToSortable: ".dragwen",
         helper: "clone",
         start: function(e,t) {
@@ -254,23 +222,17 @@ $(document).ready(function() {
             $('.topic_type[name="curProblem"]').each(function(){
                 var index = $(this).attr("dragIndex");
                 var type = $(this).attr("problemType");
+                var respondentId = $(this).attr("respondentId");
+                var respondentName = $(this).attr("respondentName");
                 $(this).parent().remove();
-                if(type == 'radio'){
-                    addProblem(index,{name:'青岛局',sort:index,type:'radio',options:[]});
-                }else if(type == 'checkbox'){
-                    addProblem(index,{name:'烟台局',sort:index,type:'checkbox',options:[]});
-                }else if(type == 'completion'){
-                    addProblem(index,{name:'荣成局',sort:index,type:'completion',options:[]});
-                }else{
-                    addOption(index);
-
-                }
+                addProblem(index,{name:respondentName,sort:index,type:'respondent',options:[]});
             });
         }
     });
 
-    $(".ul-tool .ui-draggable1").draggable({
+    $("#particUL li").draggable({
         connectToSortable: ".unstyled",
+        scroll: true,
         helper: "clone",
         start: function(e,t) {
             t.helper.find('a').each(function(){
@@ -278,28 +240,25 @@ $(document).ready(function() {
             })
 
 
-            $(this).find('.topic_type').attr('name','curProblem');
+            $(this).find('.topic_type').attr('name','curParticipant');
 
         },
         drag: function(e, t) {
-            t.helper.width(400);
+            t.helper.width(100);
         },
         stop: function() {
             $(this).find('.topic_type').attr('name','');
-            $('.topic_type[name="curProblem"]').each(function(){
+            $('.topic_type[name="curParticipant"]').each(function(){
+                //拖动到的索引
                 var index = $(this).attr("dragIndex");
                 var type = $(this).attr("problemType");
-                $(this).parent().remove();
-                if(type == 'radio'){
-                    addProblem(index,{name:'青岛局',sort:index,type:'radio',options:[]});
-                }else if(type == 'checkbox'){
-                    addProblem(index,{name:'烟台局',sort:index,type:'checkbox',options:[]});
-                }else if(type == 'completion'){
-                    addProblem(index,{name:'荣成局',sort:index,type:'completion',options:[]});
-                }else{
-                    addOption(index);
+                var particId = $(this).attr("particId");
+                var particName = $(this).attr("particName");
+                //aaaaaa
+                var sort1 = $(this).attr("sort1");
 
-                }
+                $(this).parent().remove();
+                addOption(sort1,index,particId,particName);
             });
         }
     });
@@ -334,12 +293,9 @@ $(document).ready(function() {
 
         }
 
-
-
     });
 
     $(document).bind('click',function(){
-        $("#problemNameEdit").hide();
         $("#optionNameEdit").hide();
         $('.menu_edit').hide();
     });

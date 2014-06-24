@@ -20,8 +20,7 @@
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	
 	
-	<script type="text/javascript" src="js/angular-contenteditable.js"></script>
-	<script type="text/javascript" src="js/participant.js"></script>
+	<script type="text/javascript" src="participant.js"></script>
 
   </head>
   
@@ -61,14 +60,14 @@
 <i class="icon_on"></i>
 </a>
 </h4>
-<ul class="ul-tool">
+<ul id="respondentUL" class="ul-tool">
 <li class="moduleL ui-draggable">
 <a href="javascript:;">
-<i class="basic-too11-icon-active"></i>
+<i class="basic-too13-icon-active"></i>
 青岛局
 </a>
 
-<div class="topic_type" problemType="radio" >
+<div class="topic_type" problemType="respondent" respondentId="0" respondentName="青岛局" >
 <div class="topic_type_con">
 <div class="Drag_area">
 	青岛局
@@ -86,12 +85,12 @@
 </li>
 <li class="moduleL ui-draggable" >
 <a href="javascript:;">
-<i class="basic-too12-icon-active"></i>
+<i class="basic-too13-icon-active"></i>
 烟台局
 </a>
 
 
-<div class="topic_type" problemType="checkbox">
+<div class="topic_type" problemType="respondent" respondentId="1" respondentName="烟台局" >
 <div class="topic_type_con">
 <div class="Drag_area">
 	烟台局
@@ -112,7 +111,7 @@
 荣成局
 </a>
 
-<div class="topic_type" problemType="completion">
+<div class="topic_type" problemType="respondent" respondentId="2" respondentName="荣成局">
 <div class="topic_type_menu">
 </div>
 <div class="topic_type_con">
@@ -136,33 +135,43 @@
 
 <div class="rows2 well2 Tj">
 	
-<h4 class="h4-bg T_edit p_title">2014山东检验检疫局调查问卷</h4>
+<h4 class="h4-bg T_edit p_title">调查对象与参与人关系维护</h4>
 
 
 
 
 <ul class="dragwen ui-sortable" >
 	
-<!-- 题目的html放这里 --> 
+<!-- 调查对象的html放这里 -->
 <li class="module" ng-repeat="problem in problems">
 
 
 	
 
-<!--单选题-->
-<div class="topic_type">
+<!--调查对象-->
+<div class="topic_type"  >
 <div class="topic_type_menu">
 <div class="setup-group">
 <h4>Q{{problem.sort+1}}</h4>
 <a title="调查对象删除"  href="javascript:;" ng-click="removeProblem(problem.sort)"><i class="del2-icon-active"></i></a>
 </div></div>
 <div class="topic_type_con">
-<div id="{{'problemName'+problem.sort}}" class="Drag_area" contenteditable="false" ng-model="problem.name" strip-br="true"  >
-</div>
+<input id="{{'problemName'+problem.sort}}" type="hidden" ng-model="problem.name" />
+<div  class="Drag_area" ng-bind="problem.name"  ></div>
 
-<ul class="unstyled ui-sortable "  style="height:200;">
-<li class="module" ng-repeat="option in problem.options">
-<label id="{{'optionName_'+problem.sort+'_'+option.sort}}" class="T_edit_min" contenteditable="false" ng-model="option.name" strip-br="true" ></label>
+<ul id="unstyled" class="unstyled ui-sortable" sort1="{{problem.sort}}" style="height:200;">
+
+
+    <!-- -->
+
+
+
+<!-- 参与人的html放这里 -->
+<li class="moduleOption" ng-repeat="option in problem.options" ng-click="updateSort1(problem.sort);">
+
+<!--参与人-->
+<input id="{{'optionName_'+option.sort}}" type="hidden" ng-model="option.name" />
+<div id="{{'optionName_'+problem.sort+'_'+option.sort}}" ng-bind="option.name"></div>
 </li>
 </ul>
 
@@ -176,7 +185,7 @@
 
 
 <div class="updown" >
-<a href="javascript:;" ng-click="upProblem(problem.sort)"><i title="上移本题" class="up-icon-active"></i></a><a href="javascript:;" ng-click="downProblem(problem.sort)"><i title="下移本题" class="down-icon-active"></i></a>
+<a href="javascript:;" ng-click="upProblem(problem.sort)"><i title="上移" class="up-icon-active"></i></a><a href="javascript:;" ng-click="downProblem(problem.sort)"><i title="下移" class="down-icon-active"></i></a>
 </div>
 </li>
 
@@ -184,7 +193,7 @@
 <!--/.rows2--> </div>
 
 <!-- 参与人 -->
-    <div class="rows1">
+<div class="rows1">
 <div class="well sidebar-nav affix-top" id="accordion1">
 <div class="accordion-group">
 <h4 class="tc">
@@ -193,7 +202,7 @@
 <i class="icon_on"></i>
 </a>
 </h4>
-<ul class="ul-tool">
+<ul id="particUL" class="ul-tool">
 
 <li class="moduleL ui-draggable1" >
 <a href="javascript:;">
@@ -202,12 +211,8 @@
 </a>
 
 
-<div class="topic_type" problemType="partic">
-<div class="topic_type_con">
-<div class="Drag_area">
+<div class="topic_type" problemType="partic" particId="1" particName="张三" >
 	张三
-</div>
-</div>
 </div>
 
 </li>
@@ -220,16 +225,8 @@
 </a>
 
 
-<div class="topic_type" problemType="partic">
-<div class="topic_type_con">
-<div class="Drag_area">
+<div class="topic_type" problemType="partic" particId="2" particName="李四" >
 	李四
-</div>
-<ul class="unstyled ">
-<li><label class="T_edit_min" name="option">李四</label></li>
-</ul>
-
-</div>
 </div>
 
 </li>
@@ -237,22 +234,14 @@
 
 <li class="moduleL ui-draggable1">
 <a href="javascript:;">
-<i class="basic-too13-icon-active"></i>
+<i class="basic-too12-icon-active"></i>
 王五
 </a>
 
-<div class="topic_type" problemType="partic">
+<div class="topic_type" problemType="partic" particId="3" particName="王五">
 <div class="topic_type_menu">
 </div>
-<div class="topic_type_con">
-<div class="Drag_area">
 	王五
-</div>
-<ul class="unstyled ">
-<li><label class="T_edit_min" name="option">王五</label></li>
-</ul>
-
-</div>
 </div>
 
 
@@ -272,12 +261,12 @@
 <!--/container-fluid-->
 </div>
   
-  
-  
-    <!-- 编辑 -->
-  
 
- 
+
+    <!-- 编辑 -->
+
+
+
   <div id="problemNameEdit" class="zon_edit" style="left: 518px; top: 283.19px; width: 600px; position: absolute; min-height: 30px;display:none;">
   	<ul class="menu_edit" style="right: -32px; margin-top: 37px; display: none;">
   	<li><a class="SeniorEdit" href="#editorModal"   data-toggle="modal"><i class="menu_edit2_icon"></i>高级编辑</a></li>
@@ -286,7 +275,7 @@
   	<div id="problemNameEditDiv" class="add_edit th4 q_title" style="min-height: 30px;" contenteditable="true" onblur="setProblemName(this);">
   	</div>
   </div>
-  
+
   <div id="optionNameEdit"  style="left: 536px; top: 200px; width: 202px; position: absolute; min-height: 21px;display:none;">
 	  <ul class="menu_edit" style="right: -20px; margin-top: 26px; display: none;">
 	  <li><a class="option_Set" href="javascript:;"><i class="menu_edit1_icon"></i>选项设置</a></li>
@@ -303,11 +292,11 @@
 	  </ul>
   </div>
   
-  
-  
-  
-  
- 
+
+
+
+
+
   <input id="sort1" type="hidden" vaule="0"/>
   <input id="sort2" type="hidden"/>
     </div>
