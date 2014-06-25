@@ -165,10 +165,16 @@
 <li class="moduleOption" ng-repeat="option in problem.options">
 
 <!--参与人-->
+<input id="{{'optionSort_'+option.sort}}" type="hidden" ng-model="option.sort" />
 <input id="{{'optionName_'+option.sort}}" type="hidden" ng-model="option.name" />
-<div id="{{'optionName_'+problem.sort+'_'+option.sort}}" ng-bind="option.name" ></div>
+<div id="{{'optionName_'+problem.sort+'_'+option.sort}}" ng-bind="option.name"  ng-click="showDel(problem.sort,option.sort);"></div>
+<a id="{{'del'+problem.sort+'_'+option.sort}}" style="display: none" title="删除选项" class="DelEdit" href="javascript:;" onclick="deleteOptions();"><i class="menu_edit5_icon"></i></a>
 </li>
+
 </ul>
+
+
+
 
 </div>
 </div>
@@ -253,40 +259,6 @@
 <!--/container-fluid-->
 </div>
   
-
-
-    <!-- 编辑 -->
-
-
-
-  <div id="problemNameEdit" class="zon_edit" style="left: 518px; top: 283.19px; width: 600px; position: absolute; min-height: 30px;display:none;">
-  	<ul class="menu_edit" style="right: -32px; margin-top: 37px; display: none;">
-  	<li><a class="SeniorEdit" href="#editorModal"   data-toggle="modal"><i class="menu_edit2_icon"></i>高级编辑</a></li>
-  	</ul>
-  	<div class="max_an" onclick="editDiv(true);"></div>
-  	<div id="problemNameEditDiv" class="add_edit th4 q_title" style="min-height: 30px;" contenteditable="true" onblur="setProblemName(this);">
-  	</div>
-  </div>
-
-  <div id="optionNameEdit"  style="left: 536px; top: 200px; width: 202px; position: absolute; min-height: 21px;display:none;">
-	  <ul class="menu_edit" style="right: -20px; margin-top: 26px; display: none;">
-	  <li><a class="option_Set" href="javascript:;"><i class="menu_edit1_icon"></i>选项设置</a></li>
-	  <li><a class="SeniorEdit" href="javascript:;"><i class="menu_edit2_icon"></i>高级编辑</a></li>
-	  <li><a class="logic_Set" href="javascript:;"><i class="menu_edit3_icon"></i>逻辑设置</a></li>
-	  <li><a class="reference_Set" href="javascript:;"><i class="menu_edit4_icon"></i>引用设置</a></li>
-	  </ul>
-	  <div class="min_an" onclick="fast_machine(true);"></div>
-	  <div id="optionNameEditDiv" class="add_edit T_edit_min" style="padding: 4px 0px 0px; width: 200px; min-height: 21px;" contenteditable="true"  onblur="setOptionName(this);"></div>
-	  <ul class="fast_machine">
-	  <li><a title="上移选项" class="EdUp nob" href="javascript:;" onclick="upOption();"><i class="menu_edit6_icon"></i></a></li>
-	  <li><a title="下移选项" class="EdDn" href="javascript:;" onclick="downOption();"><i class="menu_edit7_icon"></i></a></li>
-	  <li><a title="删除选项" class="DelEdit" href="javascript:;" onclick="deleteOption();"><i class="menu_edit5_icon"></i></a></li>
-	  </ul>
-  </div>
-  
-
-
-
 
 
   <input id="sort1" type="hidden" vaule="0"/>

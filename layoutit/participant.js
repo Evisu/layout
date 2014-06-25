@@ -12,8 +12,8 @@ angular.module('qn', [])
 
         //默认加载三条数据
         var options = new Array();
-        for(var i = 0;i < 50;i++){
-            options.push({name:'郑成功',sort:i});
+        for(var i = 0;i < 20;i++){
+            options.push({id:i,name:'郑成功',sort:i});
         }
         $scope.problems.push({name:'青岛局',sort:0,type:'respondent',options:options});
         $scope.problems.push({name:'烟台局',sort:1,type:'respondent'});
@@ -36,17 +36,30 @@ angular.module('qn', [])
                 problems[i].sort = i;
             }
         }
-        //向上移动调查对象
-        $scope.upProblem = function(sort1){
-            if(sort1 != 0){
-                sortTable(sort1-1,sort1);
+        //显示或隐藏删除参与人按钮
+        $scope.showDel = function(sort1,sort2){
+            if( $('#del'+sort1+'_'+sort2).attr('style').indexOf('block') > 0){
+                $('#del'+sort1+'_'+sort2).attr('style','display:none');
+            }else{
+                $('#del'+sort1+'_'+sort2).attr('style','display:block');
             }
-        }
-        //向下移动调查对象
-        $scope.downProblem = function(sort1){
-            if(sort1 != $scope.problems.length-1){
-                sortTable(sort1+1,sort1);
+
+            //隐藏其他删除项
+            for(var i = 0 ; i <  problems.length;i++){
+                if(i != sort1){
+                    if(problems[i].options){
+                        for(var j = 0 ; j < problems[i].options.length; j++){
+                            if( $('#del'+i+'_'+j).attr('style').indexOf('block') > 0){
+                                $('#del'+i+'_'+j).attr('style','display:none');
+                            }
+                        }
+                    }
+                }
             }
+
+
+            $('#sort1').val(sort1);
+            $('#sort2').val(sort2);
         }
 
 
@@ -89,6 +102,10 @@ function addOption(sort1,sort2,id,name){
         problems[sort1].options = new Array();
     }
     problems[sort1].options.push({name:name,sort:sort2});
+
+    for(var i = 0;i<problems[sort1].options.length;i++){
+        problems[sort1].options[i].sort = i;
+    }
 }
 
 
@@ -129,28 +146,47 @@ function downOption(){
     }
 }
 
+/**
+ * 删除某个参与人
+ */
 function deleteOption(){
     var sort1 = $('#sort1').val();
     var sort2 = $('#sort2').val();
+    if(sort2){
 
-    problems[sort1].options.splice(sort2,1);
+        problems[sort1].options.splice(sort2,1);
 
-    for(var i = 0;i<problems[sort1].options.length;i++){
-        problems[sort1].options[i].sort = i;
+        for(var i = 0;i<problems[sort1].options.length;i++){
+            problems[sort1].options[i].sort = i;
+        }
     }
+}
 
-
-    setTimeout(function() {
-        $('#optionNameEdit').hide();
-    }, 100)
-
-
+/**
+ * 删除多个参与人
+ */
+function deleteOptions(){
+    var sort1 = $('#sort1').val();
+    if(sort1){
+        var length = problems[sort1].options.length;
+        for(var i = 0 ; i < length;i++){
+            if( $('#del'+sort1+'_'+i).attr('style').indexOf('block') != -1){
+                for(var j = 0 ; j < problems[sort1].options.length;j++){
+                    if(problems[sort1].options[j].sort == i){
+                        problems[sort1].options.splice(j,1);
+                    }
+                }
+            }
+        }
+        for(var i = 0;i<problems[sort1].options.length;i++){
+            problems[sort1].options[i].sort = i;
+        }
+    }
 }
 
 function sortOption(newIndex,oldIndex){
     var sort1 = $('#sort1').val();
     var sort2 = $('#sort2').val();
-
     problems[sort1].options.splice(newIndex, 0,problems[sort1].options.splice(oldIndex, 1)[0]);
     for(var i = 0;i<problems[sort1].options.length;i++){
         problems[sort1].options[i].sort = i;
@@ -243,6 +279,7 @@ $(document).ready(function() {
 
         },
         drag: function(e, t) {
+            //t.helper表示当前被拖放的元素的JQuery对象
             t.helper.width(100);
         },
         stop: function() {
@@ -261,7 +298,6 @@ $(document).ready(function() {
             });
         }
     });
-
 
 
     initContainer();
