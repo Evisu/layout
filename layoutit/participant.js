@@ -13,9 +13,9 @@ angular.module('qn', [])
         //默认加载三条数据
         var options = new Array();
         for(var i = 0;i < 50;i++){
-            options.push({name:'张三'+i,sort:i});
+            options.push({name:'郑成功',sort:i});
         }
-        $scope.problems.push({name:'青岛局',sort:0,type:'respondent'});
+        $scope.problems.push({name:'青岛局',sort:0,type:'respondent',options:options});
         $scope.problems.push({name:'烟台局',sort:1,type:'respondent'});
         $scope.problems.push({name:'荣成局',sort:2,type:'respondent'});
 
@@ -52,6 +52,7 @@ angular.module('qn', [])
 
         setInterval(function() {
             $scope.$apply();
+            initContainer();
         }, 1000)
 
     })
@@ -157,7 +158,9 @@ function sortOption(newIndex,oldIndex){
 }
 
 /*******************************************************************************************/
-
+/**
+ * 注册事件
+ */
 function initContainer(){
     $(".dragwen").sortable({
         connectWith: ".dragwen",
