@@ -4,47 +4,6 @@ var problems = new Array();
 qnObj = {id:'1',title:'调查对象与参与人关系维护',problems:problems};
 
 
-
-
-function initContainer(){
-    $(".dragwen").sortable({
-        connectWith: ".dragwen",
-        opacity: .35,
-        start: function(e,t) {
-            t.item.oldIndex = t.item.index();
-        },
-        stop: function(e,t) {
-            var flag = true;
-            $('.topic_type[name="curProblem"]').each(function(){
-                flag = false;
-                $(this).attr("dragIndex",t.item.index());
-            });
-            if(flag){
-                sortTable(t.item.oldIndex,t.item.index());
-            }
-        }
-    });
-
-    $(".unstyled").sortable({
-        connectWith: ".unstyled",
-        dropOnEmpty:false,
-        opacity: .35,
-        start: function(e,t) {
-            t.item.oldIndex = t.item.index();
-        },
-        stop: function(e,t) {
-            var flag = true;
-            $('.topic_type[name="curParticipant"]').each(function(){
-                flag = false;
-                $(this).attr("dragIndex",t.item.index());
-            });
-            if(flag){
-                sortOption(t.item.index(),t.item.oldIndex);
-            }
-        }
-    });
-}
-
 //定义qn模块，并把控制器函数questionnaire传递给controller控制器
 angular.module('qn', [])
     .controller('questionnaire',function($scope){
@@ -53,10 +12,10 @@ angular.module('qn', [])
 
         //默认加载三条数据
         var options = new Array();
-        for(var i = 0;i < 20;i++){
+        for(var i = 0;i < 50;i++){
             options.push({name:'张三'+i,sort:i});
         }
-        $scope.problems.push({name:'青岛局',sort:0,type:'respondent',options:options});
+        $scope.problems.push({name:'青岛局',sort:0,type:'respondent'});
         $scope.problems.push({name:'烟台局',sort:1,type:'respondent'});
         $scope.problems.push({name:'荣成局',sort:2,type:'respondent'});
 
@@ -89,11 +48,7 @@ angular.module('qn', [])
                 sortTable(sort1+1,sort1);
             }
         }
-        //向下移动调查对象
-        $scope.updateSort1 = function(sort1){
-            alert(sort1);
-            $('#sort1').val(sort1);
-        }
+
 
         setInterval(function() {
             $scope.$apply();
@@ -109,7 +64,11 @@ function sortTable(oldIndex,newIndex){
     }
 }
 
-//添加调查对象
+/**
+ * 添加调查对象
+ * 索引
+ * 调查对象
+ */
 function addProblem(index,problem){
     problems.splice(index, 0,problem);
     for(var i = 0;i<problems.length;i++){
@@ -125,7 +84,6 @@ function addProblem(index,problem){
  * name 参与人的名称
  */
 function addOption(sort1,sort2,id,name){
-    alert(sort1);
     if(!problems[sort1].options){
         problems[sort1].options = new Array();
     }
@@ -190,9 +148,7 @@ function deleteOption(){
 
 function sortOption(newIndex,oldIndex){
     var sort1 = $('#sort1').val();
-//    var sort1 = 0;
     var sort2 = $('#sort2').val();
-    alert(sort1);
 
     problems[sort1].options.splice(newIndex, 0,problems[sort1].options.splice(oldIndex, 1)[0]);
     for(var i = 0;i<problems[sort1].options.length;i++){
@@ -201,6 +157,47 @@ function sortOption(newIndex,oldIndex){
 }
 
 /*******************************************************************************************/
+
+function initContainer(){
+    $(".dragwen").sortable({
+        connectWith: ".dragwen",
+        opacity: .35,
+        start: function(e,t) {
+            t.item.oldIndex = t.item.index();
+        },
+        stop: function(e,t) {
+            var flag = true;
+            $('.topic_type[name="curProblem"]').each(function(){
+                flag = false;
+                $(this).attr("dragIndex",t.item.index());
+            });
+            if(flag){
+                sortTable(t.item.oldIndex,t.item.index());
+            }
+        }
+    });
+
+    $(".unstyled").sortable({
+        connectWith: ".unstyled",
+        dropOnEmpty:false,
+        opacity: .35,
+        start: function(e,t) {
+            t.item.oldIndex = t.item.index();
+        },
+        stop: function(e,t) {
+            var flag = true;
+            $('.topic_type[name="curParticipant"]').each(function(){
+                flag = false;
+                $(this).attr("dragIndex",t.item.index());
+            });
+            $('#sort1').val($(this).attr('sort1'));
+            if(flag){
+                sortOption(t.item.index(),t.item.oldIndex);
+            }
+        }
+    });
+}
+
 $(document).ready(function() {
     $("#respondentUL li").draggable({
         connectToSortable: ".dragwen",
@@ -225,7 +222,7 @@ $(document).ready(function() {
                 var respondentId = $(this).attr("respondentId");
                 var respondentName = $(this).attr("respondentName");
                 $(this).parent().remove();
-                addProblem(index,{name:respondentName,sort:index,type:'respondent',options:[]});
+                addProblem(index,{name:respondentName,sort:index,type:'respondent'});
             });
         }
     });
@@ -239,7 +236,6 @@ $(document).ready(function() {
                 $(this).remove();
             })
 
-
             $(this).find('.topic_type').attr('name','curParticipant');
 
         },
@@ -249,22 +245,19 @@ $(document).ready(function() {
         stop: function() {
             $(this).find('.topic_type').attr('name','');
             $('.topic_type[name="curParticipant"]').each(function(){
-                //拖动到的索引
+                //参与人的索引
                 var index = $(this).attr("dragIndex");
                 var type = $(this).attr("problemType");
                 var particId = $(this).attr("particId");
                 var particName = $(this).attr("particName");
-                //aaaaaa
-                var sort1 = $(this).attr("sort1");
+                //调查对象的索引
+                var sort1 =$('#sort1').val();
 
                 $(this).parent().remove();
                 addOption(sort1,index,particId,particName);
             });
         }
     });
-
-
-
 
 
 
@@ -294,22 +287,6 @@ $(document).ready(function() {
         }
 
     });
-
-    $(document).bind('click',function(){
-        $("#optionNameEdit").hide();
-        $('.menu_edit').hide();
-    });
-
-    $('.T_edit,.T_edit_min,.min_an').bind('click',function(e){
-
-        stopPropagation(e);
-    });
-
-
-    $('.Drag_area,.max_an').bind('click',function(e){
-        stopPropagation(e);
-    });
-
 
 
 

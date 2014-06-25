@@ -21,7 +21,6 @@
 	
 	
 	<script type="text/javascript" src="participant.js"></script>
-
   </head>
   
   <body ng-app="qn" ng-controller="questionnaire">
@@ -140,7 +139,7 @@
 
 
 
-<ul class="dragwen ui-sortable" >
+<ul id="dragwenTarget" class="dragwen ui-sortable" >
 	
 <!-- 调查对象的html放这里 -->
 <li class="module" ng-repeat="problem in problems">
@@ -157,26 +156,19 @@
 </div></div>
 <div class="topic_type_con">
 <input id="{{'problemName'+problem.sort}}" type="hidden" ng-model="problem.name" />
-<div  class="Drag_area" ng-bind="problem.name"  ></div>
+<div  class="Drag_area" ng-bind="problem.name" ></div>
 
-<ul id="unstyled" class="unstyled ui-sortable" sort1="{{problem.sort}}" style="height:200;">
-
-
-    <!--    -->
-
+<ul  class="unstyled ui-sortable" sort1="{{problem.sort}}">
 
 
 <!-- 参与人的html放这里 -->
-<li class="moduleOption" ng-repeat="option in problem.options" ng-click="updateSort1(problem.sort);">
+<li class="moduleOption" ng-repeat="option in problem.options">
 
 <!--参与人-->
 <input id="{{'optionName_'+option.sort}}" type="hidden" ng-model="option.name" />
-<div id="{{'optionName_'+problem.sort+'_'+option.sort}}" ng-bind="option.name"></div>
+<div id="{{'optionName_'+problem.sort+'_'+option.sort}}" ng-bind="option.name"  ></div>
 </li>
 </ul>
-
-
-
 
 </div>
 </div>
