@@ -11,7 +11,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/public.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
+	<link href="css/styleView.css" rel="stylesheet">
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
@@ -26,14 +26,38 @@
 
   </head>
   
-  <body ng-app="qn" ng-controller="questionnaire">
-  	
-    <div class="wjContent">
+<body ng-app="qn" ng-controller="questionnaire">
+
+<div class="wjContent" >
 <div class="container-fluid clear">
+
+    <div class="tab2-content" id="myTabContent">
+        <div class="tab-pane fade in active" id="design">
+            <ul class="fr">
+                <li>
+                    <a id="appearset" href="javascript:getData();"> <i class="design-set1-icon active"></i>
+                        保存问卷
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:window.open('qnView.html');void(0);" >
+                        <i class="design-set4-icon"></i>
+                        预览问卷
+                    </a>
+                </li>
+                <li>
+                    <a onclick="publish_proj_confirm();return false;" href="#" target="_blank">
+                        <i class="design-set5-icon"></i>
+                        发布问卷
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
 <div class="rows2 well2 Tj">
 	
-<h4 class="h4-bg T_edit p_title">11</h4>
+<h4 class="h4-bg T_edit p_title" >{{qnObj.title}}</h4>
 
 
 
@@ -53,22 +77,31 @@
 <h4>Q{{problem.sort+1}}</h4>
 </div></div>
 <div class="topic_type_con">
-<div class="Drag_area" contenteditable="true" ng-model="problem.name" strip-br="true" ng-blur="synProblemName($event.target,problem.sort)">
+<div  ng-bind="problem.name">
 </div>
 
 <ul class="unstyled " ng-if="problem.type == 'radio'">
-<li ng-repeat="option in problem.options"><input  type="radio" ><label class="T_edit_min" contenteditable="true" ng-model="option.name" strip-br="true"></label></li>
+    <li ng-repeat="option in problem.options">
+    <input id="{{'inputValue'+problem.sort}}" name="{{'inputValue'+problem.sort}}" value="{{option.value}}" ng-click="reset(problem.sort,option.sort);" ng-model="option.inputValue" type="radio" >
+    <label class="T_edit_min"  ng-bind="option.name" ></label>
+</li>
+
 </ul>
 
 
 <ul class="unstyled " ng-if="problem.type == 'checkbox'">
-<li ng-repeat="option in problem.options"><input  type="checkbox" ><label class="T_edit_min">{{option.name}}</label></li>
+<li ng-repeat="option in problem.options">
+    <input name="{{'inputValue'+problem.sort}}" type="checkbox"  ng-model="option.inputValue">
+    <label class="T_edit_min" ng-bind="option.name"></label>
+</li>
 </ul>
 
 <ul class="unstyled" ng-if="problem.type == 'completion'">
 <li>
 <div class="option_Fill">
-<textarea rows="1" cols="40" type="text"></textarea>
+    <li ng-repeat="option in problem.options">
+        <textarea rows="6" cols="40" name="{{'inputValue'+problem.sort}}" style="width:90%;" ng-model="option.inputValue"></textarea>
+    </li>
 </div>
 </li>
 </ul>

@@ -1,7 +1,7 @@
 
 var qnObj = {};
 var problems = new Array();
-qnObj = {id:'1',title:'121212',problems:problems};
+qnObj = {id:'1',title:'2014年巴西世界杯调查问卷',problems:problems};
 
 
 
@@ -16,9 +16,9 @@ angular.module('qn', ['contenteditable'])
 	
 	for(var i = 0;i<50;i++){
     }
-        $scope.problems.push({name:'题目1',sort:0,type:'radio',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
-        $scope.problems.push({name:'题目2',sort:1,type:'checkbox',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
-        $scope.problems.push({name:'题目2',sort:2,type:'completion',options:[{name:'',sort:0,isInput:true}]});
+        $scope.problems.push({name:'您在看2014年巴西世界杯吗？',sort:0,type:'radio',options:[{name:'看',sort:0,value:true,inputValue:false},{name:'不看',sort:1,value:true,inputValue:false}]});
+        $scope.problems.push({name:'您喜爱哪个球队？',sort:1,type:'checkbox',options:[{name:'巴西',sort:0,inputValue:true},{name:'阿根廷',sort:1,inputValue:true},{name:'荷兰',sort:2,inputValue:true},{name:'德国',sort:3,inputValue:true}]});
+        $scope.problems.push({name:'您认为哪个球队能夺得冠军,及为什么？',sort:2,type:'completion',options:[{inputValue:''}]});
 
 	
 	
@@ -122,6 +122,11 @@ alert(JSON.stringify(qnObj));
 function getProblems(){
 
 return JSON.stringify(problems);
+
+}
+function getQNObj(){
+
+return JSON.stringify(qnObj);
 
 }
 
