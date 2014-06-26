@@ -10,17 +10,7 @@ angular.module('qn', [])
         $scope.problems = problems;
         $scope.qnObj = qnObj;
 
-        //默认加载三条数据
-        var options = new Array();
-        for(var i = 0;i < 20;i++){
-            options.push({id:i,name:'郑成功',sort:i});
-        }
-        $scope.problems.push({name:'青岛局',sort:0,type:'respondent',options:options});
-        $scope.problems.push({name:'烟台局',sort:1,type:'respondent'});
-        $scope.problems.push({name:'荣成局',sort:2,type:'respondent'});
-
-
-
+        initData($scope.problems);
 
         $scope.addOption = function(sort1){
             $scope.problems[sort1].options.push({name:'选项'+($scope.problems[sort1].options.length+1),sort:($scope.problems[sort1].options.length)});
@@ -36,6 +26,19 @@ angular.module('qn', [])
                 problems[i].sort = i;
             }
         }
+        //上移调查对象
+        $scope.upProblem = function(sort1){
+            if(sort1 != 0){
+                sortTable(sort1-1,sort1);
+            }
+        }
+        //下移调查对象
+        $scope.downProblem = function(sort1){
+            if(sort1 != $scope.problems.length-1){
+                sortTable(sort1+1,sort1);
+            }
+        }
+
         //显示或隐藏删除参与人按钮
         $scope.showDel = function(sort1,sort2){
             if( $('#del'+sort1+'_'+sort2).attr('style').indexOf('block') > 0){
@@ -44,7 +47,7 @@ angular.module('qn', [])
                 $('#del'+sort1+'_'+sort2).attr('style','display:block');
             }
 
-            //隐藏其他删除项
+            //隐藏其他调查对象的参与人删除项
             for(var i = 0 ; i <  problems.length;i++){
                 if(i != sort1){
                     if(problems[i].options){
@@ -57,7 +60,6 @@ angular.module('qn', [])
                 }
             }
 
-
             $('#sort1').val(sort1);
             $('#sort2').val(sort2);
         }
@@ -69,6 +71,25 @@ angular.module('qn', [])
         }, 1000)
 
     })
+
+function initData(problems){
+    problems.length = 0;
+
+    //初始化数据
+
+    $('.topic_type[problemType="respondent"]').each(function(index,element){
+
+        var options = new Array();
+
+        $('.topic_type[problemType="partic"]').each(function(sort,element){
+            options.push({id:$(this).attr('particId'),name:$(this).attr('particName'),sort:sort,type:$(this).attr('problemType')});
+        });
+
+        problems.push({id:$(this).attr('respondentId'),name:$(this).attr('respondentName'),sort:index,type:$(this).attr('problemType'),options:options});
+
+    });
+}
+
 
 //调查对象排序
 function sortTable(oldIndex,newIndex){
@@ -84,6 +105,12 @@ function sortTable(oldIndex,newIndex){
  * 调查对象
  */
 function addProblem(index,problem){
+    for(var i = 0;i<problems.length;i++){
+        if(problems[i].id == problem.id){
+            alert('不能重复添加');
+            return false;
+        }
+    }
     problems.splice(index, 0,problem);
     for(var i = 0;i<problems.length;i++){
         problems[i].sort = i;
@@ -101,7 +128,15 @@ function addOption(sort1,sort2,id,name){
     if(!problems[sort1].options){
         problems[sort1].options = new Array();
     }
-    problems[sort1].options.push({name:name,sort:sort2});
+
+    for(var i = 0;i<problems[sort1].options.length;i++){
+        if(problems[sort1].options[i].id == id){
+            alert('不能重复添加');
+            return false;
+        }
+    }
+
+    problems[sort1].options.push({id:id,name:name,sort:sort2});
 
     for(var i = 0;i<problems[sort1].options.length;i++){
         problems[sort1].options[i].sort = i;
@@ -261,7 +296,7 @@ $(document).ready(function() {
                 var respondentId = $(this).attr("respondentId");
                 var respondentName = $(this).attr("respondentName");
                 $(this).parent().remove();
-                addProblem(index,{name:respondentName,sort:index,type:'respondent'});
+                addProblem(index,{id:respondentId,name:respondentName,sort:index,type:'respondent'});
             });
         }
     });

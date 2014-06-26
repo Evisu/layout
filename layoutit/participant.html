@@ -41,6 +41,10 @@
 <div class="tab-pane fade in active" id="design">
 <ul class="fr">
 <li>
+<a id="initData" href="javascript:initData(problems);"> <i class="design-set2-icon active"></i>
+初始化数据
+</a>
+<li>
 <a id="appearset" href="javascript:getData();"> <i class="design-set1-icon active"></i>
 保存关系
 </a>
@@ -168,7 +172,7 @@
 <input id="{{'optionSort_'+option.sort}}" type="hidden" ng-model="option.sort" />
 <input id="{{'optionName_'+option.sort}}" type="hidden" ng-model="option.name" />
 <div id="{{'optionName_'+problem.sort+'_'+option.sort}}" ng-bind="option.name"  ng-click="showDel(problem.sort,option.sort);"></div>
-<a id="{{'del'+problem.sort+'_'+option.sort}}" style="display: none" title="删除选项" class="DelEdit" href="javascript:;" onclick="deleteOptions();"><i class="menu_edit5_icon"></i></a>
+<a id="{{'del'+problem.sort+'_'+option.sort}}" style="display: none" title="删除参与人" class="DelEdit" href="javascript:;" onclick="deleteOptions();"><i class="menu_edit5_icon"></i></a>
 </li>
 
 </ul>
@@ -209,7 +213,7 @@
 </a>
 
 
-<div class="topic_type" problemType="partic" particId="1" particName="张三" >
+<div class="topic_type" problemType="partic" particId="0" particName="张三" >
 	张三
 </div>
 
@@ -223,7 +227,7 @@
 </a>
 
 
-<div class="topic_type" problemType="partic" particId="2" particName="李四" >
+<div class="topic_type" problemType="partic" particId="1" particName="李四" >
 	李四
 </div>
 
@@ -236,7 +240,7 @@
 王五
 </a>
 
-<div class="topic_type" problemType="partic" particId="3" particName="王五">
+<div class="topic_type" problemType="partic" particId="2" particName="王五">
 <div class="topic_type_menu">
 </div>
 	王五
