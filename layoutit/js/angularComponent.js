@@ -13,6 +13,7 @@ angular.module('qn', ['contenteditable'])
 .controller('questionnaire',function($scope){
 	$scope.problems = problems;
 	$scope.qnObj = qnObj;
+    $scope.problemTypes = problemTypes;
 	
 	for(var i = 0;i<50;i++){
     }

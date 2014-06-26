@@ -25,6 +25,7 @@
 	<script type="text/javascript" src="js/angular-contenteditable.js"></script>
 	<script type="text/javascript" src="js/angularComponent.js"></script>
 	<script type="text/javascript" src="qn.js"></script>
+	<script type="text/javascript" src="problemTypes.js"></script>
 
   </head>
   
@@ -77,81 +78,41 @@
 </a>
 </h4>
 <ul class="ul-tool">
-<li class="moduleL ui-draggable">
+
+
+<li class="moduleL ui-draggable"  ng-repeat="problemType in problemTypes">
 <a href="javascript:;">
-<i class="basic-too11-icon-active"></i>
-单选题
+<i class="{{problemType.class}}"></i>
+{{problemType.name}}
 </a>
 
-	<div class="topic_type" problemType="radio" >
+	<div class="topic_type" problemType="{{problemType.problemType}}" >
 <div class="topic_type_con">
 <div class="Drag_area">
-	单选题
+    {{problemType.name}}
 </div>
-<ul class="unstyled ">
+<ul class="unstyled " ng-if="problemType.problemType == 'radio'">
 <li><input  type="radio"><label class="T_edit_min">选项1</label></li>
 <li><input type="radio"><label class="T_edit_min" name="option">选项2</label></li>
 </ul>
-
-</div>
-</div>
-
-
-
-
-
-</li>
-<li class="moduleL ui-draggable" >
-<a href="javascript:;">
-<i class="basic-too12-icon-active"></i>
-多选题
-</a>
-
-
-<div class="topic_type" problemType="checkbox">
-<div class="topic_type_con">
-<div class="Drag_area">
-	多选题
-</div>
-<ul class="unstyled ">
+<ul class="unstyled " ng-if="problemType.problemType == 'checkbox'">
 <li><input  type="checkbox"><label class="T_edit_min">选项1</label></li>
 <li><input type="checkbox"><label class="T_edit_min" name="option">选项2</label></li>
 </ul>
-
-</div>
-</div>
-
-
-
-
-</li>
-<li class="moduleL ui-draggable">
-<a href="javascript:;">
-<i class="basic-too13-icon-active"></i>
-填空题
-</a>
-
-<div class="topic_type" problemType="completion">
-<div class="topic_type_menu">
-</div>
-<div class="topic_type_con">
-<div class="Drag_area">
-	填空题
-</div>
-<ul class="unstyled">
+<ul class="unstyled " ng-if="problemType.problemType == 'completion'">
 <li>
-<div class="option_Fill">
-<textarea rows="1" cols="40" type="text"></textarea>
-</div>
+    <div class="option_Fill">
+        <textarea rows="1" cols="40" type="text"></textarea>
+    </div>
 </li>
 </ul>
 
 </div>
 </div>
 
-
-
 </li>
+
+
 </ul>
 </div>
 </div>
