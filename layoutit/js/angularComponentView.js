@@ -1,10 +1,15 @@
 
 var problems = new Array();
 var qnObj = {};
+var curProblem = new Array();
+var page = 1;
+var qindex = 0;
 
 angular.module('qn', [])
 .controller('questionnaire',function($scope){
-    problems = eval(opener.getProblems().replace(/\$/g,''));
+//     problems = eval(opener.getProblems().replace(/\$/g,''));
+    curProblem = eval(opener.getProblems().replace(/\$/g,''));
+
 
     qnObj = eval("("+opener.getQNObj().replace(/\$/g,'')+")");
 
@@ -12,6 +17,12 @@ angular.module('qn', [])
 
     $scope.problems = problems;
 
+
+    /**
+     * 重置单选题选项的值
+     * @param sort1
+     * @param sort2
+     */
     $scope.reset = function(sort1,sort2){
 
         for(var i = 0;i < $scope.problems[sort1].options.length;i++){
@@ -22,12 +33,30 @@ angular.module('qn', [])
 
     }
 
+    /**
+     *  下一步
+     */
+    $scope.next = function(){
+        $scope.problems.length = 0;
+        for(var i = qindex;i < curProblem.length;i++){
+            $scope.problems.push(curProblem[i]);
+            if(curProblem[i].type == 'paging' && curProblem[i].options[0].sort == page){
+                qindex = i+1;
+                page++;
+                break;
+            }
+        }
+
+
+    }
+
+        $scope.next();
 
 });
 
 function getData(){
 
-    alert(JSON.stringify(problems));
+    alert(JSON.stringify(curProblem));
 
 }
 

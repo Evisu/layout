@@ -1,130 +1,176 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    
+<head>
+
     <title>预览问卷</title>
-    
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="this is my page">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/public.css" rel="stylesheet">
-	<link href="css/styleView.css" rel="stylesheet">
-	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-	<script type="text/javascript" src="js/jquery.htmlClean.js"></script>
-	<script type="text/javascript" src="js/angular.min.js"></script>
-	
-	
-	<script type="text/javascript" src="js/angular-contenteditable.js"></script>
-	<script type="text/javascript" src="js/angularComponentView.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/public.css" rel="stylesheet">
+    <link href="css/styleView.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="js/jquery.htmlClean.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
 
 
-  </head>
-  
+    <script type="text/javascript" src="js/angular-contenteditable.js"></script>
+    <script type="text/javascript" src="js/angularComponentView.js"></script>
+    <style>
+        .maxtop {
+            float: left;
+            width: 100%;
+            margin-top: 30px;
+        }
+        .btns {
+            height: 40px;
+        }
+        .WJButton {
+            padding: .3em 2em .3em;
+        }
+        .wj_color {
+             color: #f7f7f7;
+             background: #55a1e3;
+         }
+        .red {
+            font-size: 14px;
+            color: red;
+            padding-bottom: 5px;
+        }
+        .fL {
+            float: left;
+            margin: 8px 0 0 8px;
+        }
+        .wjprogress {
+            text-align: center;
+            width: 210px;
+            float: right;
+        }
+        .barbox {
+            width: 20%;
+            background-color: #55a1e3;
+            height: 7px;
+        }
+
+
+
+
+
+    </style>
+
+</head>
+
 <body ng-app="qn" ng-controller="questionnaire">
 
-<div class="wjContent" >
-<div class="container-fluid clear">
+<div class="wjContent">
+    <div class="container-fluid clear">
 
-    <div class="tab2-content" id="myTabContent">
-        <div class="tab-pane fade in active" id="design">
-            <ul class="fr">
-                <li>
-                    <a id="appearset" href="javascript:getData();"> <i class="design-set1-icon active"></i>
-                        保存问卷
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:window.open('qnView.html');void(0);" >
-                        <i class="design-set4-icon"></i>
-                        预览问卷
-                    </a>
-                </li>
-                <li>
-                    <a onclick="publish_proj_confirm();return false;" href="#" target="_blank">
-                        <i class="design-set5-icon"></i>
-                        发布问卷
-                    </a>
-                </li>
-            </ul>
+        <div class="tab2-content" id="myTabContent">
+            <div class="tab-pane fade in active" id="design">
+                <ul class="fr">
+                    <li>
+                        <a id="appearset" href="javascript:getData();"> <i class="design-set1-icon active"></i>
+                            保存问卷
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:window.open('qnView.html');void(0);">
+                            <i class="design-set4-icon"></i>
+                            预览问卷
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="publish_proj_confirm();return false;" href="#" target="_blank">
+                            <i class="design-set5-icon"></i>
+                            发布问卷
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
 
-<div class="rows2 well2 Tj">
-	
-<h4 class="h4-bg T_edit p_title" >{{qnObj.title}}</h4>
+        <div class="rows2 well2 Tj">
 
+            <h4 class="h4-bg T_edit p_title">{{qnObj.title}}</h4>
 
 
+            <ul class="dragwen ui-sortable">
 
-<ul class="dragwen ui-sortable" >
-	
-<!-- 题目的html放这里 --> 
-<li class="module" ng-repeat="problem in problems">
+                <!-- 题目的html放这里 -->
+                <li class="module" ng-repeat="problem in problems">
 
 
-	
+                    <!-- 题目 -->
+                    <div class="topic_type" ng-if="problem.type != 'paging'">
+                        <div class="topic_type_menu">
+                            <div class="setup-group">
+                                <h4>Q{{problem.sort+1}}</h4>
+                            </div>
+                        </div>
+                        <div class="topic_type_con">
+                            <div ng-bind="problem.name">
+                            </div>
 
-		<!--单选题-->
-<div class="topic_type">
-<div class="topic_type_menu">
-<div class="setup-group">
-<h4>Q{{problem.sort+1}}</h4>
-</div></div>
-<div class="topic_type_con">
-<div  ng-bind="problem.name">
+                            <!-- 单选题 -->
+                            <ul class="unstyled " ng-if="problem.type == 'radio'">
+                                <li ng-repeat="option in problem.options">
+                                    <input id="{{'inputValue'+problem.sort}}" name="{{'inputValue'+problem.sort}}"
+                                           value="{{option.value}}" ng-click="reset(problem.sort,option.sort);"
+                                           ng-model="option.inputValue" type="radio">
+                                    <label class="T_edit_min" ng-bind="option.name"></label>
+                                </li>
+                            </ul>
+
+                            <!-- 多选题 -->
+                            <ul class="unstyled " ng-if="problem.type == 'checkbox'">
+                                <li ng-repeat="option in problem.options">
+                                    <input name="{{'inputValue'+problem.sort}}" type="checkbox"
+                                           ng-model="option.inputValue">
+                                    <label class="T_edit_min" ng-bind="option.name"></label>
+                                </li>
+                            </ul>
+
+                            <!-- 填空题 -->
+                            <ul class="unstyled" ng-if="problem.type == 'completion'">
+                                <li>
+                                    <div class="option_Fill">
+                                        <li ng-repeat="option in problem.options">
+                                            <textarea rows="6" cols="40" name="{{'inputValue'+problem.sort}}"
+                                                      style="width:90%;" ng-model="option.inputValue"></textarea>
+                                        </li>
+                                    </div>
+                                </li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+
+
+                </li>
+                <div class="maxtop btns" id="control_panel" align="center">
+                    <div class="WJButton wj_color" id="next_button" ng-click="next();">下一页 &gt;&gt;</div>
+                    <div class="red fL" id="err_msg"></div>
+                    <div class="wjprogress" id="progress_bar" style="display: block;">
+                        <span>25%</span>
+                        <div class="bar">
+                            <div class="barbox" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+
+
+            <!--/.rows2--> </div>
+        <!--/.row-fluid--> </div>
+    <!--/container-fluid-->
 </div>
 
-<ul class="unstyled " ng-if="problem.type == 'radio'">
-    <li ng-repeat="option in problem.options">
-    <input id="{{'inputValue'+problem.sort}}" name="{{'inputValue'+problem.sort}}" value="{{option.value}}" ng-click="reset(problem.sort,option.sort);" ng-model="option.inputValue" type="radio" >
-    <label class="T_edit_min"  ng-bind="option.name" ></label>
-</li>
 
-</ul>
-
-
-<ul class="unstyled " ng-if="problem.type == 'checkbox'">
-<li ng-repeat="option in problem.options">
-    <input name="{{'inputValue'+problem.sort}}" type="checkbox"  ng-model="option.inputValue">
-    <label class="T_edit_min" ng-bind="option.name"></label>
-</li>
-</ul>
-
-<ul class="unstyled" ng-if="problem.type == 'completion'">
-<li>
-<div class="option_Fill">
-    <li ng-repeat="option in problem.options">
-        <textarea rows="6" cols="40" name="{{'inputValue'+problem.sort}}" style="width:90%;" ng-model="option.inputValue"></textarea>
-    </li>
-</div>
-</li>
-</ul>
-
-
-
-</div>
-</div>
-
-
-
-</li>
-
-</ul>
-
-<!--/.rows2--> </div>
-<!--/.row-fluid--> </div>
-<!--/container-fluid-->
-</div>
-  
-  
-  
-  
-  
-  </body>
+</body>
 </html>

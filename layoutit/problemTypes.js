@@ -23,6 +23,6 @@ var problemTypes = [
         problemTypeId:'3',
         name:'分页',
         class:'basic-too13-icon-active',
-        problemType:'group'
+        problemType:'paging'
     }
 ];

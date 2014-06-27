@@ -49,11 +49,13 @@ $(document).ready(function() {
 			var type = $(this).attr("problemType");
 			$(this).parent().remove();
 			if(type == 'radio'){
-				addProblem(index,{name:'题目',sort:index,type:'radio',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
+				addProblem(index,{id:'radio1',name:'题目',sort:index,type:'radio',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
 			}else if(type == 'checkbox'){
-				addProblem(index,{name:'题目',sort:index,type:'checkbox',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
+				addProblem(index,{id:'checkbox1',name:'题目',sort:index,type:'checkbox',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
 			}else if(type == 'completion'){
-				addProblem(index,{name:'题目',sort:index,type:'completion',options:[{name:'',sort:0,isInput:true}]});
+				addProblem(index,{id:'completion1',name:'题目',sort:index,type:'completion',options:[{name:'',sort:0,isInput:true}]});
+			}else if(type == 'paging'){
+				addProblem(index,{id:'paging1',name:'页码',sort:index,type:'paging',options:[{sort:($('.paging').length+1),total:($('.paging').length+1),isInput:true}]});
 			}
 			});
 		}
@@ -90,6 +92,7 @@ $(document).ready(function() {
 	
 	$(document).bind("click",function(e){
      var target = $(e.target);
+     if($(target).attr('class')){
     if($(target).attr('class').indexOf('Drag_area') != -1 || $(target).attr('class').indexOf('max_an') != -1 || $(target).attr('id') == 'problemNameEditDiv' || $(target).attr('id') == 'titleEdit'){
     	
     }else if($(target).attr('class').indexOf('T_edit_min') != -1 || $(target).attr('class').indexOf('min_an') != -1 || $(target).attr('id') == 'optionNameEditDiv'){
@@ -100,6 +103,11 @@ $(document).ready(function() {
     	$('#problemNameEdit').hide();
     	$('#optionNameEdit').hide();
     }
+     }else{
+
+         $('#problemNameEdit').hide();
+         $('#optionNameEdit').hide();
+     }
    
    });  
  
