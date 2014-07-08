@@ -4,64 +4,164 @@
 
     <title>问卷管理</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="this is my page">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-    <link href="css/public.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-theme.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-    <script type="text/javascript" src="js/jquery.htmlClean.js"></script>
-    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="ckeditor/config.js"></script>
     <script type="text/javascript" src="js/angular.min.js"></script>
 
-
-    <script type="text/javascript" src="js/angular-contenteditable.js"></script>
-    <script type="text/javascript" src="js/angularComponent.js"></script>
     <script type="text/javascript" src="qnList.js"></script>
+    <style>
+        .sequence{
+            background: #efefef url(../images/arrow_list_ico.png) 69px -35px no-repeat;
+            cursor: pointer;
+        }
+        .surveyhead {
+            position: relative;
+            padding-top: 10px;
+        }
+
+        .surveyhead .filter {
+            float: right;
+            padding-left: 15px;
+        }
+        .footer_w {
+            background: none repeat scroll 0 0 #B8B8B8;
+            color: #828282;
+            font-size: 12px;
+            min-height: 150px;
+            width: 100%;
+            min-width: 990px;
+            margin-top: 350px;
+        }
+        .footer {
+            width: 990px;
+            margin: 0 auto;
+            padding-top: 30px;
+        }
+        .instructions {
+             float: left;
+             width: 100%;
+             color: #fff;
+             margin: 15px 0 0 0;
+         }
+        .ma_auto {
+            float: none !important;
+            margin: 0 auto;
+            width: 350px;
+        }
+        .slogan_min {
+            width: 47px;
+            height: 16px;
+            margin: 0 10px;
+            background: url(../images/all_index_pic.png) no-repeat -104px -42px;
+        }
+
+
+
+
+    </style>
 
 </head>
 
-<body ng-app="qn" ng-controller="questionnaire">
-<div class="container">
-    <div class="panel panel-default" style="width: 800px;" align="center">
-        <!-- Default panel contents -->
-        <div class="panel-heading">调查问卷</div>
+<body ng-app="qnList" ng-controller="qnListContr">
 
-        <!-- Table -->
+<div class="container" style="margin-left: 350px;">
 
-        <table class="table" >
-            <tr>
-                <td></td>
-                <td class=".col-md-4">First Name</td>
-                <td>Last Name</td>
-                <td>Username</td>
+    <div class="page-header"  style="width: 800px;">
+        <h1>问卷管理 <small>Subtext for header</small></h1>
+    </div>
+
+    <div class="surveyhead" style="width: 800px;">
+        <button id="create-question" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">新建问卷</button>
+        <div class="filter" align="right">
+            <select name="stateq" id="stateq" ng-model="query">
+                <option value="">全部问卷</option>
+                <option value="1">未发布问卷</option>
+                <option value="2">收集中问卷</option>
+                <option value="3">已发布问卷</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="panel panel-default" style="width: 800px;float: center;" >
+
+        <table class="table  table-hover">
+            <thead>
+            <tr class="sequence">
+                <th>序号</th>
+                <th>问卷标题</th>
+                <th>创建时间</th>
+                <th>状态</th>
+                <th>操作</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            </thead>
+            <tbody>
+            <tr ng-repeat="question in questions | filter:{state : query}">
+                <td>{{question.sort+1}}</td>
+                <td>{{question.name}}</td>
+                <td>{{question.createDate}}</td>
+                <td>
+                    <select name="state1" id="state1" ng-model="question.state" ng-change="changeState(question.sort);">
+                        <option value="1">未发布</option>
+                        <option value="2">收集中</option>
+                        <option value="3">已发布</option>
+                    </select>
+                </td>
+                <td>
+                    <a title="编辑"  href="/layout/layoutit/qn.html" style="display: inline-block;margin:0 8px" target="_blank"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a title="预览"  href="/layout/layoutit/qn.html" style="display: inline-block;margin:0 8px" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a>
+                    <a title="删除" ng-click="deleteQuestion(question.sort)" style="display: inline-block;margin:0 8px" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
+            </tbody>
+
 
         </table>
 
     </div>
 </div>
 
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title " id="myModalLabel">新建问卷</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <span class="input-group-addon">标题</span>
+                    <input id="title" type="text" class="form-control" placeholder="" ng-model="questionTitle">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addQuesttion();">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer_w">
+    <div class="footer">
+        <div class="instructions">
+            <div class="ma_auto">
+                <div> ©2014 调查问卷 </div><a href="#" target="_blank"><div class="slogan_min"></div></a>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
