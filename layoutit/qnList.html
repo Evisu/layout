@@ -18,6 +18,7 @@
     <script type="text/javascript" src="js/angular.min.js"></script>
 
     <script type="text/javascript" src="qnList.js"></script>
+    <script type="text/javascript" src="commonUtil.js"></script>
     <style>
         .sequence{
             background: #efefef url(../images/arrow_list_ico.png) 69px -35px no-repeat;
@@ -80,7 +81,7 @@
     </div>
 
     <div class="surveyhead" style="width: 800px;">
-        <button id="create-question" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">新建问卷</button>
+        <button id="create-question" type="button" class="btn btn-sm btn-primary " data-toggle="modal" data-target="#myModal">新建问卷</button>
         <div class="filter" align="right">
             <select name="stateq" id="stateq" ng-model="query">
                 <option value="">全部问卷</option>
@@ -93,7 +94,7 @@
 
     <div class="panel panel-default" style="width: 800px;float: center;" >
 
-        <table class="table  table-hover">
+        <table class="table  table-hover ">
             <thead>
             <tr class="sequence">
                 <th>序号</th>
@@ -134,20 +135,24 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content ">
+            <form novalidate name="subForm">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title " id="myModalLabel">新建问卷</h4>
             </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <span class="input-group-addon">标题</span>
-                    <input id="title" type="text" class="form-control" placeholder="" ng-model="questionTitle">
-                </div>
+            <div id="modal-body" class="modal-body">
+                    <label id="titleMsg" class="control-label sr-only" for="title">标题不能为空</label>
+                    <div class="input-group">
+                        <span  class="input-group-addon">标题</span>
+                        <input id="title" name="title" type="text" class="form-control" placeholder=""  ng-model="questionTitle" required>
+                    </div>
             </div>
             <div class="modal-footer">
+                <!-- data-dismiss="modal" 关闭窗口 -->
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addQuesttion();">保存</button>
+                <button id="saveBtn" type="button" class="btn btn-primary"   ng-click="validate(subForm.title.$valid);">保存</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
