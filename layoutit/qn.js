@@ -88,9 +88,39 @@ $(document).ready(function() {
 		
 		
 	});
+
+
+    $(document).bind("click",function(e){
+
+        var target = $(e.target).parents("#problemNameEdit");
+        if(!target.html()){
+            target = $(e.target).parents("#optionNameEdit");
+        }
+
+        if(!target.html()){
+            if($(e.target).attr('contenteditable') == 'true'){
+                target = $(e.target);
+            }
+
+        }
+        if(!target.html()){
+
+                target = $(e.target).parents("[contenteditable=true]");
+
+
+        }
+
+        if(!target.html()){
+
+                $('#problemNameEdit').hide();
+                $('#optionNameEdit').hide();
+            }
+
+
+    });
+
 	
-	
-	$(document).bind("click",function(e){
+	/*$(document).bind("click",function(e){
      var target = $(e.target);
      if($(target).attr('class')){
     if($(target).attr('class').indexOf('Drag_area') != -1 || $(target).attr('class').indexOf('max_an') != -1 || $(target).attr('id') == 'problemNameEditDiv' || $(target).attr('id') == 'titleEdit'){
@@ -109,7 +139,7 @@ $(document).ready(function() {
          $('#optionNameEdit').hide();
      }
    
-   });  
+   });  */
  
     
   /*
