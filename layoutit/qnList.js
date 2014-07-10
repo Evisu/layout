@@ -4,6 +4,13 @@
 
 var questions = new Array();
 var questionTitle = '';
+var webPage = {
+    total:0,
+    pageTotal: new Array(),
+    curPage: 1,
+    start:0,
+    limit:2
+};
 
 var anListModule = angular.module('qnList', []);
 
@@ -16,14 +23,47 @@ anListModule.service('qnService',['$http',function($http){
 
 
 anListModule .controller('qnListContr', function ($scope,qnService) {
-        qnService.query().success(function(data,status ){
-            $scope.questions = data.data;
-        })
 
+        qnService.query().success(function(data,status ){
+            questions = data.data;
+            $scope.questions = data.data;
+            for(var i = 1;i <= (data.total / 2);i++){
+                webPage.pageTotal.push(i);
+            }
+            $scope.loadData();
+        })
+        $scope.webPage = webPage;
 
         $scope.questionTitle = questionTitle;
 
 
+
+        $scope.loadData = function(){
+            $scope.questions = questions.concat().splice($scope.webPage.curPage*2-2,2);
+        }
+
+        /* 下一页 */
+        $scope.nextPage = function(){
+            if(($scope.webPage.curPage + 1)  <= $scope.webPage.pageTotal.length){
+                $scope.webPage.curPage =  $scope.webPage.curPage + 1;
+            }
+            $scope.loadData();
+        }
+
+        /* 上一页 */
+        $scope.lastPage = function(){
+            if(($scope.webPage.curPage - 1)  >= 1){
+                $scope.webPage.curPage =  $scope.webPage.curPage -1;
+            }
+            $scope.loadData();
+        }
+
+        /* 当前 */
+        $scope.clickPage = function(page){
+            $scope.webPage.curPage =  page;
+            $scope.loadData();
+
+        }
 
         /* 新建问卷 */
         $scope.addQuesttion = function () {
@@ -63,7 +103,6 @@ anListModule .controller('qnListContr', function ($scope,qnService) {
             }
         }
 
-
     });
 
 
@@ -74,3 +113,9 @@ function updateSort(questions){
     }
 
 }
+
+$(document).ready(function() {
+
+
+
+})

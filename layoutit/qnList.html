@@ -130,6 +130,18 @@
 
         </table>
 
+
+
+    </div>
+    <div style="width: 800px;" align="center">
+        <ul class="pagination">
+            <li><a href="#" ng-click="lastPage();">&laquo;</a></li>
+            <li class="{{webPage.curPage == page ? 'active' : ''}}"  ng-repeat="page in webPage.pageTotal">
+                <a href="#" ng-click="clickPage(page);">{{page}}</a>
+            </li>
+            <li><a href="#" ng-click="nextPage();">&raquo;</a></li>
+        </ul>
+
     </div>
 </div>
 
