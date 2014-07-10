@@ -771,8 +771,8 @@ width:28px;
 }
 .unstyled{
     font-size:14px;
-    border: 1px solid #DBDBDB;
-    /*display: inline-block; width: 100%;*/
+   /* border: 1px solid #DBDBDB;*/
+    display: inline-block; width: 100%;
 }
 .unstyled li{
 	margin-top:5px;
@@ -1574,11 +1574,6 @@ width:18px;height:18px;background-position:-102px -201px;
      
 .ul-tool .topic_type { display: none; }
 .ui-draggable-dragging .topic_type { display:block;}
-
-.Drag_area:hover{
-	background:#FDF9CD;
-}
-
 
 
 .close {

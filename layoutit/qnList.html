@@ -12,7 +12,6 @@
 
 
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js"></script>
@@ -85,9 +84,9 @@
         <div class="filter" align="right">
             <select name="stateq" id="stateq" ng-model="query">
                 <option value="">全部问卷</option>
-                <option value="1">未发布问卷</option>
-                <option value="2">收集中问卷</option>
-                <option value="3">已发布问卷</option>
+                <option value="0">草稿问卷</option>
+                <option value="1">开始问卷</option>
+                <option value="2">结束问卷</option>
             </select>
         </div>
     </div>
@@ -99,6 +98,8 @@
             <tr class="sequence">
                 <th>序号</th>
                 <th>问卷标题</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
                 <th>创建时间</th>
                 <th>状态</th>
                 <th>操作</th>
@@ -106,14 +107,16 @@
             </thead>
             <tbody>
             <tr ng-repeat="question in questions | filter:{state : query}">
-                <td>{{question.sort+1}}</td>
-                <td>{{question.name}}</td>
-                <td>{{question.createDate}}</td>
+                <td>{{$index+1}}</td>
+                <td>{{question.title}}</td>
+                <td>{{question.startDate}}</td>
+                <td>{{question.endDate}}</td>
+                <td>{{question.enterDate}}</td>
                 <td>
                     <select name="state1" id="state1" ng-model="question.state" ng-change="changeState(question.sort);">
-                        <option value="1">未发布</option>
-                        <option value="2">收集中</option>
-                        <option value="3">已发布</option>
+                        <option value="0">草稿</option>
+                        <option value="1">开始</option>
+                        <option value="2">结束</option>
                     </select>
                 </td>
                 <td>

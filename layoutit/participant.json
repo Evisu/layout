@@ -1,0 +1,60 @@
+{
+    "respondents" : [
+        {
+            "respondentId" : "1",
+            "objName" : "调查对象1",
+            "objId" : "1",
+            "objType" : "orgUnit",
+            "questionnaireId" : "1",
+            "orderNum" : 0
+        }
+        ,
+        {
+            "respondentId" : "2",
+            "objName" : "调查对象2",
+            "objId" : "2",
+            "objType" : "orgUnit",
+            "questionnaireId" : "1",
+            "orderNum" : 1
+        }
+    ]
+    ,
+    "participants" : [
+        {
+            "participantId" : "1",
+            "objName" : "参与对象1",
+            "objId" : "1",
+            "objType" : "orgUnit",
+            "questionnaireId" : "1",
+            "orderNum" : 0
+        }
+        ,
+        {
+            "participantId" : "2",
+            "objName" : "参与对象2",
+            "objId" : "2",
+            "objType" : "orgUnit",
+            "questionnaireId" : "1",
+            "orderNum" : 1
+        }
+    ]
+    ,
+    "respondentParticipants" : [
+        {
+
+            "relationId" : "1",
+            "participantId" : "1",
+            "respondentId" : "1",
+            "questionnaireId" : "1"
+        }
+        ,
+        {
+
+            "relationId" : "2",
+            "participantId" : "2",
+            "respondentId" : "2",
+            "questionnaireId" : "1"
+        }
+    ]
+
+}

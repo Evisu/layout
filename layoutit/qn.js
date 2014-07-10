@@ -56,7 +56,9 @@ $(document).ready(function() {
 				addProblem(index,{id:'completion1',name:'题目',sort:index,type:'completion',options:[{name:'',sort:0,isInput:true}]});
 			}else if(type == 'paging'){
 				addProblem(index,{id:'paging1',name:'页码',sort:index,type:'paging',options:[{sort:($('.paging').length+1),total:($('.paging').length+1),isInput:true}]});
-			}
+			}else if(type == 'text'){
+                addProblem(index,{id:'paging1',name:'段落说明',sort:index,type:'text',options:[{sort:($('.paging').length+1),total:($('.paging').length+1),isInput:true}]});
+            }
 			});
 		}
 	});
@@ -76,11 +78,9 @@ $(document).ready(function() {
 	
 		$("#savecontent").click(function() {
 		var sort1 = $('#sort1').val();
-		
 		if(sort1 != -1){
 			problems[sort1].name = contenthandle.getData();
 	 }else{
-	 	alert(contenthandle.getData());
 	 	qnObj.title = contenthandle.getData();
 	
 	 	}
@@ -203,8 +203,11 @@ function editDiv(show){
 }
 
 function fast_machine(show){
+    alert();
 	if(show){
+
 		$('.fast_machine').show();
+        alert();
 	}else{
 		$('.fast_machine').hide();
 	}

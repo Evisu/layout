@@ -21,8 +21,14 @@ var problemTypes = [
     },
     {
         problemTypeId:'3',
+        name:'段落说明',
+        class:'basic-too111-icon-active',
+        problemType:'text'
+    },
+    {
+        problemTypeId:'4',
         name:'分页',
-        class:'basic-too13-icon-active',
+        class:'basic-too112-icon-active',
         problemType:'paging'
     }
 ];

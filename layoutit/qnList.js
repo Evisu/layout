@@ -5,14 +5,25 @@
 var questions = new Array();
 var questionTitle = '';
 
-angular.module('qnList', [])
-    .controller('qnListContr', function ($scope) {
+var anListModule = angular.module('qnList', []);
 
-        $scope.questions = questions;
+anListModule.service('qnService',['$http',function($http){
+    this.query =  function(){
+            return $http({method:"get",url:"qnList.json"});
+
+    }
+}])
+
+
+anListModule .controller('qnListContr', function ($scope,qnService) {
+        qnService.query().success(function(data,status ){
+            $scope.questions = data.data;
+        })
+
+
         $scope.questionTitle = questionTitle;
 
-        $scope.questions.push({id: 1, sort: 0, name: '巴西世界杯调查问卷', state: '1', createDate: '2014-07-07'});
-        $scope.questions.push({id: 2, sort: 1, name: '居民生活质量调查', state: '2', createDate: '2014-07-09'});
+
 
         /* 新建问卷 */
         $scope.addQuesttion = function () {
@@ -63,10 +74,3 @@ function updateSort(questions){
     }
 
 }
-
-
-$(document).ready(function () {
-
-
-
-});

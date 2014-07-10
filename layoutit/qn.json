@@ -1,0 +1,110 @@
+{
+    "questionnaireId" : "1",
+    "title" : "满意度调查",
+    "state" : "0",
+    "startDate" : null,
+    "endData" : null,
+    "enterOrgUnitId" : "",
+    "enterOrgUnitName" : "",
+    "enterOrgId" : "",
+    "enterOrgName" : "",
+    "enterEmployeeId" : "",
+    "enterPersonId" : "",
+    "enterDate" : null,
+    "qnType" : "",
+    "applyId" : "",
+    "moduleId" : "",
+    "moduleName" : "",
+    "problems" : [
+        {
+            "problemId" : "1",
+            "title" : "题目1",
+            "problemType" : "radio",
+            "questionnaireId" : "1",
+            "orderNum" : 0,
+            "options" : [
+                {
+                    "qsOptionsId" : "11",
+                    "optionName" : "选项1",
+                    "isInput" : false,
+                    "problemId" : "1",
+                    "orderNum" : 0
+                }
+                ,
+                {
+                    "qsOptionsId" : "12",
+                    "optionName" : "选项2",
+                    "isInput" : true,
+                    "problemId" : "1",
+                    "orderNum" : 1
+                }
+            ]
+
+        }
+        ,
+        {
+            "problemId" : "2",
+            "title" : "题目2",
+            "problemType" : "checkbox",
+            "questionnaireId" : "1",
+            "orderNum" : 1,
+            "options" : [
+                {
+                    "qsOptionsId" : "21",
+                    "optionName" : "选项1",
+                    "isInput" : false,
+                    "problemId" : "1",
+                    "orderNum" : 0
+                }
+                ,
+                {
+                    "qsOptionsId" : "22",
+                    "optionName" : "选项2",
+                    "isInput" : false,
+                    "problemId" : "2",
+                    "orderNum" : 1
+                }
+            ]
+
+        }
+        ,
+        {
+            "problemId" : "3",
+            "title" : "题目3",
+            "problemType" : "completion1",
+            "questionnaireId" : "1",
+            "orderNum" : 2,
+            "options" : [
+                {
+                    "qsOptionsId" : "31",
+                    "optionName" : "",
+                    "isInput" : true,
+                    "problemId" : "3",
+                    "orderNum" : 0
+                }
+            ]
+
+        }
+    ],
+    "labels" : [
+        {
+            "labelId" : "1",
+            "labelType" : "text",
+            "questionnaireId" : "1",
+            "orderNum" : 0,
+            "pageNum" : null,
+            "labelContent" : "文本标签"
+        }
+        ,
+        {
+            "labelId" : "1",
+            "labelType" : "page",
+            "questionnaireId" : "1",
+            "orderNum" : 2,
+            "pageNum" : 1,
+            "labelContent" : null
+        }
+    ]
+
+
+}

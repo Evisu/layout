@@ -56,7 +56,7 @@ angular.module('qn', ['contenteditable'])
             problemNameEdit.css("top", $('#problemName' + sort1).offset().top);
             problemNameEdit.show();
             problemNameEdit.find('.add_edit')[0].focus();
-            $('.menu_edit').hide();
+            editDiv(false);
             var optionNameEdit = $('#optionNameEdit');
             optionNameEdit.hide();
         }
@@ -76,7 +76,7 @@ angular.module('qn', ['contenteditable'])
             var problemNameEdit = $('#problemNameEdit');
             problemNameEdit.hide();
 
-            fast_machine(false);
+            editDiv(false);
 
         }
 
