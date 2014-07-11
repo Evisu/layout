@@ -12,9 +12,9 @@ var webPage = {
     limit:2
 };
 
-var anListModule = angular.module('qnList', []);
+var qnListModule = angular.module('qnList', []);
 
-anListModule.service('qnService',['$http',function($http){
+qnListModule.service('qnService',['$http',function($http){
     this.query =  function(){
             return $http({method:"get",url:"qnList.json"});
 
@@ -22,8 +22,9 @@ anListModule.service('qnService',['$http',function($http){
 }])
 
 
-anListModule .controller('qnListContr', function ($scope,qnService) {
 
+
+qnListModule .controller('qnListContr', function ($scope,qnService) {
         qnService.query().success(function(data,status ){
             questions = data.data;
             $scope.questions = data.data;
