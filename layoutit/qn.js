@@ -48,17 +48,7 @@ $(document).ready(function() {
 			var index = $(this).attr("dragIndex");
 			var type = $(this).attr("problemType");
 			$(this).parent().remove();
-			if(type == 'radio'){
-				addProblem(index,{id:'radio1',name:'题目',sort:index,type:'radio',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
-			}else if(type == 'checkbox'){
-				addProblem(index,{id:'checkbox1',name:'题目',sort:index,type:'checkbox',options:[{name:'选项1',sort:0},{name:'选项2',sort:1}]});
-			}else if(type == 'completion'){
-				addProblem(index,{id:'completion1',name:'题目',sort:index,type:'completion',options:[{name:'',sort:0,isInput:true}]});
-			}else if(type == 'paging'){
-				addProblem(index,{id:'paging1',name:'页码',sort:index,type:'paging',options:[{sort:($('.paging').length+1),total:($('.paging').length+1),isInput:true}]});
-			}else if(type == 'text'){
-                addProblem(index,{id:'paging1',name:'段落说明',sort:index,type:'text',options:[{sort:($('.paging').length+1),total:($('.paging').length+1),isInput:true}]});
-            }
+			addProblem(index,createProblem(index,type,qnObj.questionnaireId));
 			});
 		}
 	});
@@ -67,10 +57,11 @@ $(document).ready(function() {
 	
 	$(".SeniorEdit[href='#editorModal']").click(function() {
 		var sort1 = $('#sort1').val();
-		if(sort1 != -1){
-		contenthandle.setData(problems[sort1].name);
-	 }else{
-	 	contenthandle.setData(qnObj.title);
+        var sort2 = $('#sort2').val();
+		if(sort2 == -1){
+		contenthandle.setData(problems[sort1].title);
+	     }else{
+	 	contenthandle.setData(problems[sort1].options[sort2].optionName);
 	 	}
 		
 	});
@@ -78,16 +69,38 @@ $(document).ready(function() {
 	
 		$("#savecontent").click(function() {
 		var sort1 = $('#sort1').val();
-		if(sort1 != -1){
-			problems[sort1].name = contenthandle.getData();
+        var sort2 = $('#sort2').val();
+		if(sort2 == -1){
+			problems[sort1].title = contenthandle.getData();
+
 	 }else{
-	 	qnObj.title = contenthandle.getData();
+            problems[sort1].options[sort2].optionName = contenthandle.getData();
 	
 	 	}
 		
 		
 		
 	});
+
+
+    $("#saveOption").click(function() {
+        var sort1 = $('#sort1').val();
+        var sort2 = $('#sort2').val();
+        var isChecked = $('#isInputCheckBox').is(":checked");
+        if(sort2 != -1){
+            problems[sort1].options[sort2].isInput = isChecked;
+        }
+    });
+
+    $("#saveTextOption").click(function() {
+        var sort1 = $('#sort1').val();
+        var sort2 = $('#sort2').val();
+        if(sort2 != -1){
+            problems[sort1].options[sort2].height = $('#text_row').val();
+            problems[sort1].options[sort2].width = $('#text_col').val();
+        }
+    });
+
 
 
     $(document).bind("click",function(e){
@@ -188,9 +201,7 @@ $(document).ready(function() {
             });   
             
       */      
-                 
-	
-	
+
 })
 
 
@@ -203,7 +214,6 @@ function editDiv(show){
 }
 
 function fast_machine(show){
-    alert();
 	if(show){
 
 		$('.fast_machine').show();
@@ -224,3 +234,72 @@ function fast_machine(show){
                     e.cancelBubble = true;
             }
            ;
+
+    function createProblem(orderNum,problemType,questionnaireId){
+        var problem = {
+            "problemId" : "",
+            "title" : "",
+            "problemType" : problemType,
+            "questionnaireId" : questionnaireId,
+            "orderNum" : 0,
+            "displayNum" : 1}
+        if(problemType == 'radio'){
+            problem.title = "单选题";
+            problem.options = [
+                {
+                    "qsOptionsId" : "",
+                    "optionName" : "选项1",
+                    "isInput" : false,
+                    "problemId" : "",
+                    "orderNum" : 0
+                }
+                ,
+                {
+                    "qsOptionsId" : "",
+                    "optionName" : "选项2",
+                    "isInput" : false,
+                    "problemId" : "",
+                    "orderNum" : 1
+                }
+            ]
+        }else if(problemType == 'checkbox'){
+            problem.title = "多选题";
+            problem.options = [
+                {
+                    "qsOptionsId" : "",
+                    "optionName" : "选项1",
+                    "isInput" : false,
+                    "problemId" : "",
+                    "orderNum" : 0
+                }
+                ,
+                {
+                    "qsOptionsId" : "",
+                    "optionName" : "选项2",
+                    "isInput" : false,
+                    "problemId" : "",
+                    "orderNum" : 1
+                }
+            ]
+        }else if(problemType == 'completion'){
+            problem.title = "填空题";
+            problem.options = [
+                {
+                    "qsOptionsId" : "",
+                    "optionName" : "",
+                    "isInput" : true,
+                    "problemId" : "",
+                    "orderNum" : 0,
+                    "height" : 1,
+                    "width" : 40
+                }
+
+            ]
+        }else if(problemType == 'text'){
+            problem.title = "段落说明";
+        }else if(problemType == 'paging'){
+            problem.title = "分页";
+        }
+
+       return problem;
+    }

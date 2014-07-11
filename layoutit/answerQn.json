@@ -1,9 +1,9 @@
 {
-    "questionnaireId" : "1",
-    "title" : "满意度调查",
-    "state" : "0",
-    "startDate" : null,
-    "endData" : null,
+    "answerSheetId" : "",
+    "state" : "",
+    "questionnaireId" : "",
+    "respondentId" : "",
+    "participantId" : "",
     "enterOrgUnitId" : "",
     "enterOrgUnitName" : "",
     "enterOrgId" : "",
@@ -11,10 +11,7 @@
     "enterEmployeeId" : "",
     "enterPersonId" : "",
     "enterDate" : null,
-    "qnType" : "",
-    "applyId" : "",
-    "moduleId" : "",
-    "moduleName" : "",
+    "title" : "满意度调查",
     "problems" : [
         {
             "problemId" : "1",
@@ -29,7 +26,9 @@
                     "optionName" : "选项1",
                     "isInput" : false,
                     "problemId" : "1",
-                    "orderNum" : 0
+                    "orderNum" : 0,
+                    "checked" : false,
+                    "inputValue" : null
                 }
                 ,
                 {
@@ -37,7 +36,9 @@
                     "optionName" : "选项2",
                     "isInput" : true,
                     "problemId" : "1",
-                    "orderNum" : 1
+                    "orderNum" : 1,
+                    "checked" : false,
+                    "inputValue" : null
                 }
             ]
 
@@ -56,7 +57,9 @@
                     "optionName" : "选项1",
                     "isInput" : false,
                     "problemId" : "1",
-                    "orderNum" : 0
+                    "orderNum" : 0,
+                    "checked" : false,
+                    "inputValue" : null
                 }
                 ,
                 {
@@ -64,7 +67,9 @@
                     "optionName" : "选项2",
                     "isInput" : false,
                     "problemId" : "2",
-                    "orderNum" : 1
+                    "orderNum" : 1,
+                    "checked" : false,
+                    "inputValue" : null
                 }
             ]
 
@@ -85,7 +90,9 @@
                     "problemId" : "3",
                     "height" : 1,
                     "width" : 40,
-                    "orderNum" : 0
+                    "orderNum" : 0,
+                    "checked" : false,
+                    "inputValue" : null
                 }
             ]
 
@@ -111,4 +118,7 @@
 
         }
     ]
+
+
+
 }

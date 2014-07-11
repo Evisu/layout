@@ -150,7 +150,7 @@
             <ul class="dragwen ui-sortable">
 
                 <!-- 题目的html放这里 -->
-                <li class="module {{problem.type == 'paging' ? 'paging': ''}}" ng-repeat="problem in problems">
+                <li class="module {{problem.problemType == 'paging' ? 'paging': ''}}" ng-repeat="problem in problems">
 
 
 
@@ -159,63 +159,64 @@
                         <div class="topic_type_menu">
                             <div class="setup-group">
                                 <!-- 题号 -->
-                                <div ng-if="problem.type != 'paging'">
-                                    <h4>Q{{problem.sort+1}}</h4>
-                                    <a title="题目删除" href="javascript:;" ng-click="removeProblem(problem.sort)"><i
+                                <div ng-if="problem.problemType != 'paging'">
+                                    <h4 ng-if="problem.problemType != 'text'">Q{{problem.displayNum}}</h4>
+                                    <a title="题目删除" href="javascript:;" ng-click="removeProblem(problem.orderNum)"><i
                                             class="del2-icon-active"></i></a>
                                 </div>
-                                <div ng-if="problem.type == 'paging'">
-                                    <a title="删除分页" href="javascript:;" ng-click="removeProblem(problem.sort)"><i
+                                <div ng-if="problem.problemType == 'paging'">
+                                    <a title="删除分页" href="javascript:;" ng-click="removeProblem(problem.orderNum)"><i
                                             class="del2-icon-active"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="topic_type_con">
                             <div  class="Drag_area" >
-                                <div  ng-if="problem.type != 'paging'" id="{{'problemName'+problem.sort}}" class="th4 T_edit q_title" contenteditable="true"
-                                     ng-model="problem.name" strip-br="true" ng-click="problemNameEditShow(problem.sort);"></div>
+                                <div  ng-if="problem.problemType != 'paging'" id="{{'problemName'+problem.orderNum}}" class="th4 T_edit q_title" contenteditable="true"
+                                     ng-model="problem.title" strip-br="true" ng-click="problemNameEditShow(problem.orderNum);"></div>
 
                                 <!-- 分页-->
 
-                                <div class="icon_paging" ng-if="problem.type == 'paging'"></div>
-                                <div class="fr con_paging" ng-if="problem.type == 'paging'">
-                                     页码 :<span> </span>
+                                <div class="icon_paging" ng-if="problem.problemType == 'paging'"></div>
+                                <div class="fr con_paging" ng-if="problem.problemType == 'paging'">
+                                     页码 :<span>{{problem.displayNum}} </span>
                                 </div>
 
 
                             </div>
                             <!------- 单选题 ------->
-                            <ul class="unstyled " ng-if="problem.type == 'radio'">
+                            <ul class="unstyled " ng-if="problem.problemType == 'radio'">
                                 <li ng-repeat="option in problem.options"><input type="radio"><label
-                                        id="{{'optionName_'+problem.sort+'_'+option.sort}}" class="T_edit_min"
-                                        contenteditable="true" ng-model="option.name" strip-br="true"
-                                        ng-click="optionNameEditShow(problem.sort,option.sort);"></label>
+                                        id="{{'optionName_'+problem.orderNum+'_'+option.orderNum}}" class="T_edit_min"
+                                        contenteditable="true" ng-model="option.optionName" strip-br="true"
+                                        ng-click="optionNameEditShow(problem.orderNum,option.orderNum);"></label>
                                     <input class="open_input" type="text" ng-if="option.isInput" />
                                 </li>
                             </ul>
 
                             <!------- 复选题 ------->
-                            <ul class="unstyled " ng-if="problem.type == 'checkbox'">
+                            <ul class="unstyled " ng-if="problem.problemType == 'checkbox'">
                                 <li ng-repeat="option in problem.options">
                                     <input type="checkbox">
-                                    <label id="{{'optionName_'+problem.sort+'_'+option.sort}}" class="T_edit_min"
-                                           contenteditable="true" ng-model="option.name" strip-br="true"
-                                           ng-click="optionNameEditShow(problem.sort,option.sort);"></label>
+                                    <label id="{{'optionName_'+problem.orderNum+'_'+option.orderNum}}" class="T_edit_min"
+                                           contenteditable="true" ng-model="option.optionName" strip-br="true"
+                                           ng-click="optionNameEditShow(problem.orderNum,option.orderNum);"></label>
+                                    <input class="open_input" type="text" ng-if="option.isInput" />
                                 </li>
                             </ul>
 
                             <!------- 填空题 ------->
-                            <ul class="unstyled" ng-if="problem.type == 'completion'">
+                            <ul class="unstyled" ng-if="problem.problemType == 'completion'">
                                 <li>
-                                    <div class="option_Fill">
-                                        <div class="min_an" style="display: none;"></div>
-                                        <textarea rows="1" cols="40" type="text" ></textarea>
+                                    <div class="option_Fill" ng-repeat="option in problem.options">
+                                       <div class="min_an"><a class="SeniorEdit" href="#textOptionModal" data-toggle="modal"  ng-click="textOptionShow(problem.orderNum,option.orderNum);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+                                        <textarea rows="{{option.height}}" cols="{{option.width}}" type="text" ></textarea>
                                     </div>
                                 </li>
                             </ul>
 
-                            <div class="operationH" ng-if="problem.type == 'radio' || problem.type == 'checkbox'"><a
-                                    href="javascript:;" ng-click="addOption(problem.sort)">
+                            <div class="operationH" ng-if="problem.problemType == 'radio' || problem.problemType == 'checkbox'"><a
+                                    href="javascript:;" ng-click="addOption(problem.orderNum)">
                                 <i title="添加选项" class="add-icon-active"></i></a>
                             </div>
                         </div>
@@ -223,8 +224,8 @@
 
 
                     <div class="updown">
-                        <a href="javascript:;" ng-click="upProblem(problem.sort)"  ><i title="上移本题" class="up-icon-active"></i></a>
-                        <a href="javascript:;" ng-click="downProblem(problem.sort)"><i title="下移本题" class="down-icon-active"></i></a>
+                        <a href="javascript:;" ng-click="upProblem(problem.orderNum)"  ><i title="上移本题" class="up-icon-active"></i></a>
+                        <a href="javascript:;" ng-click="downProblem(problem.orderNum)"><i title="下移本题" class="down-icon-active"></i></a>
                     </div>
                 </li>
 
@@ -272,7 +273,7 @@
             <div>
                     <ul>
                         <li>
-                            <input id="isInputCheckBox" type="checkbox">
+                            <input id="isInputCheckBox" type="checkbox"/>
                             <label >在选项后增加填空框</label>
                         </li>
 
@@ -289,6 +290,43 @@
     <!-- /.modal-dialog -->
 </div>
 
+<!--填空题设置-->
+
+<div class="modal fade" id="textOptionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">配置</h4>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <label>输入框宽度：</label>
+                        <input id="text_col" class="inputborder"  type="text">字符
+                        <span class="options_tip"></span>
+                    </li>
+                    <li>
+                        <label>输入框高度：</label>
+                        <input id="text_row" class="inputborder" type="text">行
+                        <span class="options_tip"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button  id="saveTextOption" type="button" class="btn btn-default btn-primary" data-dismiss="modal">保存
+                </button>
+                <button type="button" class="btn btn-default btn-primary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+
+
 
 <div id="problemNameEdit" class="zon_edit"
      style="left: 518px; top: 283.19px; width: 600px; position: absolute; min-height: 30px;display:none;">
@@ -304,8 +342,8 @@
 <div id="optionNameEdit"
      style="left: 536px; top: 200px; width: 202px; position: absolute; min-height: 21px;display:none;">
     <ul class="menu_edit" style="right: -20px; margin-top: 26px; display: none;">
-        <li><a class="option_Set" href="#optionModal"  data-toggle="modal"><i class="menu_edit1_icon"></i>选项设置</a></li>
-        <li><a class="SeniorEdit" href="javascript:;"><i class="menu_edit2_icon"></i>高级编辑</a></li>
+        <li><a class="option_Set" href="#optionModal"  data-toggle="modal" onclick="setInputToModa();"><i class="menu_edit1_icon"></i>选项设置</a></li>
+        <li><a class="SeniorEdit" href="#editorModal" data-toggle="modal"><i class="menu_edit2_icon"></i>高级编辑</a></li>
        <!-- <li><a class="logic_Set" href="javascript:;"><i class="menu_edit3_icon"></i>逻辑设置</a></li>
         <li><a class="reference_Set" href="javascript:;"><i class="menu_edit4_icon"></i>引用设置</a></li>-->
     </ul>

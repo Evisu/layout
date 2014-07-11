@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <title>预览问卷</title>
+    <title>答卷</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
@@ -20,7 +20,8 @@
 
 
     <script type="text/javascript" src="js/angular-contenteditable.js"></script>
-    <script type="text/javascript" src="js/angularComponentView.js"></script>
+    <script type="text/javascript" src="js/angularComponentAnswer.js"></script>
+    <script type="text/javascript" src="answerQn.js"></script>
     <style>
         .maxtop {
             float: left;
@@ -34,9 +35,9 @@
             padding: .3em 2em .3em;
         }
         .wj_color {
-             color: #f7f7f7;
-             background: #55a1e3;
-         }
+            color: #f7f7f7;
+            background: #55a1e3;
+        }
         .red {
             font-size: 14px;
             color: red;
@@ -72,25 +73,7 @@
 
         <div class="tab2-content" id="myTabContent">
             <div class="tab-pane fade in active" id="design">
-                <ul class="fr">
-                    <li>
-                        <a id="appearset" href="javascript:getData();"> <i class="design-set1-icon active"></i>
-                            保存问卷
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:window.open('qnView.html');void(0);">
-                            <i class="design-set4-icon"></i>
-                            预览问卷
-                        </a>
-                    </li>
-                    <li>
-                        <a onclick="publish_proj_confirm();return false;" href="#" target="_blank">
-                            <i class="design-set5-icon"></i>
-                            发布问卷
-                        </a>
-                    </li>
-                </ul>
+                  <a href="javascript:getData();">查看数据</a>
             </div>
         </div>
 
@@ -120,10 +103,10 @@
                             <ul class="unstyled " ng-if="problem.problemType == 'radio'">
                                 <li ng-repeat="option in problem.options">
                                     <input id="{{'inputValue'+problem.orderNum}}" name="{{'inputValue'+problem.orderNum}}"
-                                            ng-click="reset(problem.orderNum,option.orderNum)"
-                                            type="radio">
+                                           ng-click="reset(problem.orderNum,option.orderNum)"
+                                           type="radio">
                                     <label class="T_edit_min" ng-bind="option.optionName"></label>
-                                    <input class="open_input" type="text" ng-if="option.isInput && option.checked" />
+                                    <input class="open_input" type="text"  ng-model="option.inputValue" ng-if="option.isInput && option.checked" />
                                 </li>
                             </ul>
 
@@ -132,7 +115,7 @@
                                 <li ng-repeat="option in problem.options">
                                     <input name="{{'inputValue'+problem.orderNum}}" type="checkbox" ng-model="option.checked">
                                     <label class="T_edit_min" ng-bind="option.optionName"></label>
-                                    <input class="open_input" type="text" ng-if="option.isInput && option.checked" />
+                                    <input class="open_input" type="text"  ng-model="option.inputValue" ng-if="option.isInput && option.checked" />
                                 </li>
                             </ul>
 
@@ -141,8 +124,8 @@
                                 <li>
                                     <div class="option_Fill">
                                         <li ng-repeat="option in problem.options">
-                                            <textarea rows="{{option.height}}" cols="{{option.width}}" name="{{'inputValue'+problem.orderNum}}"
-                                                      style="width:90%;"></textarea>
+                                            <textarea rows="{{option.height}}" cols="{{option.width}}"  ng-model="option.inputValue"
+                                                      style="width:90%;" ng-change="setCheckedToText(problem.orderNum,option.orderNum);"></textarea>
                                         </li>
                                     </div>
                                 </li>

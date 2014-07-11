@@ -1,57 +1,87 @@
 var qnObj = {};
 var problems = new Array();
-qnObj = {id: '1', title: '2014年巴西世界杯调查问卷',pages:1, problems: problems};
+
+var qnModule = angular.module('qn', ['contenteditable']);
+/**
+ * 问卷设计服务
+ */
+qnModule.service('qnService',['$http',function($http){
+    this.query =  function(params){
+        return $http({method:"get",url:"qn.json",params:params});
+    }
+}])
+
+/**
+ * 问卷设计控制器
+ */
+ qnModule.controller('questionnaire',['$scope','qnService', function ($scope,qnService) {
+    qnService.query().success(function(data,status ){
+                $scope.qnObj = data;
+                $scope.problems = data.problems;
+                problems = data.problems;
+                qnObj = data;
+    })
+    $scope.problemTypes = problemTypes;
 
 
-angular.module('qn', ['contenteditable'])
-    .controller('questionnaire', function ($scope) {
-        $scope.problems = problems;
-        $scope.qnObj = qnObj;
-        $scope.problemTypes = problemTypes;
-
-        $scope.problems.push({name: '您在看2014年巴西世界杯吗？', sort: 0, type: 'radio', options: [
-            {name: '看', sort: 0, value: true, inputValue: false},
-            {name: '不看', sort: 1, value: true, inputValue: false}
-        ]});
-        $scope.problems.push({name: '您喜爱哪个球队？', sort: 1, type: 'checkbox', options: [
-            {name: '巴西', sort: 0, inputValue: true},
-            {name: '阿根廷', sort: 1, inputValue: true},
-            {name: '荷兰', sort: 2, inputValue: true},
-            {name: '德国', sort: 3, inputValue: true}
-        ]});
-        $scope.problems.push({name: '您认为哪个球队能夺得冠军,及为什么？', sort: 2, type: 'completion', options: [
-            {inputValue: ''}
-        ]});
-
-
+     /**
+      * 添加选项
+      * @param sort1
+      */
         $scope.addOption = function (sort1) {
-            $scope.problems[sort1].options.push({name: '选项' + ($scope.problems[sort1].options.length + 1), sort: ($scope.problems[sort1].options.length)});
+            $scope.problems[sort1].options.push({ "qsOptionsId" : "","optionName" : "选项" + ($scope.problems[sort1].options.length + 1),"isInput" : false,"problemId" : "1",
+                "orderNum" : ($scope.problems[sort1].options.length)
+            });
         }
+
+     /**
+      * 移除选项
+      * @param sort1
+      * @param sort2
+      */
         $scope.removeOption = function (sort1, sort2) {
             $scope.problems[sort1].options.splice(sort2, 1);
+            updatOptionSort($scope.problems[sort1].options);
         }
 
+     /**
+      * 移除题目
+      * @param sort1
+      */
         $scope.removeProblem = function (sort1) {
             $scope.problems.splice(sort1, 1);
             updateProblemSort($scope.problems);
         }
 
+     /**
+      * 上移题目
+      * @param sort1
+      */
         $scope.upProblem = function (sort1) {
             if (sort1 != 0) {
                 sortTable(sort1 - 1, sort1);
             }
         }
 
+     /**
+      * 下移题目
+      * @param sort1
+      */
         $scope.downProblem = function (sort1) {
             if (sort1 != $scope.problems.length - 1) {
                 sortTable(sort1 + 1, sort1);
             }
         }
 
+     /**
+      * 题目主题编辑
+      * @param sort1
+      */
         $scope.problemNameEditShow = function (sort1) {
             $('#sort1').val(sort1);
+            $('#sort2').val(-1);
             var problemNameEdit = $('#problemNameEdit');
-            problemNameEdit.find('div[contenteditable="true"]').html($scope.problems[sort1].name);
+            problemNameEdit.find('div[contenteditable="true"]').html($scope.problems[sort1].title);
             problemNameEdit.css("left", $('#problemName' + sort1).offset().left);
             problemNameEdit.css("top", $('#problemName' + sort1).offset().top);
             problemNameEdit.show();
@@ -61,13 +91,16 @@ angular.module('qn', ['contenteditable'])
             optionNameEdit.hide();
         }
 
-
+     /**
+      * 选项名编辑
+      * @param sort1
+      */
         $scope.optionNameEditShow = function (sort1, sort2) {
             $('#sort1').val(sort1);
             $('#sort2').val(sort2);
             var optionNameEdit = $('#optionNameEdit');
 
-            optionNameEdit.find('div[contenteditable="true"]').html($scope.problems[sort1].options[sort2].name);
+            optionNameEdit.find('div[contenteditable="true"]').html($scope.problems[sort1].options[sort2].optionName);
             optionNameEdit.css("left", $('#optionName_' + sort1 + '_' + sort2).offset().left);
             optionNameEdit.css("top", $('#optionName_' + sort1 + '_' + sort2).offset().top);
             optionNameEdit.show();
@@ -94,11 +127,18 @@ angular.module('qn', ['contenteditable'])
             optionNameEdit.hide();
         }
 
+        $scope.textOptionShow = function (sort1,sort2){
+         $('#sort1').val(sort1);
+         $('#sort2').val(sort2);
+         $('#text_row').val(problems[sort1].options[sort2].height);
+         $('#text_col').val(problems[sort1].options[sort2].width);
+     }
+
         setInterval(function () {
             $scope.$apply();
         }, 1000)
 
-    })
+    }])
 
 /**
  * 题目排序
@@ -127,21 +167,30 @@ function addProblem(index, problem) {
  */
 function updateProblemSort(problems,isAdd) {
     var index = 0;
+    var problemNum = 1;
+    var pageNum = 1;
+    var textNum = 1;
     for (var i = 0; i < problems.length; i++) {
-        problems[i].sort = i;
-        if(problems[i].type == 'paging'){
-            qnObj.pages++;
-            index++;
-            problems[i].options[0].sort = index;
-            if(isAdd){
-                problems[i].options[0].total = $('.paging').length+1;
-            }else{
-                problems[i].options[0].total = $('.paging').length;
-            }
+        problems[i].orderNum = i;
+        if(problems[i].problemType == 'paging'){
+            problems[i].displayNum = pageNum;
+            pageNum++;
+        }else if(problems[i].problemType == 'text'){
+            problems[i].displayNum = textNum;
+            textNum++;
+        }else{
+            problems[i].displayNum = problemNum;
+            problemNum++;
         }
     }
 }
 
+function setInputToModa(){
+    var sort1 = $('#sort1').val();
+    var sort2 = $('#sort2').val();
+    $('#isInputCheckBox').prop('checked',problems[sort1].options[sort2].isInput);
+
+}
 
 function getData() {
 
@@ -166,7 +215,7 @@ function getQNObj() {
  */
 function setProblemName(target) {
     if ($('#sort1').val() != -1) {
-        problems[$('#sort1').val()].name = $(target).html();
+        problems[$('#sort1').val()].title = $(target).html();
     } else {
         qnObj.title = $(target).html();
     }
@@ -177,7 +226,13 @@ function setProblemName(target) {
  * @param target
  */
 function setOptionName(target) {
-    problems[$('#sort1').val()].options[$('#sort2').val()].name = $(target).html();
+    if($(target).html()){
+        problems[$('#sort1').val()].options[$('#sort2').val()].optionName = $(target).html();
+    }else{
+        problems[$('#sort1').val()].options.splice($('#sort2').val(), 1);
+        updateOptionSort(problems[$('#sort1').val()].options);
+    }
+
 }
 
 /**
@@ -216,7 +271,6 @@ function downOption() {
 function deleteOption() {
     var sort1 = $('#sort1').val();
     var sort2 = $('#sort2').val();
-
     problems[sort1].options.splice(sort2, 1);
 
     updateOptionSort(problems[sort1].options);
@@ -247,7 +301,7 @@ function sortOption(newIndex, oldIndex) {
  */
 function updateOptionSort(options) {
     for (var i = 0; i < options.length; i++) {
-        options[i].sort = i;
+        options[i].orderNum = i;
     }
 }
 

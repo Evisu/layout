@@ -1571,6 +1571,7 @@ width:18px;height:18px;background-position:-102px -201px;
 .module:hover  .setup-group a{display:block;}
      .module:hover  .updown {display:block;}
      .module:hover  .operationH a {display:block;}
+.module:hover  .min_an {display:block;}
      
 .ul-tool .topic_type { display: none; }
 .ui-draggable-dragging .topic_type { display:block;}

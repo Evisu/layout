@@ -25,9 +25,10 @@ angular.module('qn', [])
      */
     $scope.reset = function(sort1,sort2){
 
+        $scope.problems[sort1].options[sort2].checked = true;
         for(var i = 0;i < $scope.problems[sort1].options.length;i++){
             if(i != sort2){
-                $scope.problems[sort1].options[i].inputValue = false;
+                $scope.problems[sort1].options[i].checked = false;
             }
         }
 
@@ -40,7 +41,7 @@ angular.module('qn', [])
         $scope.problems.length = 0;
         for(var i = qindex;i < curProblem.length;i++){
             $scope.problems.push(curProblem[i]);
-            if(curProblem[i].type == 'paging' && curProblem[i].options[0].sort == page){
+            if(curProblem[i].problemType == 'paging'){
                 qindex = i+1;
                 page++;
                 break;
