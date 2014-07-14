@@ -7,6 +7,7 @@ var qindex = 0;
 
 var answerModule = angular.module('qn', []);
 
+
 answerModule.service('answerService',['$http',function($http){
     this.query =  function(params){
         return $http({method:"get",url:"answerQn.json",params:params});
@@ -17,11 +18,13 @@ answerModule.controller('questionnaire',['$scope','answerService',function($scop
 
     answerService.query().success(function(data,status ){
         $scope.qnObj = data;
-        problems = data.problems;
+
         qnObj = data;
         $scope.labels = data.labels;
 
         curProblem = data.problems;
+        $scope.maxOrderNum = data.problems.length-1;
+        alert(data.problems.length);
         $scope.next();
     })
 
