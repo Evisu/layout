@@ -81,18 +81,39 @@
     </div>
 
     <div class="surveyhead" style="width: 80%;">
+
         <button id="create-question" type="button" class="btn btn-sm btn-primary " data-toggle="modal" data-target="#myModal">新建问卷</button>
-        <div class="filter" align="right">
-            <select name="stateq" id="stateq" ng-model="query">
+        <div class="filter" >
+            <!--
+            <select name="stateq" id="stateq" ng-model="query" >
                 <option value="">全部问卷</option>
                 <option value="0">草稿问卷</option>
                 <option value="1">开始问卷</option>
                 <option value="2">结束问卷</option>
             </select>
+            -->
+            <!-- 查询组件 按标题和状态进行查询 -->
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" ng-model="queryTitle">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle {{queryState != '' ? 'btn-primary' : ''}}" data-toggle="dropdown"><span id="showTitle">显示</span> <span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li class="{{queryState == '' ? 'active' : ''}}" ><a href="#"  ng-click="queryStateFn()">全部问卷</a></li>
+                        <li class="{{queryState == '0' ? 'active' : ''}}"><a href="#"  ng-click="queryStateFn('0')">草稿问卷</a></li>
+                        <li class="{{queryState == '1' ? 'active' : ''}}"><a href="#"  ng-click="queryStateFn('1')">开始问卷</a></li>
+                        <li class="{{queryState == '2' ? 'active' : ''}}"><a href="#"  ng-click="queryStateFn('2')">结束问卷</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
+
+
+
+
     </div>
 
-    <div class="panel panel-default" style="width: 80%;float: center;" >
+    <!-- 列表 -->
+    <div class="panel panel-default" style="width: 80%;" >
 
         <table class="table  table-hover ">
             <thead>
@@ -107,7 +128,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="question in questions | filter:{state : query}">
+            <tr ng-repeat="question in questions | filter:{state : queryState,title:queryTitle}">
                 <td>{{$index+1}}</td>
                 <td>{{question.title}}</td>
                 <td>{{question.startDate}}</td>
@@ -122,7 +143,7 @@
                 </td>
                 <td>
                     <a title="编辑"  href="/layout/layoutit/qn.html" style="display: inline-block;margin:0 8px" target="_blank"><span class="glyphicon glyphicon-tag"></span></a>
-                    <a title="预览"  href="/layout/layoutit/qn.html" style="display: inline-block;margin:0 8px" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a>
+                    <a title="预览"  href="/layout/layoutit/qnView.html" style="display: inline-block;margin:0 8px" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a>
                     <a title="删除" ng-click="deleteQuestion(question.sort)" style="display: inline-block;margin:0 8px" href="#"><span class="glyphicon glyphicon-remove"></span></a>
                     <a title="答卷"  href="/layout/layoutit/answerQn.html" style="display: inline-block;margin:0 8px" target="_blank"><span class="glyphicon glyphicon-pencil"></span></a>
                 </td>
@@ -137,7 +158,7 @@
     </div>
 
 
-
+    <!-- 分页组件 -->
     <div style="width: 80%;" align="center">
         <ul class="pagination">
             <li><a href="#" ng-click="lastPage();">&laquo;</a></li>
@@ -147,10 +168,7 @@
             <li><a href="#" ng-click="nextPage();">&raquo;</a></li>
         </ul>
 
-
-
         <div style="width: 10%;float: right;">
-
             <select class="form-control input-sm" ng-model="webPage.limit" ng-change="changePage();">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -166,7 +184,7 @@
 
 
 
-
+<!-- 新建问卷 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content ">
@@ -191,6 +209,7 @@
         </div>
     </div>
 </div>
+
 
 
 <div class="footer_w">

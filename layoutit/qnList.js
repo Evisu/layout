@@ -30,6 +30,7 @@ qnListModule .controller('qnListContr', function ($scope,qnService) {
         })
 
         $scope.questionTitle = questionTitle;
+        $scope.queryState = "";
 
 
         /* 改变分页最大记录数 */
@@ -42,6 +43,13 @@ qnListModule .controller('qnListContr', function ($scope,qnService) {
         /* 加载数据 */
         $scope.loadData = function(){
             $scope.questions = questions.concat().splice($scope.webPage.curPage * $scope.webPage.limit- $scope.webPage.limit, $scope.webPage.limit);
+        }
+
+        $scope.queryStateFn = function(state){
+            if(!state)
+                $scope.queryState = "";
+            else
+                $scope.queryState = state;
         }
 
         /* 下一页 */

@@ -17,7 +17,8 @@
             "qnType" : "",
             "applyId" : "",
             "moduleId" : "",
-            "moduleName" : ""
+            "moduleName" : "",
+            "sort":0
         }
         ,
         {
@@ -36,7 +37,9 @@
             "qnType" : "",
             "applyId" : "",
             "moduleId" : "",
-            "moduleName" : ""
+            "moduleName" : "",
+            "sort":1
+
         }
         ,
         {
@@ -55,7 +58,8 @@
             "qnType" : "",
             "applyId" : "",
             "moduleId" : "",
-            "moduleName" : ""
+            "moduleName" : "",
+            "sort":2
         }
         ,
         {
@@ -74,7 +78,8 @@
             "qnType" : "",
             "applyId" : "",
             "moduleId" : "",
-            "moduleName" : ""
+            "moduleName" : "",
+            "sort":3
         }
         ,
         {
@@ -93,7 +98,8 @@
             "qnType" : "",
             "applyId" : "",
             "moduleId" : "",
-            "moduleName" : ""
+            "moduleName" : "",
+            "sort":4
         }
         ,
         {
@@ -112,7 +118,8 @@
             "qnType" : "",
             "applyId" : "",
             "moduleId" : "",
-            "moduleName" : ""
+            "moduleName" : "",
+            "sort":5
         }
     ]
 }
