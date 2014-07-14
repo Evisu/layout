@@ -18,6 +18,7 @@
 
     <script type="text/javascript" src="qnList.js"></script>
     <script type="text/javascript" src="commonUtil.js"></script>
+    <script type="text/javascript" src="webpage.js"></script>
     <style>
         .sequence{
             background: #efefef url(../images/arrow_list_ico.png) 69px -35px no-repeat;
@@ -75,11 +76,11 @@
 
 <div class="container" style="margin-left: 350px;">
 
-    <div class="page-header"  style="width: 800px;">
+    <div class="page-header"  style="width: 80%;">
         <h1>问卷管理 <small>Subtext for header</small></h1>
     </div>
 
-    <div class="surveyhead" style="width: 800px;">
+    <div class="surveyhead" style="width: 80%;">
         <button id="create-question" type="button" class="btn btn-sm btn-primary " data-toggle="modal" data-target="#myModal">新建问卷</button>
         <div class="filter" align="right">
             <select name="stateq" id="stateq" ng-model="query">
@@ -91,7 +92,7 @@
         </div>
     </div>
 
-    <div class="panel panel-default" style="width: 800px;float: center;" >
+    <div class="panel panel-default" style="width: 80%;float: center;" >
 
         <table class="table  table-hover ">
             <thead>
@@ -120,7 +121,7 @@
                     </select>
                 </td>
                 <td>
-                    <a title="编辑"  href="/layout/layoutit/qn.html" style="display: inline-block;margin:0 8px" target="_blank"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a title="编辑"  href="/layout/layoutit/qn.html" style="display: inline-block;margin:0 8px" target="_blank"><span class="glyphicon glyphicon-tag"></span></a>
                     <a title="预览"  href="/layout/layoutit/qn.html" style="display: inline-block;margin:0 8px" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a>
                     <a title="删除" ng-click="deleteQuestion(question.sort)" style="display: inline-block;margin:0 8px" href="#"><span class="glyphicon glyphicon-remove"></span></a>
                     <a title="答卷"  href="/layout/layoutit/answerQn.html" style="display: inline-block;margin:0 8px" target="_blank"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -134,7 +135,10 @@
 
 
     </div>
-    <div style="width: 800px;" align="center">
+
+
+
+    <div style="width: 80%;" align="center">
         <ul class="pagination">
             <li><a href="#" ng-click="lastPage();">&laquo;</a></li>
             <li class="{{webPage.curPage == page ? 'active' : ''}}"  ng-repeat="page in webPage.pageTotal">
@@ -143,8 +147,23 @@
             <li><a href="#" ng-click="nextPage();">&raquo;</a></li>
         </ul>
 
+
+
+        <div style="width: 10%;float: right;">
+
+            <select class="form-control input-sm" ng-model="webPage.limit" ng-change="changePage();">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+
+        </div>
+
     </div>
+
+
 </div>
+
 
 
 
