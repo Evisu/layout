@@ -4,13 +4,6 @@
 
 var questions = new Array();
 var questionTitle = '';
-var webPage = {
-    total:0,
-    pageTotal: new Array(),
-    curPage: 1,
-    start:0,
-    limit:2
-};
 
 var qnListModule = angular.module('qnList', []);
 
@@ -25,22 +18,38 @@ qnListModule.service('qnService',['$http',function($http){
 
 
 qnListModule .controller('qnListContr', function ($scope,qnService) {
-        qnService.query().success(function(data,status ){
+    qnService.query().success(function(data,status ){
             questions = data.data;
             $scope.questions = data.data;
-            for(var i = 1;i <= (data.total / 2);i++){
-                webPage.pageTotal.push(i);
-            }
+
+            webPage.initWebPage({data:data});
+
+            $scope.webPage = webPage;
+
             $scope.loadData();
         })
-        $scope.webPage = webPage;
 
         $scope.questionTitle = questionTitle;
+        $scope.queryState = "";
 
 
+        /* 改变分页最大记录数 */
+        $scope.changePage = function(){
+            $scope.webPage.curPage = 1;
+            $scope.webPage.initWebPage();
+            $scope.loadData();
+        }
 
+        /* 加载数据 */
         $scope.loadData = function(){
-            $scope.questions = questions.concat().splice($scope.webPage.curPage*2-2,2);
+            $scope.questions = questions.concat().splice($scope.webPage.curPage * $scope.webPage.limit- $scope.webPage.limit, $scope.webPage.limit);
+        }
+
+        $scope.queryStateFn = function(state){
+            if(!state)
+                $scope.queryState = "";
+            else
+                $scope.queryState = state;
         }
 
         /* 下一页 */
@@ -59,7 +68,7 @@ qnListModule .controller('qnListContr', function ($scope,qnService) {
             $scope.loadData();
         }
 
-        /* 当前 */
+        /* 当前页 */
         $scope.clickPage = function(page){
             $scope.webPage.curPage =  page;
             $scope.loadData();
