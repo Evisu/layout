@@ -94,7 +94,8 @@
             -->
             <!-- 查询组件 按标题和状态进行查询 -->
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" ng-model="queryTitle">
+                <label class="sr-only" for="queryTitle">Email address</label>
+                <input id="queryTitle" style="width:20%;float:right" type="text" class="form-control " ng-model="queryTitle">
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-default dropdown-toggle {{queryState != '' ? 'btn-primary' : ''}}" data-toggle="dropdown"><span id="showTitle">显示</span> <span class="caret"></span></button>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
