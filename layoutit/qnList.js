@@ -44,7 +44,7 @@ qnListModule .controller('qnListContr', function ($scope,qnService) {
         $scope.loadData = function(){
             $scope.questions = questions.concat().splice($scope.webPage.curPage * $scope.webPage.limit- $scope.webPage.limit, $scope.webPage.limit);
         }
-
+        /* 按状态查询 */
         $scope.queryStateFn = function(state){
             if(!state)
                 $scope.queryState = "";
@@ -78,7 +78,7 @@ qnListModule .controller('qnListContr', function ($scope,qnService) {
         /* 新建问卷 */
         $scope.addQuesttion = function () {
 
-            $scope.questions.push({id: ($scope.questions.length+1), sort: ($scope.questions.length), name: $scope.questionTitle, state: '1', createDate: new Date().format('yyyy-MM-dd')});
+            $scope.questions.push({id: ($scope.questions.length+1), sort: ($scope.questions.length), title: $scope.questionTitle, state: '1', createDate: new Date().format('yyyy-MM-dd')});
 
             $scope.questionTitle = "";
 
