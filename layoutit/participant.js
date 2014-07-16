@@ -13,6 +13,7 @@ participantModule.service("participantService",['$http',function($http){
 
 participantModule.controller('questionnaire',['$scope','participantService',function($scope,participantService){
     participantService.query().success(function(data,status ){
+        $scope.data = data;
         respondents = data.respondents;
         participants = data.participants;
         $scope.respondents = respondents;
@@ -77,6 +78,9 @@ participantModule.controller('questionnaire',['$scope','participantService',func
         }
     }
 
+    /**
+     * 添加调查对象
+     */
     $scope.addRespondents = function(){
         $scope.respondents.push( {
             "respondentId" :  $scope.respondents.length,
@@ -88,8 +92,73 @@ participantModule.controller('questionnaire',['$scope','participantService',func
         });
 
     }
-        .
 
+    /**
+     * 添加参与对象
+     */
+    $scope.addParticipants = function(){
+
+        $scope.participants.push( {
+            "participantId" :  $scope.participants.length,
+            "objName" : $scope.addParticipantsText,
+            "objId" :  $scope.participants.length,
+            "objType" :  $scope.objType,
+            "questionnaireId" : $scope.questionnaireId,
+            "orderNum" : $scope.respondents.length
+        });
+
+    }
+
+
+    /**
+     * 初始数据
+     */
+    $scope.initData = function (){
+
+        for(var k = 0;k < $scope.respondents.length;k++){
+            var checkParticipants = new Array();
+            var curRespondent = $scope.respondents[k];
+            $("input[name='curParticipantCheck'][type='checkbox']").each(function() {
+                checkParticipants.push($(this).val() );
+
+            })
+            var flag = false;
+            for(var i = 0;i < $scope.respondentParticipants.length;i++){
+                if(curRespondent.respondentId == $scope.respondentParticipants[i].respondentId){
+                    flag = false;
+                    for(var j = 0; j < checkParticipants.length;j++){
+                        if(checkParticipants[j] == $scope.respondentParticipants[i].participantId){
+                            flag = true;
+                            checkParticipants.splice(j, 1);
+                            break;
+                        }
+                    }
+                    if(!flag){
+                        $scope.respondentParticipants.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+            for(var j = 0; j < checkParticipants.length;j++){
+                $scope.respondentParticipants.push({
+                    "relationId" : "",
+                    "participantId" : checkParticipants[j],
+                    "respondentId" : curRespondent.respondentId,
+                    "questionnaireId" : curRespondent.questionnaireId
+                })
+            }
+        }
+    }
+
+
+    /**
+     * 获得数据
+     */
+
+    $scope.getData = function(){
+
+        alert(JSON.stringify($scope.data));
+    }
         setInterval(function() {
             $scope.$apply();
             initContainer();
@@ -97,42 +166,6 @@ participantModule.controller('questionnaire',['$scope','participantService',func
 
     }])
 
-function initData(){
-
-    for(var k = 0;k < $scope.respondents.length;k++){
-    var checkParticipants = new Array();
-        var curRespondent = $scope.respondents[k];
-    $("input[name='curParticipantCheck'][type='checkbox']").each(function() {
-            checkParticipants.push($(this).val() );
-
-    })
-    var flag = false;
-    for(var i = 0;i < $scope.respondentParticipants.length;i++){
-        if(curRespondent.respondentId == $scope.respondentParticipants[i].respondentId){
-            flag = false;
-            for(var j = 0; j < checkParticipants.length;j++){
-                if(checkParticipants[j] == $scope.respondentParticipants[i].participantId){
-                    flag = true;
-                    checkParticipants.splice(j, 1);
-                    break;
-                }
-            }
-            if(!flag){
-                $scope.respondentParticipants.splice(i, 1);
-                i--;
-            }
-        }
-    }
-    for(var j = 0; j < checkParticipants.length;j++){
-        $scope.respondentParticipants.push({
-            "relationId" : "",
-            "participantId" : checkParticipants[j],
-            "respondentId" : curRespondent.respondentId,
-            "questionnaireId" : curRespondent.questionnaireId
-        })
-    }
-    }
-}
 
 
 //调查对象排序

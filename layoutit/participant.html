@@ -43,12 +43,12 @@
                     <div class="tab-pane fade in active" id="design">
                         <ul class="fr">
                             <li>
-                                <a id="initData" href="javascript:initData(problems);"> <i
+                                <a id="initData" href="javascript:void(0);" ng-click="initData();"> <i
                                         class="design-set2-icon active"></i>
                                     初始化数据
                                 </a>
                             <li>
-                                <a id="appearset" href="javascript:getData();"> <i class="design-set1-icon active"></i>
+                                <a id="appearset" href="javascript:;" ng-click="getData();"> <i class="design-set1-icon active"></i>
                                     保存关系
                                 </a>
                             </li>
@@ -63,7 +63,7 @@
                         <h4 class="tc">
                             <a href="javascript:;">
                                 调查对象
-                                <a  href="#editObjModal" data-toggle="modal">+</a>
+                                <a  href="#addRespondentModal" data-toggle="modal">+</a>
                             </a>
                         </h4>
                         <ul id="respondentUL" class="ul-tool">
@@ -146,7 +146,7 @@
                         <h4 class="tc">
                             <a href="javascript:;">
                                 参与对象
-                                <i class="icon_on" onclick="alert();">+</i>
+                                <a  href="#addParticipantModal" data-toggle="modal">+</a>
                             </a>
                         </h4>
                         <ul id="particUL" class="ul-tool">
@@ -204,14 +204,14 @@
 
 
 <!-- 添加调查对象-->
-<div class="modal fade" id="editObjModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="addRespondentModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">添加调查对象</h4>
             </div>
-            <div id="modal-body" class="modal-body">
+            <div  class="modal-body">
 
                 <div class="input-group">
                     <span  class="input-group-addon">调查对象类型</span>
@@ -225,7 +225,7 @@
 
                     <div class="input-group">
                         <span  class="input-group-addon">调查对象</span>
-                        <input id="title" name="title" type="text" class="form-control" placeholder=""  ng-model="addRespondentsText" required/>
+                        <input name="title" type="text" class="form-control" placeholder=""  ng-model="addRespondentsText" required/>
                     </div>
 
 
@@ -241,6 +241,42 @@
     <!-- /.modal-dialog -->
 </div>
 
+<!-- 添加参与对象-->
+<div class="modal fade" id="addParticipantModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">添加参与对象</h4>
+            </div>
+            <div  class="modal-body">
 
+                <div class="input-group">
+                    <span  class="input-group-addon">参与对象类型</span>
+                    <select class="form-control"  ng-model="objType" >
+                        <option value="">请选择</option>
+                        <option value="orgUnit">单位</option>
+                        <option value="department">部门</option>
+                        <option value="employee">人员</option></select>
+                </div>
+
+
+                <div class="input-group">
+                    <span  class="input-group-addon">参与对象</span>
+                    <input id="title" name="title" type="text" class="form-control" placeholder=""  ng-model="addParticipantsText" required/>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button  type="button" class="btn btn-default btn-primary" data-dismiss="modal" ng-click="addParticipants();">保存
+                </button>
+                <button type="button" class="btn btn-default btn-primary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 </body>
 </html>
