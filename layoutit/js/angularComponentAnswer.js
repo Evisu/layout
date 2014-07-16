@@ -14,7 +14,13 @@ answerModule.service('answerService',['$http',function($http){
     }
 }])
 
-answerModule.controller('questionnaire',['$scope','answerService',function($scope,answerService){
+answerModule.service('respondentService',['$http',function($http){
+    this.query =  function(params){
+        return $http({method:"get",url:"respondent.json",params:params});
+    }
+}])
+
+answerModule.controller('questionnaire',['$scope','answerService','respondentService',function($scope,answerService,respondentService){
 
     answerService.query().success(function(data,status ){
         $scope.qnObj = data;
@@ -32,6 +38,10 @@ answerModule.controller('questionnaire',['$scope','answerService',function($scop
             }
         }
         $scope.next();
+    })
+
+    respondentService.query().success(function(data,status ){
+        $scope.respondents = data;
     })
 
 

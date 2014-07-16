@@ -77,6 +77,12 @@
 
         <div class="rows2 well2 Tj">
 
+            <div class="input-group">
+                <span  class="input-group-addon">调查对象</span>
+                <select class="form-control"  >
+                  <option ng-repeat="respondent in respondents" value="respondent.respondentId">{{respondent.objName}}</option>
+                 </select>
+            </div>
             <h4 class="h4-bg T_edit p_title">{{qnObj.title}}</h4>
 
 
