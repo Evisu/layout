@@ -142,20 +142,20 @@
                 <div class="WJButton wj_color" id="next_button" ng-click="next();">下一页 &gt;&gt;</div>
                 <div class="red fL" id="err_msg"></div>
                 <div class="wjprogress" id="progress_bar" style="display: block;">
-                    <span>25%</span>
+                    <span>{{progress}}%</span>
                     <div class="bar">
-                        <div class="barbox" style="width: 25%;"></div>
+                        <div class="barbox" ng-style="{ 'width': '{{progress}}%' }"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="maxtop btns" id="control_panel" align="center" ng-if="problem.orderNum == maxOrderNum" ng-repeat="problem in problems">
-                <div class="WJButton wj_color" id="next_button" ng-click="next();">提交 &gt;&gt;</div>
-                <div class="red fL" id="err_msg"></div>
-                <div class="wjprogress" id="progress_bar" style="display: block;">
-                    <span>25%</span>
+            <div class="maxtop btns"  align="center" ng-if="problem.orderNum == maxOrderNum" ng-repeat="problem in problems">
+                <div class="WJButton wj_color">提交 &gt;&gt;</div>
+                <div class="red fL" ></div>
+                <div class="wjprogress"  style="display: block;">
+                    <span>{{progress}}%</span>
                     <div class="bar">
-                        <div class="barbox" style="width: 25%;"></div>
+                        <div class="barbox" ng-style="{ 'width': '{{progress}}%' }"></div>
                     </div>
                 </div>
             </div>

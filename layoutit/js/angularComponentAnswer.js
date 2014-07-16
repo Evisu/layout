@@ -24,7 +24,13 @@ answerModule.controller('questionnaire',['$scope','answerService',function($scop
 
         curProblem = data.problems;
         $scope.maxOrderNum = data.problems.length-1;
-        alert(data.problems.length);
+
+        for(var i = curProblem.length-1 ; i>=0 ; i--){
+            if(curProblem[i].problemType != 'paging' && curProblem[i].problemType != 'text'){
+                $scope.problemsNum = curProblem[i].displayNum;
+                break;
+            }
+        }
         $scope.next();
     })
 
@@ -60,6 +66,11 @@ answerModule.controller('questionnaire',['$scope','answerService',function($scop
             $scope.problems.length = 0;
             for(var i = qindex;i < curProblem.length;i++){
                 $scope.problems.push(curProblem[i]);
+
+                if(curProblem[i].problemType != 'paging' && curProblem[i].problemType != 'text'){
+                    $scope.curPageProblemsNum = curProblem[i].displayNum;
+                }
+                $scope.progress = Math.ceil(($scope.curPageProblemsNum/$scope.problemsNum)*100);
                 if(curProblem[i].problemType == 'paging'){
                     qindex = i+1;
                     page++;
@@ -81,13 +92,17 @@ answerModule.controller('questionnaire',['$scope','answerService',function($scop
             }
 
         }
+
+    /**
+     * 提交数据
+     */
+    $scope.submitData = function(){
+        alert(JSON.stringify(curProblem));
+    }
+
     }]);
 
-function getData(){
 
-    alert(JSON.stringify(curProblem));
-
-}
 
 
 

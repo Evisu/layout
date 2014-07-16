@@ -17,6 +17,8 @@ angular.module('qn', [])
 
     $scope.problems = problems;
 
+    $scope.maxOrderNum =   curProblem.length-1;
+
 
     /**
      * 重置单选题选项的值
