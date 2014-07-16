@@ -186,8 +186,8 @@ function updateProblemSort(problems,isAdd) {
 }
 
 function setInputToModa(){
-    var sort1 = $('#sort1').val();
-    var sort2 = $('#sort2').val();
+    var sort1 = parseInt($('#sort1').val());
+    var sort2 = parseInt($('#sort2').val());
     $('#isInputCheckBox').prop('checked',problems[sort1].options[sort2].isInput);
 
 }
@@ -214,8 +214,9 @@ function getQNObj() {
  * @param target
  */
 function setProblemName(target) {
-    if ($('#sort1').val() != -1) {
-        problems[$('#sort1').val()].title = $(target).html();
+    var sort1 = parseInt($('#sort1').val());
+    if (sort1 != -1) {
+        problems[sort1].title = $(target).html();
     } else {
         qnObj.title = $(target).html();
     }
@@ -239,8 +240,8 @@ function setOptionName(target) {
  * 上移选项
  */
 function upOption() {
-    var sort2 = $('#sort2').val();
-    var sort1 = $('#sort1').val();
+    var sort1 = parseInt($('#sort1').val());
+    var sort2 = parseInt($('#sort2').val());
     if (sort2 != 0) {
         sortOption(sort2 - 1, sort2);
         $('#sort2').val(sort2 - 1);
@@ -254,8 +255,8 @@ function upOption() {
  * 下移选项
  */
 function downOption() {
-    var sort1 = $('#sort1').val();
-    var sort2 = $('#sort2').val();
+    var sort1 = parseInt($('#sort1').val());
+    var sort2 = parseInt($('#sort2').val());
     if (sort2 != problems[sort1].options.length) {
         sortOption(sort2 + 1, sort2);
         $('#sort2').val(sort2 + 1);
@@ -269,8 +270,8 @@ function downOption() {
  * 删除选项
  */
 function deleteOption() {
-    var sort1 = $('#sort1').val();
-    var sort2 = $('#sort2').val();
+    var sort1 = parseInt($('#sort1').val());
+    var sort2 = parseInt($('#sort2').val());
     problems[sort1].options.splice(sort2, 1);
 
     updateOptionSort(problems[sort1].options);
@@ -288,8 +289,8 @@ function deleteOption() {
  * @param oldIndex
  */
 function sortOption(newIndex, oldIndex) {
-    var sort1 = $('#sort1').val();
-    var sort2 = $('#sort2').val();
+    var sort1 = parseInt($('#sort1').val());
+    var sort2 = parseInt($('#sort2').val());
 
     problems[sort1].options.splice(newIndex, 0, problems[sort1].options.splice(oldIndex, 1)[0]);
     updateOptionSort(problems[sort1].options);
