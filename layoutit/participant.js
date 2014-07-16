@@ -109,6 +109,38 @@ participantModule.controller('questionnaire',['$scope','participantService',func
 
     }
 
+    /**
+     * 删除调查对象
+     */
+    $scope.delRespondent = function(respondentOrderNum){
+        for(var i = 0;i < $scope.respondentParticipants.length;i++){
+            if( $scope.respondentParticipants[i].respondentId == $scope.respondents[respondentOrderNum].respondentId){
+                $scope.respondentParticipants.splice(i,1);
+                i--;
+            }
+        }
+
+        $scope.respondents.splice(respondentOrderNum,1);
+
+    }
+
+
+    /**
+     * 删除参与对象
+     */
+    $scope.delParticipant = function(participantOrderNum){
+
+        for(var i = 0;i < $scope.respondentParticipants.length;i++){
+            if( $scope.participants[i].participantId == $scope.participants[participantOrderNum].participantId){
+                $scope.respondentParticipants.splice(i,1);
+                i--;
+            }
+        }
+
+        $scope.participants.splice(participantOrderNum,1);
+    }
+
+
 
     /**
      * 初始数据
