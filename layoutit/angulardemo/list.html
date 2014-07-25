@@ -1,0 +1,27 @@
+<div class="row">
+    <a href="#edit/add"  class="btn btn-sm btn-primary ">新建</a>
+<search search1="search"></search>
+</div>
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>操作</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="person in persons | filter : {name:search.searchTitle}">
+                <td>{{person.id}}</td>
+                <td>{{person.name}}</td>
+                <td>{{person.age}}</td>
+                <td>
+                    <a title="编辑"  ng-href="#/edit/{{person.id}}" style="display: inline-block;margin:0 8px" ><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a title="删除" ng-click="del(person.id)" style="display: inline-block;margin:0 8px" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

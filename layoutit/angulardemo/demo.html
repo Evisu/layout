@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/angular-1.2.20.min.js"></script>
+    <script type="text/javascript" src="../js/angular-route-1.2.20.js"></script>
+</head>
+<body ng-app="demo">
+        <div class="container">
+            <div class="page-header">
+                <h1>demo</h1>
+            </div>
+            <div ng-view>
+            </div>
+
+        </div>
+<script>
+           var module = angular.module("demo",["ngRoute"]);
+
+            module.config(['$routeProvider',function ($routeProvider) {
+                 $routeProvider
+                        .when('/list', {
+                            templateUrl: 'list.html',
+                            controller: 'PersonCtrl'
+                        })
+                        .when('/edit/:id', {
+                            templateUrl: 'edit.html',
+                            controller: 'PersonCtrl'
+                        })
+                        .otherwise({
+                            redirectTo: '/list'
+                        });
+            }]);
+
+
+
+            module.service('personService',function($http){
+                var initData = [{"id":"1","name" : "joho","age" : 23},{"id":"2","name" : "angu","age" : 24}];
+                this.query = function(){
+
+                        return initData;
+                }
+                this.save = function(person){
+
+                }
+                this.delete = function(id){
+
+                }
+                this.update = function(person){
+
+                }
+            })
+            module.controller("PersonCtrl",function($rootScope,$scope,$location,personService,$routeParams,$filter){
+                if($rootScope.persons == null)
+                $rootScope.persons = personService.query();
+                if($routeParams.id != null && $routeParams.id != 'add'){
+                    for(var i = 0;i < $rootScope.persons.length;i++){
+                        if( $rootScope.persons[i].id == $routeParams.id){
+                            $scope.curPerson = {"id":$rootScope.persons[i].id,"name" : $rootScope.persons[i].name,"age" : $rootScope.persons[i].age};
+                            break;
+                        }
+                    }
+                }
+                $scope.save = function(){
+                    var flag = true;
+                    var personNew = {"id":$scope.curPerson.id,"name" : $scope.curPerson.name,"age" : $scope.curPerson.age};
+                    for(var i = 0;i < $rootScope.persons.length;i++){
+                        if( $rootScope.persons[i].id == personNew.id){
+                            $rootScope.persons.splice(i,1,personNew);
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if(flag){
+                        $rootScope.persons.push(personNew);
+                    }
+                    $location.path('/list');
+                }
+                $scope.del = function(id){
+                    for(var i = 0; i<  $rootScope.persons.length;i++){
+                        if( $rootScope.persons[i].id == id){
+                            $rootScope.persons.splice(i,1);
+                        }
+                    }
+                }
+                $scope.search = {"searchTitle":""};
+              /*  $scope.query = function(){
+                    $scope.search.searchTitle = $('#searchTitle').val();
+                }*/
+            })
+
+
+            module.directive('search',function(){
+                return {
+                    restrict : 'E',
+                    templateUrl : 'search.html',
+                    replace : true,
+                    scope : {search:'='},
+                    link : function(scope){
+                        scope.searchTitle = '';
+                        scope.query = function(){
+                            scope.search.searchTitle = scope.searchTitle;
+                        }
+                    }
+                };
+            })
+
+
+
+</script>
+</body>
+</html>

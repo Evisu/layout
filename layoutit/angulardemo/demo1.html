@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head >
+
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/angular-1.2.20.min.js"></script>
+    <script type="text/javascript" src="../js/angular-route-1.2.20.js"></script>
+</head>
+<body ng-app="demo">
+
+<div   ng-controller="Ctrl">
+
+    <input  ng-model="name"/>
+    <input  ng-model="name1"/>
+    <button  ng-click="add()">1111</button>
+    <input  ng-model="data.name"/>
+</div>
+
+
+
+
+<script>
+
+    var demo = angular.module('demo',[]);
+    demo.controller('Ctrl',function ($scope,$rootScope,data){
+//        $scope.data = data.init();
+        $rootScope.name = '3333';
+        $scope.add = function(){
+            $scope.name1 = '111';
+        }
+    })
+
+    demo.service('data',function($http){
+        this.init = function(){
+            return {"name":"data"};
+        }
+    })
+
+
+
+
+</script>
+
+</body>
+</html>

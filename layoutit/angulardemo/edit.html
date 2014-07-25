@@ -1,0 +1,20 @@
+<form name="form" novalidate>
+    <div class="input-group">
+        <span  class="input-group-addon">编号</span>
+        <input  name="id" type="text" class="form-control" placeholder="编号"  ng-model="curPerson.id" required/>
+        <label  class="control-label" ng-show="form.id.$invalid">不能为空</label>
+    </div>
+    <div class="input-group">
+        <span  class="input-group-addon">姓名</span>
+        <input  name="name" type="text" class="form-control" placeholder="姓名"  ng-model="curPerson.name" required/>
+        <label  class="control-label" ng-show="form.name.$invalid">不能为空</label>
+    </div>
+    <div class="input-group">
+        <span  class="input-group-addon">年龄</span>
+        <input  name="age" type="number" class="form-control" placeholder="年龄"  ng-model="curPerson.age" required max="100" />
+        <label  class="control-label" ng-show="form.age.$error['required']">不能为空</label>
+        <label  class="control-label" ng-show="form.age.$error['max']">最大值不能超过100</label>
+    </div>
+    <button  type="button" class="btn btn-default btn-primary" ng-click="save();" ng-disabled="form.$invalid">保存
+    </button>
+</form>

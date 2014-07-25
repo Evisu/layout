@@ -20,6 +20,7 @@
             "questionnaireId" : "1",
             "orderNum" : 0,
             "displayNum" : 1,
+            "optionValue" : "11",
             "options" : [
                 {
                     "qsOptionsId" : "11",
@@ -27,7 +28,7 @@
                     "isInput" : false,
                     "problemId" : "1",
                     "orderNum" : 0,
-                    "checked" : false,
+                    "checked" : true,
                     "inputValue" : null
                 }
                 ,

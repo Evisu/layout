@@ -79,8 +79,7 @@
 
             <div class="input-group">
                 <span  class="input-group-addon">调查对象</span>
-                <select class="form-control"  >
-                  <option ng-repeat="respondent in respondents" value="respondent.respondentId">{{respondent.objName}}</option>
+                <select class="form-control"   ng-options="x.objName for x in respondents" >
                  </select>
             </div>
             <h4 class="h4-bg T_edit p_title">{{qnObj.title}}</h4>
@@ -106,9 +105,13 @@
                             <!-- 单选题 -->
                             <ul class="unstyled " ng-if="problem.problemType == 'radio'">
                                 <li ng-repeat="option in problem.options">
+
                                     <input id="{{'inputValue'+problem.orderNum}}" name="{{'inputValue'+problem.orderNum}}"
                                            ng-click="reset(problem.orderNum,option.orderNum)"
-                                           type="radio">
+                                           type="radio"  ng-model="problem.optionValue" value="{{option.qsOptionsId}}">
+
+
+
                                     <label class="T_edit_min" ng-bind="option.optionName"></label>
                                     <input class="open_input" type="text"  ng-model="option.inputValue" ng-if="option.isInput && option.checked" />
                                 </li>
