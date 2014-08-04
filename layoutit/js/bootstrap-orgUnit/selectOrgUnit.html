@@ -1,0 +1,34 @@
+<div  id="{{option.id}}" class="col-lg-4 orgUnitWindow"  style="position: absolute;display:none;">
+    <div class="form-group">
+        <label class="col-md-2 col-lg-3 control-label">负责人：</label>
+        <div class="input-group btn-group-sm col-md-2 col-lg-4">
+            <input type="text" class="form-control input-sm ">
+        </div>
+    </div>
+    <table class="table table-bordered table-hover table-condensed" >
+        <thead>
+        <tr>
+            <th  class="col-lg-1" ><input type="checkbox" ng-change="selectAllClick();" ng-model="selectAll" ng-if="!option.singleSelected"></th>
+            <th class="col-lg-2">序号</th>
+            <th class="col-lg-6">单位名称</th>
+            <th>负责人</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="orgUnit in orgUnits">
+            <td><input type="checkbox" ng-change="clickItem(orgUnit.id);" ng-model="orgUnit.checked"></td>
+            <td>{{$index+1}}</td>
+            <td>{{orgUnit.name}}</td>
+            <td>{{orgUnit.name}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <ul class="pagination pagination-sm">
+        <li><a href="#">&laquo;</a></li>
+        <li class="active"  >
+            <a href="#" >1</a>
+        </li>
+        <li><a href="#" >&raquo;</a></li>
+
+    </ul>
+</div>
