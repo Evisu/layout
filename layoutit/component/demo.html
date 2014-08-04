@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head >
+    <title>答卷</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery-1.9.0.js"></script>
+    <script type="text/javascript" src="../js/jquery-migrate-1.0.0.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+</head>
+<body class="modal-open">
+<!-- onload="change('staff.html')" -->
+
+<form class="form-horizontal" role="form" id="new_form">
+    <div class="form-group">
+        <label class="col-md-2 col-lg-2 control-label">编号：</label>
+        <div class=" col-md-4 col-lg-4">
+            <input type="text" class="form-control input-sm"  placeholder="编号">
+            <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title="" aria-describedby="popover302825">Bottom</button>
+        </div>
+        <label class="col-md-2 col-lg-2 control-label">名称：</label>
+        <div class="col-md-4 col-lg-4">
+            <input type="text" class="form-control input-sm" placeholder="名称">
+            <a href="#" role="button" class="btn btn-default popover-test" title=""  data-toggle="popover" data-placement="bottom" data-content="白雪 " data-original-title="" aria-describedby="popover584346">button</a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword" class="col-md-2 col-lg-2 control-label">时间维度：</label>
+        <div class="col-md-4 col-lg-4">
+            <div class=" radio-inline">
+                <input type="radio" name="time" value="year" checked>
+                年</div>
+            <div class=" radio-inline">
+                <input type="radio" name="time" value="quarter">
+                季</div>
+            <div class=" radio-inline">
+                <input type="radio" name="time" value="month">
+                月</div>
+        </div>
+        <label for="inputPassword" class="col-md-2 col-lg-2 control-label">类别：</label>
+        <div class="col-md-4 col-lg-4">
+            <div class=" radio-inline">
+                <input type="radio" name="class" value="depart" checked>
+                部门</div>
+            <div class=" radio-inline">
+                <input type="radio" name="class" value="penson">
+                人员</div>
+            <!-- <div class=" bootstrap-switch" data-on-label="SI" data-off-label="NO">
+                  <input type="checkbox" checked />
+              </div>-->
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword" class="col-md-2 col-lg-2 control-label">业务分类：</label>
+        <div class="col-md-4 col-lg-4">
+            <div class="dropdown select_my">
+                <div  class="dropdown-toggle" data-toggle="dropdown">分类<span class="caret sel_caret"></span></div>
+                <ul class="dropdown-menu sel_menu">
+                    <li><a href="#">分类一</a></li>
+                    <li><a href="#">分类二</a></li>
+                    <li><a href="#">分类三</a></li>
+                    <li><a href="#">分类一</a></li>
+                    <li><a href="#">分类二</a></li>
+                    <li><a href="#">分类三</a></li>
+                    <li><a href="#">分类一</a></li>
+                    <li><a href="#">分类二</a></li>
+                    <li><a href="#">分类三</a></li>
+                    <li><a href="#">分类一</a></li>
+                    <li><a href="#">分类二</a></li>
+                    <li><a href="#">分类三</a></li>
+                    <li><a href="#">分类一</a></li>
+                    <li><a href="#">分类二</a></li>
+                    <li><a href="#">分类三</a></li>
+                    <li><a href="#">分类一</a></li>
+                    <li><a href="#">分类二</a></li>
+                    <li><a href="#">分类三</a></li>
+                </ul>
+            </div>
+        </div>
+        <label for="inputPassword" class="col-md-2 col-lg-2 control-label">计划对象：</label>
+        <div class="col-md-4 col-lg-4">
+            <input type="text" class="form-control input-sm"  placeholder="计划对象">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 col-lg-2 control-label">负责人：</label>
+        <div class="col-md-4 col-lg-4">
+            <div class="input-group btn-group-sm">
+                <input type="text" class="form-control input-sm">
+
+
+                <a class="input-group-addon btn btn-sm dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
+
+                <div class="dropdown-menu staff" id="staff">
+                    <div class="tab_div">
+                        <ul>
+                            <li class="tabin">按姓名</li>
+                            <li>按部门</li>
+                            <li>按分组</li>
+                            <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        </ul>
+                        <div class="tab_con contentin">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li><a href="#A" >A</a></li>
+                                <li ><a href="#B">B</a></li>
+                                <li ><a href="#C" >C</a></li>
+                                <li ><a href="#D">D</a></li>
+                            </ul>
+                            <dl id="A" class="tab-pane-dl">
+                                <dt>A</dt>
+                                <dd> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> <a href="#" data-toggle="tooltip" title="动植物检验检疫/荣成局">艾秋英</a> </dd>
+                            </dl>
+                            <ul class="pager">
+                                <li class=" disabled"><a href="#" >上一页</a></li>
+                                <li><a href="#">下一页</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab_con" id="depart">
+                            按部门
+                        </div>
+                        <div class="tab_con" id="group"> 按分组 </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <label class="col-md-2 col-lg-2 control-label">负责部门：</label>
+        <div class="col-md-4 col-lg-4">
+            <div class="input-group employee form_employee btn-group-sm" data-date-format="e" data-link-field="employee_input1">
+                <input class="form-control" size="16" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="hidden" id="employee_input1" value="" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 col-lg-2 control-label">开始时间：</label>
+        <div class="col-md-4 col-lg-4">
+
+                <div class="input-group date form_date btn-group-sm" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    <input type="hidden" id="dtp_input1" value="" />
+                </div>
+
+
+        </div>
+        <label class="col-md-2 col-lg-2 control-label">结束时间：</label>
+        <div class="col-md-4 col-lg-4">
+            <div class="input-group date form_date btn-group-sm" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input class="form-control"  type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <input type="hidden" id="dtp_input2" value="" />
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 col-lg-2 control-label">计划里程碑：</label>
+        <div class="col-md-10 col-lg-10">
+            <textarea type="text" class="form-control input-sm" rows="6"  placeholder="计划里程碑"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 col-lg-2 control-label">计划概述：</label>
+        <div class="col-md-10 col-lg-10">
+            <textarea type="text" class="form-control input-sm" rows="6"  placeholder="计划概述"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 col-lg-2 control-label">备注：</label>
+        <div class="col-md-10 col-lg-10">
+            <textarea type="text" class="form-control input-sm" rows="6"  placeholder="备注"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 col-lg-2 control-label">创建人：</label>
+        <div class="col-md-4 col-lg-4">
+            <div class="input-group btn-group-sm">
+                <input type="text" class="form-control input-sm dropdown-toggle" data-toggle="dropdown">
+                <a class="input-group-addon btn btn-sm"><i class="glyphicon glyphicon-user"></i></a>
+                <div class="dropdown-menu staff-result">
+                    <dl>
+                        <dt>白雪</dt>
+                        <dd>检验员 </dd>
+                        /
+                        <dd>检验检疫科 </dd>
+                        /
+                        <dd>荣成局 </dd>
+                    </dl>
+                    <dl>
+                        <dt>白雪</dt>
+                        <dd>检验员 </dd>
+                        /
+                        <dd>检验检疫科 </dd>
+                        /
+                        <dd>荣成局 </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <label class="col-md-2 col-lg-2 control-label">创建时间：</label>
+        <div class="col-md-4 col-lg-4">
+            <input type="text" class="form-control input-sm" value="2014-7-4" placeholder="2014-7-4" readonly>
+        </div>
+    </div>
+</form>
+<!--<a href="#" data-toggle="tooltip" title="Example tooltip">请悬停在我的上面</a>-->
+
+<div class="btn-toolbar text-right">
+    <button class="btn btn-link" title="取消"><!--<i class="ti-share-alt"></i>--> 取消</button>
+    <button class="btn btn-primary"  title="保存并新建" onclick="javascript:change('save_plan2.html')"> <i class="ti-save"></i> 保存并新建</button>
+    <button class="btn btn-success"  title="保存" onclick="javascript:change('save_plan.html')"> <i class="ti-save"></i> 保存</button>
+</div>
+
+    <script type="text/javascript">
+            $('.form_datetime').datetimepicker({
+                language:'zh-CN',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                forceParse: 0,
+                showMeridian: 1
+            });
+    $('.form_date').datetimepicker({
+        language:'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+    $('.form_time').datetimepicker({
+        language:'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+</script>
+</body>
+</html>

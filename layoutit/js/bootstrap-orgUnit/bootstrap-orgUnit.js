@@ -85,6 +85,8 @@ orgUnitWindowModule.directive('orgunitwindow',function(){
 })
 
 
+
+
 function showOrgUnitWindow(id,element){
     var divShow = $("#"+id);
     var eOff = $(element).offset();
