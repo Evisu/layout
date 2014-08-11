@@ -3,7 +3,6 @@
 <head>
 
     <title>问卷设计</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="this is my page">
@@ -11,8 +10,7 @@
 
     <link href="css/public.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-1.9.0.js"></script>
-    <script type="text/javascript" src="js/jquery-migrate-1.0.0.js"></script>
+    <script type="text/javascript" src="js/jquery-2.0.0.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.js"></script>
 
@@ -24,7 +22,15 @@
     <script type="text/javascript" src="js/angular-contenteditable.js"></script>
     <script type="text/javascript" src="js/angularComponent.js"></script>
     <script type="text/javascript" src="qn.js"></script>
+    <script type="text/javascript" src="js/stickUp.js"></script>
     <script type="text/javascript" src="problemTypes.js"></script>
+    <script>
+        jQuery(function($) {
+            $(document).ready( function() {
+                $('.navbar-wrapper').stickUp();
+            });
+        });
+    </script>
 
 </head>
 
@@ -69,7 +75,7 @@
             <!--/.tab2-content--> </div>
         <!--/.wentop-->
         <div class="rows1">
-            <div class="well sidebar-nav affix-top" id="accordion1">
+            <div class="well sidebar-nav affix-top navbar-wrapper" style="width: 120px;">
                 <div class="accordion-group">
                     <h4 class="tc">
                         <a href="javascript:;">
